@@ -1,35 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
+import AuthContext from './lib/auth-context'
+
+import Layout from './components/Layout/Layout'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import Home from './pages/Home/Home'
 import Pets from './pages/Pets/Pets'
+import Details from './pages/Pets/Details/Details'
 import Adopt from './pages/Adopt/Adopt'
 import Donate from './pages/Donate/Donate'
-import Logout from './pages/Auth/Logout/Logout'
 import Auth from './pages/Auth/Auth'
 
 function App() {
-  const isAuthenticated = true
-  const routes = !isAuthenticated ? (
-    <Switch>
-      <Route path='/pets' component={Pets} />
-      <Route path='/auth' component={Auth} />
-      <Route path='/' exact component={Home} />
-      <Redirect to='/' />
-    </Switch>
-  ) : (
-    <Switch>
-      <Route path='/pets' component={Pets} />
-      <Route path='/adopt' component={Adopt} />
-      <Route path='/donate' component={Donate} />
-      <Route path='/logout' component={Logout} />
-      <Route path='/auth' component={Auth} />
-      <Route path='/' exact component={Home} />
-      <Redirect to='/' />
-    </Switch>
-  )
+  const [isAuthenticated, setIsLoggedIn] = useState(false)
+  const authContextValue = {
+    isAuthenticated,
+    login: () => setIsLoggedIn(true),
+    logout: () => setIsLoggedIn(false),
+  }
 
-  return routes
+  return (
+    <AuthContext.Provider value={authContextValue}>
+      <Layout>
+        <Switch>
+          <Route path='/pets/:id' component={Details} />
+          <Route path='/pets' component={Pets} />
+          <ProtectedRoute path='/adopt' component={Adopt} />
+          <ProtectedRoute path='/donate' component={Donate} />
+          <Route path='/auth' component={Auth} />
+          <Route path='/' exact component={Home} />
+          <Redirect to='/' />
+        </Switch>
+      </Layout>
+    </AuthContext.Provider>
+  )
 }
 
 export default App
