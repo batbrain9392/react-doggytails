@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 import AuthContext from './lib/auth-context'
 
-import Layout from './components/Layout/Layout'
+import Layout from './components/UI/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import Home from './pages/Home/Home'
 import Pets from './pages/Pets/Pets'

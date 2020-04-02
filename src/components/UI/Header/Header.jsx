@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import AuthContext from '../../../lib/auth-context'
 
-import CustomNavLink from './CustomNavLink/CustomNavLink'
+import CustomNavLink from '../CustomNavLink/CustomNavLink'
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)
