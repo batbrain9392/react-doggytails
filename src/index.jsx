@@ -1,11 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App'
 
-ReactDOM.render(
+const root = (
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 )
+
+ReactDOM.render(root, document.getElementById('root'))
