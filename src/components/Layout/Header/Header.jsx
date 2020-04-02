@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
 
 import AuthContext from '../../../lib/auth-context'
+
+import CustomNavLink from './CustomNavLink/CustomNavLink'
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)
@@ -9,23 +10,23 @@ const Header = () => {
     logout()
   }
 
-  const authNav = isAuthenticated ? (
+  const protectedNavLinks = isAuthenticated ? (
     <>
-      <NavLink to='/adopt'>adopt</NavLink>
-      <NavLink to='/donate'>donate</NavLink>
+      <CustomNavLink to='/adopt'>adopt</CustomNavLink>
+      <CustomNavLink to='/donate'>donate</CustomNavLink>
       <button onClick={handleClick}>logout</button>
     </>
   ) : (
-    <NavLink to='/auth'>auth</NavLink>
+    <CustomNavLink to='/auth'>auth</CustomNavLink>
   )
 
   return (
     <header>
-      <NavLink to='/' exact>
+      <CustomNavLink to='/' exact>
         home
-      </NavLink>
-      <NavLink to='/pets'>pets</NavLink>
-      {authNav}
+      </CustomNavLink>
+      <CustomNavLink to='/pets'>pets</CustomNavLink>
+      {protectedNavLinks}
     </header>
   )
 }
