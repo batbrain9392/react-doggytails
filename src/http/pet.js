@@ -1,4 +1,5 @@
 import db from './db'
+import { toArray } from '../lib/util'
 
 const addToken = token => `auth=${token}`
 
@@ -8,6 +9,12 @@ const add = async (pet, token) => {
   return data
 }
 
+const fetchAll = async () => {
+  const { data } = await db.get(`/pets.json`)
+  return toArray(data)
+}
+
 export default {
   add,
+  fetchAll,
 }
