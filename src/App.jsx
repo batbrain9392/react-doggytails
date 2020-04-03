@@ -14,18 +14,27 @@ import Adopt from './pages/Adopt/Adopt'
 import Donate from './pages/Donate/Donate'
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(null)
+  const [token, setToken] = useState(null)
+  const [userId, setUserId] = useState(null)
 
-  const postLogout = () => setLoggedInUser(null)
+  const postSignin = authInfo => {
+    setToken(authInfo.token)
+    setUserId(authInfo.userId)
+  }
+
+  const postLogout = () => {
+    setToken(null)
+    setUserId(null)
+  }
 
   const authenticate = async (email, password, isSignUp = false) => {
-    const userId = await auth.authenticate(
+    const authInfo = await auth.authenticate(
       email,
       password,
       isSignUp,
       postLogout
     )
-    setLoggedInUser(userId)
+    postSignin(authInfo)
   }
 
   const logout = () => {
@@ -34,16 +43,17 @@ function App() {
   }
 
   const authContextValue = {
-    isAuthenticated: !!loggedInUser,
-    loggedInUser,
+    isAuthenticated: !!userId,
+    token,
+    userId,
     signin: (email, password) => authenticate(email, password),
     signup: (email, password) => authenticate(email, password, true),
     logout,
   }
 
   useEffect(() => {
-    const cachedIsAuthenticated = auth.checkAuth(postLogout)
-    setLoggedInUser(cachedIsAuthenticated)
+    const authInfo = auth.checkAuth(postLogout)
+    postSignin(authInfo)
   }, [])
 
   return (

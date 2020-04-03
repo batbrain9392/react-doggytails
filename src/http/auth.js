@@ -40,7 +40,7 @@ const authenticate = async (email, password, isSignUp, postLogout) => {
     localStorage.setItem('token', token)
     localStorage.setItem('userId', userId)
     localStorage.setItem('expirationDate', expirationDate)
-    return userId
+    return { token, userId }
   } catch (error) {
     throw error.response.data.error.message
   }
@@ -60,7 +60,7 @@ const checkAuth = postLogout => {
       const userId = localStorage.getItem('userId')
       let expiresIn = expirationDate.getTime() - new Date().getTime()
       setAuthTimeout(expiresIn, postLogout)
-      return userId
+      return { token, userId }
     }
   }
 }
