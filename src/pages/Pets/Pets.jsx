@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useRouteMatch, Link } from 'react-router-dom'
 
-import pet from '../../http/pet'
+import petService from '../../http/pet'
 
 const Pets = () => {
   const [pets, setPets] = useState([])
   const { url } = useRouteMatch()
 
   const getPets = async () => {
-    const data = await pet.fetchAll()
+    const data = await petService.fetchAll()
     setPets(data)
   }
 
