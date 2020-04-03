@@ -8,9 +8,9 @@ import AuthContext from '../../lib/auth-context'
 import TextInput from '../../components/UI/TextInput/TextInput'
 
 const Auth = () => {
+  const { signin, signup } = useContext(AuthContext)
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState(null)
-  const { signin, signup } = useContext(AuthContext)
   const history = useHistory()
   const location = useLocation()
   const { from } = location.state || { from: { pathname: '/' } }
