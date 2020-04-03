@@ -14,7 +14,13 @@ const fetchAll = async () => {
   return toArray(data)
 }
 
+const fetch = async petId => {
+  const { data } = await db.get(`/pets/${petId}.json`)
+  return data
+}
+
 export default {
   add,
   fetchAll,
+  fetch,
 }
