@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
@@ -8,7 +9,9 @@ import pet from '../../http/pet'
 import TextInput from '../../components/UI/TextInput/TextInput'
 
 const Donate = () => {
-  const { token, userId } = useContext(AuthContext)
+  const { isAuthenticated, token, userId } = useContext(AuthContext)
+  const history = useHistory()
+  const { pathname } = useLocation()
   const [error, setError] = useState(null)
   const initialValues = {
     name: 'name',
@@ -33,47 +36,58 @@ const Donate = () => {
   const submitHandler = async formValues => {
     try {
       setError(null)
-      const data = await pet.add({ ...formValues, userId }, token)
+      const data = await pet.add({ ...formValues, donorUserId: userId }, token)
       console.log(data)
     } catch (error) {
       setError(error)
     }
   }
 
+  const signinHandler = () => {
+    history.push('/auth', { from: pathname })
+  }
+
   return (
     <>
       <h3>Donate</h3>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={submitHandler}>
-        {({ isValid, isSubmitting }) => (
-          <Form>
-            <TextInput label='Name' name='name' type='text' />
-            <TextInput label='Breed' name='breed' type='text' />
-            <TextInput label='Age' name='age' type='text' />
-            <TextInput label='Vaccination' name='vaccination' type='text' />
-            <TextInput label='Personality' name='personality' type='text' />
-            <TextInput
-              label='Food Preference'
-              name='foodPreference'
-              type='text'
-            />
-            <TextInput
-              label='Date Available'
-              name='dateAvailable'
-              type='text'
-            />
-            <TextInput label='Location' name='location' type='text' />
-            <TextInput label='Description' name='description' type='text' />
-            <button type='submit' disabled={!isValid}>
-              submit
-            </button>
-            {isSubmitting && <p>Submitting...</p>}
-            {error && <p>{error}</p>}
-          </Form>
-        )}
-      </Formik>
+      {isAuthenticated ? (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={submitHandler}>
+          {({ isValid, isSubmitting }) => (
+            <Form>
+              <TextInput label='Name' name='name' type='text' />
+              <TextInput label='Breed' name='breed' type='text' />
+              <TextInput label='Age' name='age' type='text' />
+              <TextInput label='Vaccination' name='vaccination' type='text' />
+              <TextInput label='Personality' name='personality' type='text' />
+              <TextInput
+                label='Food Preference'
+                name='foodPreference'
+                type='text'
+              />
+              <TextInput
+                label='Date Available'
+                name='dateAvailable'
+                type='text'
+              />
+              <TextInput label='Location' name='location' type='text' />
+              <TextInput label='Description' name='description' type='text' />
+              <button type='submit' disabled={!isValid}>
+                submit
+              </button>
+              {isSubmitting && <p>Submitting...</p>}
+              {error && <p>{error}</p>}
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <>
+          <p>Please signin to donate</p>
+          <button onClick={signinHandler}>go to signin</button>
+        </>
+      )}
     </>
   )
 }

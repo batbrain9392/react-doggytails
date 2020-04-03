@@ -11,10 +11,7 @@ const Header = () => {
   }
 
   const protectedNavLinks = isAuthenticated ? (
-    <>
-      <CustomNavLink to='/donate'>donate</CustomNavLink>
-      <button onClick={handleClick}>logout</button>
-    </>
+    <button onClick={handleClick}>logout</button>
   ) : (
     <CustomNavLink to='/auth'>auth</CustomNavLink>
   )
@@ -31,6 +28,7 @@ const Header = () => {
         home
       </CustomNavLink>
       <CustomNavLink to='/pets'>pets</CustomNavLink>
+      <CustomNavLink to='/donate'>donate</CustomNavLink>
       {protectedNavLinks}
     </header>
   )

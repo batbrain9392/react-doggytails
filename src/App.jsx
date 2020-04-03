@@ -10,7 +10,6 @@ import Home from './pages/Home/Home'
 import Pets from './pages/Pets/Pets'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
-import Adopt from './pages/Adopt/Adopt'
 import Donate from './pages/Donate/Donate'
 
 function App() {
@@ -63,10 +62,9 @@ function App() {
     <AuthContext.Provider value={authContextValue}>
       <Layout>
         <Switch>
-          <ProtectedRoute path='/pets/:id/adopt' component={Adopt} />
           <Route path='/pets/:id' component={PetDetails} />
           <Route path='/pets' component={Pets} />
-          <ProtectedRoute path='/donate' component={Donate} />
+          <Route path='/donate' component={Donate} />
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
           <Route path='/' exact component={Home} />
           <Redirect to='/' />
