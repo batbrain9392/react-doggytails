@@ -14,9 +14,6 @@ import Adopt from './pages/Adopt/Adopt'
 import Donate from './pages/Donate/Donate'
 
 function App() {
-  const [token, setToken] = useState(null)
-  const [userId, setUserId] = useState(null)
-
   const postSignin = authInfo => {
     setToken(authInfo.token)
     setUserId(authInfo.userId)
@@ -26,6 +23,10 @@ function App() {
     setToken(null)
     setUserId(null)
   }
+
+  const authInfo = auth.checkAuth(postLogout)
+  const [token, setToken] = useState(authInfo?.token)
+  const [userId, setUserId] = useState(authInfo?.userId)
 
   const authenticate = async (email, password, isSignUp = false) => {
     const authInfo = await auth.authenticate(
