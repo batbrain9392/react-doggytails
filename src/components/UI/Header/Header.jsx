@@ -20,7 +20,13 @@ const Header = () => {
   )
 
   return (
-    <header>
+    <header
+      style={{
+        display: 'grid',
+        gridAutoFlow: 'column',
+        justifyContent: 'start',
+        gap: '20px',
+      }}>
       <CustomNavLink to='/' exact>
         home
       </CustomNavLink>
