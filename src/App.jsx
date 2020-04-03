@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import AuthContext from './lib/auth-context'
@@ -13,12 +13,25 @@ import Donate from './pages/Donate/Donate'
 import Auth from './pages/Auth/Auth'
 
 function App() {
-  const [isAuthenticated, setIsLoggedIn] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const login = () => {
+    setIsAuthenticated(true)
+    localStorage.setItem('isAuthenticated', true)
+  }
+  const logout = () => {
+    setIsAuthenticated(false)
+    localStorage.removeItem('isAuthenticated')
+  }
   const authContextValue = {
     isAuthenticated,
-    login: () => setIsLoggedIn(true),
-    logout: () => setIsLoggedIn(false),
+    login,
+    logout,
   }
+
+  useEffect(() => {
+    const cachedIsAuthenticated = localStorage.getItem('isAuthenticated')
+    setIsAuthenticated(cachedIsAuthenticated === 'true')
+  }, [])
 
   return (
     <AuthContext.Provider value={authContextValue}>
