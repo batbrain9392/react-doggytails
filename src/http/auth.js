@@ -1,6 +1,28 @@
 import axios from 'axios'
 
-const authenticate = async (email, password, isSignUp) => {
+let timeout = null
+
+const clearAuthTimeout = () => {
+  if (timeout) clearTimeout(timeout)
+}
+
+const logout = () => {
+  if (timeout) clearTimeout(timeout)
+  localStorage.removeItem('token')
+  localStorage.removeItem('userId')
+  localStorage.removeItem('expirationDate')
+}
+
+const setAuthTimeout = (expiresIn, postLogout) => {
+  clearAuthTimeout()
+  timeout = setTimeout(() => {
+    console.log('authSetTimeout')
+    logout()
+    postLogout()
+  }, expiresIn)
+}
+
+const authenticate = async (email, password, isSignUp, postLogout) => {
   const authData = {
     email: email,
     password: password,
@@ -13,7 +35,7 @@ const authenticate = async (email, password, isSignUp) => {
     const {
       data: { idToken: token, localId: userId, expiresIn },
     } = await axios.post(url, authData)
-    authCheckTimeout(expiresIn * 1000)
+    setAuthTimeout(expiresIn * 1000, postLogout)
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
     localStorage.setItem('token', token)
     localStorage.setItem('userId', userId)
@@ -24,13 +46,7 @@ const authenticate = async (email, password, isSignUp) => {
   }
 }
 
-const authCheckTimeout = expiresIn => {
-  setTimeout(() => {
-    logout()
-  }, expiresIn)
-}
-
-const checkAuth = () => {
+const checkAuth = postLogout => {
   const token = localStorage.getItem('token')
   if (!token) {
     logout()
@@ -43,16 +59,10 @@ const checkAuth = () => {
     } else {
       const userId = localStorage.getItem('userId')
       let expiresIn = expirationDate.getTime() - new Date().getTime()
-      authCheckTimeout(expiresIn)
+      setAuthTimeout(expiresIn, postLogout)
       return userId
     }
   }
-}
-
-const logout = () => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('userId')
-  localStorage.removeItem('expirationDate')
 }
 
 export default {

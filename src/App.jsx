@@ -16,14 +16,21 @@ import Donate from './pages/Donate/Donate'
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
 
+  const postLogout = () => setLoggedInUser(null)
+
   const authenticate = async (email, password, isSignUp = false) => {
-    const userId = await auth.authenticate(email, password, isSignUp)
+    const userId = await auth.authenticate(
+      email,
+      password,
+      isSignUp,
+      postLogout
+    )
     setLoggedInUser(userId)
   }
 
   const logout = () => {
-    setLoggedInUser(null)
     auth.logout()
+    postLogout()
   }
 
   const authContextValue = {
@@ -35,7 +42,7 @@ function App() {
   }
 
   useEffect(() => {
-    const cachedIsAuthenticated = auth.checkAuth()
+    const cachedIsAuthenticated = auth.checkAuth(postLogout)
     setLoggedInUser(cachedIsAuthenticated)
   }, [])
 
