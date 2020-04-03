@@ -53,7 +53,9 @@ function App() {
 
   useEffect(() => {
     const authInfo = auth.checkAuth(postLogout)
-    postSignin(authInfo)
+    if (authInfo) {
+      postSignin(authInfo)
+    }
   }, [])
 
   return (
