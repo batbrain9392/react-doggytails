@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -8,7 +8,9 @@ import AuthContext from '../../lib/auth-context'
 import TextInput from '../../components/UI/TextInput/TextInput'
 
 const Auth = () => {
-  const { login } = useContext(AuthContext)
+  const [isSignUp, setIsSignUp] = useState(false)
+  const [error, setError] = useState(null)
+  const { signin, signup } = useContext(AuthContext)
   const history = useHistory()
   const location = useLocation()
   const { from } = location.state || { from: { pathname: '/' } }
@@ -25,20 +27,28 @@ const Auth = () => {
       .required('Required'),
   })
 
-  const handleClick = () => {
-    setTimeout(() => {
-      login()
+  const submitHandler = async ({ email, password }) => {
+    try {
+      setError(null)
+      !isSignUp ? await signin(email, password) : await signup(email, password)
       history.replace(from)
-    }, 1000)
+    } catch (error) {
+      setError(error)
+    }
+  }
+
+  const switchHandler = () => {
+    setError(null)
+    setIsSignUp(!isSignUp)
   }
 
   return (
     <>
-      <h3>Login</h3>
+      <h3>{!isSignUp ? 'Signin' : 'Signup'}</h3>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleClick}>
+        onSubmit={submitHandler}>
         {({ isValid, isSubmitting }) => (
           <Form>
             <TextInput label='Email' name='email' type='text' />
@@ -46,7 +56,11 @@ const Auth = () => {
             <button type='submit' disabled={!isValid}>
               submit
             </button>
+            <button type='button' onClick={switchHandler}>
+              switch to {!isSignUp ? 'signup' : 'signin'}
+            </button>
             {isSubmitting && <p>Logging in...</p>}
+            {error && <p>{error}</p>}
           </Form>
         )}
       </Formik>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import AuthContext from './lib/auth-context'
+import auth from './http/auth'
 
 import Layout from './components/UI/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
@@ -13,24 +14,29 @@ import Adopt from './pages/Adopt/Adopt'
 import Donate from './pages/Donate/Donate'
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const login = () => {
-    setIsAuthenticated(true)
-    localStorage.setItem('isAuthenticated', true)
+  const [loggedInUser, setLoggedInUser] = useState(null)
+
+  const authenticate = async (email, password, isSignUp = false) => {
+    const userId = await auth.authenticate(email, password, isSignUp)
+    setLoggedInUser(userId)
   }
+
   const logout = () => {
-    setIsAuthenticated(false)
-    localStorage.removeItem('isAuthenticated')
+    setLoggedInUser(null)
+    auth.logout()
   }
+
   const authContextValue = {
-    isAuthenticated,
-    login,
+    isAuthenticated: !!loggedInUser,
+    loggedInUser,
+    signin: (email, password) => authenticate(email, password),
+    signup: (email, password) => authenticate(email, password, true),
     logout,
   }
 
   useEffect(() => {
-    const cachedIsAuthenticated = localStorage.getItem('isAuthenticated')
-    setIsAuthenticated(cachedIsAuthenticated === 'true')
+    const cachedIsAuthenticated = auth.checkAuth()
+    setLoggedInUser(cachedIsAuthenticated)
   }, [])
 
   return (
