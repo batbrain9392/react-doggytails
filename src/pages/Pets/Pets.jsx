@@ -5,7 +5,7 @@ import pet from '../../http/pet'
 
 const Pets = () => {
   const [pets, setPets] = useState([])
-  let { url } = useRouteMatch()
+  const { url } = useRouteMatch()
 
   const getPets = async () => {
     const data = await pet.fetchAll()
