@@ -28,7 +28,7 @@ function App() {
           <Route path='/pets' component={Pets} />
           <ProtectedRoute path='/adopt' component={Adopt} />
           <ProtectedRoute path='/donate' component={Donate} />
-          <Route path='/auth' component={Auth} />
+          <ProtectedRoute path='/auth' component={Auth} isAuthPath />
           <Route path='/' exact component={Home} />
           <Redirect to='/' />
         </Switch>
