@@ -80,7 +80,7 @@ const Donate = () => {
               <button type='submit' disabled={!isValid}>
                 submit
               </button>
-              {isSubmitting && <p>Submitting...</p>}
+              {isSubmitting && <p>Donating...</p>}
               {error && <p>{error}</p>}
             </Form>
           )}
