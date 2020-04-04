@@ -86,10 +86,7 @@ const Donate = () => {
           )}
         </Formik>
       ) : (
-        <>
-          <p>Please signin to donate</p>
-          <button onClick={signinHandler}>go to signin</button>
-        </>
+        <button onClick={signinHandler}>signin to donate</button>
       )}
     </>
   )
