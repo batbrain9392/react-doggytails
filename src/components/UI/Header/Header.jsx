@@ -27,9 +27,9 @@ const Header = () => {
         justifyContent: 'start',
         gap: '20px',
       }}>
-      <CustomNavLink to='/' exact>
+      {/* <CustomNavLink to='/' exact>
         Home
-      </CustomNavLink>
+      </CustomNavLink> */}
       <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
       <CustomNavLink to='/donate'>Donate</CustomNavLink>
       {protectedNavLinks}

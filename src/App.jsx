@@ -6,7 +6,7 @@ import auth from './http/auth'
 
 import Layout from './components/UI/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
-import Home from './pages/Home/Home'
+// import Home from './pages/Home/Home'
 import Pets from './pages/Pets/Pets'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
@@ -68,8 +68,8 @@ function App() {
           <Route path='/donate' component={Donate} />
           <ProtectedRoute path='/my-profile' component={MyProfile} />
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
-          <Route path='/' exact component={Home} />
-          <Redirect to='/' />
+          {/* <Route path='/' exact component={Home} /> */}
+          <Redirect to='/adopt' />
         </Switch>
       </Layout>
     </AuthContext.Provider>
