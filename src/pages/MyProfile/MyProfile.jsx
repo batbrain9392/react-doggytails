@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 import AuthContext from '../../lib/auth-context'
-import adoptionService from '../../http/adoption'
 import petService from '../../http/pet'
 
 const MyProfile = () => {
@@ -13,13 +12,13 @@ const MyProfile = () => {
   const { userId, token } = useContext(AuthContext)
 
   const fetchMyAdoptions = useCallback(async () => {
-    const data = await adoptionService.fetchAllOfUser(userId, token)
+    const data = await petService.fetchAllOfAdopter(userId, token)
     setAdoptions(data)
     setLoadingAdoption(false)
   }, [userId, token])
 
   const fetchMyDonations = useCallback(async () => {
-    const data = await petService.fetchAllOfUser(userId)
+    const data = await petService.fetchAllOfDonor(userId)
     setDonations(data)
     setLoadingDonation(false)
   }, [userId])

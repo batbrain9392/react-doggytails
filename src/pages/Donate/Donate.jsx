@@ -36,7 +36,10 @@ const Donate = () => {
   const submitHandler = async formValues => {
     try {
       setError(null)
-      const petId = await pet.add({ ...formValues, donorUserId: userId }, token)
+      const petId = await pet.addForAdoption(
+        { ...formValues, donorUserId: userId },
+        token
+      )
       history.push(`/adopt/${petId}`)
     } catch (error) {
       setError(error)

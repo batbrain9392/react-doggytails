@@ -9,7 +9,7 @@ const Pets = () => {
   const { url } = useRouteMatch()
 
   const getPets = async () => {
-    const data = await petService.fetchAll()
+    const data = await petService.fetchAllForAdoption()
     setPets(data)
     setLoading(false)
   }
