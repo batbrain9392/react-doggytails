@@ -5,11 +5,13 @@ import petService from '../../http/pet'
 
 const Pets = () => {
   const [pets, setPets] = useState([])
+  const [loading, setLoading] = useState(true)
   const { url } = useRouteMatch()
 
   const getPets = async () => {
     const data = await petService.fetchAll()
     setPets(data)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -19,12 +21,21 @@ const Pets = () => {
   return (
     <>
       <h3>Pets</h3>
-      {pets.map(pet => (
-        <div key={pet.id}>
-          <pre>{JSON.stringify(pet, null, 2)}</pre>
-          <Link to={`${url}/${pet.id}`}>view details</Link>
-        </div>
-      ))}
+      {loading ? (
+        'Loading...'
+      ) : pets.length ? (
+        pets.map(pet => (
+          <div key={pet.id}>
+            <pre>{JSON.stringify(pet, null, 2)}</pre>
+            <Link to={`${url}/${pet.id}`}>view details</Link>
+          </div>
+        ))
+      ) : (
+        <p>
+          There are no pets up for adoption now. <br />
+          Please come back later.
+        </p>
+      )}
     </>
   )
 }
