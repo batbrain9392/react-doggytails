@@ -23,7 +23,7 @@ const Auth = () => {
       .email('Invalid email addresss`')
       .required('Required'),
     password: Yup.string()
-      .min(6, 'Password has to be longer than 6 characters')
+      .min(6, 'Password has to be minimum 6 characters')
       .required('Required'),
   })
 

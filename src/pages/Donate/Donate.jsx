@@ -26,7 +26,7 @@ const Donate = () => {
   }
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'Name has to be minimum 6 characters')
+      .min(3, 'Name has to be minimum 3 characters')
       .required('Required'),
   })
 
