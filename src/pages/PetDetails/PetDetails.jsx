@@ -8,6 +8,7 @@ const PetDetails = () => {
   const [pet, setPet] = useState(null)
   const [loadingPet, setLoadingPet] = useState(true)
   const [adopting, setAdopting] = useState(false)
+  const [adopted, setAdopted] = useState(false)
   const { id: petId } = useParams()
   const { isAuthenticated, token, userId } = useContext(AuthContext)
   const history = useHistory()
@@ -30,7 +31,7 @@ const PetDetails = () => {
   const adoptHandler = async () => {
     setAdopting(true)
     await petService.adopt(petId, userId, token)
-    history.push('/my-profile')
+    setAdopted(true)
   }
 
   const template = message => (
@@ -45,6 +46,11 @@ const PetDetails = () => {
         template('This pet has already been adopted.')
       ) : pet.donorUserId === userId ? (
         template('You cannot adopt your own donations.')
+      ) : adopted ? (
+        <>
+          <p>Congrats! It's yours. </p>
+          <Link to='/my-profile'>view my adoptions</Link>
+        </>
       ) : (
         <>
           <button onClick={adoptHandler}>adopt</button>
