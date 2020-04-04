@@ -49,6 +49,18 @@ const adopt = async (petId, adopterUserId, token) => {
   return data
 }
 
+const removeAdoption = (petId, token) => {
+  const queryParams = addToken(token)
+  return db.patch(`/${url}/${petId}.json?${queryParams}`, {
+    adopterUserId: null,
+  })
+}
+
+const removeDonation = (petId, token) => {
+  const queryParams = addToken(token)
+  return db.delete(`/${url}/${petId}.json?${queryParams}`)
+}
+
 export default {
   addForAdoption,
   fetchAllForAdoption,
@@ -56,4 +68,6 @@ export default {
   fetchAllOfAdopter,
   fetchDetails,
   adopt,
+  removeAdoption,
+  removeDonation,
 }

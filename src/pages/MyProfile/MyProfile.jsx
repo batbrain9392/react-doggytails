@@ -28,6 +28,30 @@ const MyProfile = () => {
     fetchMyAdoptions()
   }, [fetchMyDonations, fetchMyAdoptions])
 
+  const cancelAdoptionHandler = async petId => {
+    const original = [...adoptions]
+    const updated = adoptions.filter(pet => pet.id !== petId)
+    setAdoptions(updated)
+    try {
+      await petService.removeAdoption(petId, token)
+    } catch (error) {
+      console.log(error)
+      setAdoptions(original)
+    }
+  }
+
+  const cancelDonationHandler = async petId => {
+    const original = [...donations]
+    const updated = donations.filter(pet => pet.id !== petId)
+    setDonations(updated)
+    try {
+      await petService.removeDonation(petId, token)
+    } catch (error) {
+      console.log(error)
+      setDonations(original)
+    }
+  }
+
   return (
     <>
       <h3>My Profile</h3>
@@ -39,6 +63,9 @@ const MyProfile = () => {
           adoptions.map(pet => (
             <div key={pet.id}>
               <pre>{JSON.stringify(pet, null, 2)}</pre>
+              <button onClick={() => cancelAdoptionHandler(pet.id)}>
+                cancel
+              </button>
             </div>
           ))
         ) : (
@@ -57,6 +84,9 @@ const MyProfile = () => {
           donations.map(pet => (
             <div key={pet.id}>
               <pre>{JSON.stringify(pet, null, 2)}</pre>
+              <button onClick={() => cancelDonationHandler(pet.id)}>
+                cancel
+              </button>
             </div>
           ))
         ) : (
