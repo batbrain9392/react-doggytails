@@ -7,7 +7,7 @@ const addToken = token => `auth=${token}`
 const add = async (pet, token) => {
   const queryParams = addToken(token)
   const { data } = await db.post(`/${url}.json?${queryParams}`, pet)
-  return data
+  return data.name
 }
 
 const fetchAll = async () => {
