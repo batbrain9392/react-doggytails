@@ -11,6 +11,7 @@ import Pets from './pages/Pets/Pets'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
 import Donate from './pages/Donate/Donate'
+import MyProfile from './pages/MyProfile/MyProfile'
 
 function App() {
   const postSignin = authInfo => {
@@ -65,6 +66,7 @@ function App() {
           <Route path='/adopt/:id' component={PetDetails} />
           <Route path='/adopt' component={Pets} />
           <Route path='/donate' component={Donate} />
+          <ProtectedRoute path='/my-profile' component={MyProfile} />
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
           <Route path='/' exact component={Home} />
           <Redirect to='/' />

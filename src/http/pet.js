@@ -3,6 +3,7 @@ import { toArray } from '../lib/util'
 
 const url = 'pets'
 const addToken = token => `auth=${token}`
+const addUserId = userId => `orderBy="donorUserId"&equalTo="${userId}"`
 
 const add = async (pet, token) => {
   const queryParams = addToken(token)
@@ -15,6 +16,12 @@ const fetchAll = async () => {
   return toArray(data)
 }
 
+const fetchAllOfUser = async donorUserId => {
+  const queryParams = addUserId(donorUserId)
+  const { data } = await db.get(`/${url}.json?${queryParams}`)
+  return toArray(data)
+}
+
 const fetch = async petId => {
   const { data } = await db.get(`/${url}/${petId}.json`)
   return data
@@ -23,5 +30,6 @@ const fetch = async petId => {
 export default {
   add,
   fetchAll,
+  fetchAllOfUser,
   fetch,
 }
