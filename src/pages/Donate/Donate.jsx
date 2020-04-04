@@ -14,23 +14,20 @@ const Donate = () => {
   const { pathname } = useLocation()
   const [error, setError] = useState(null)
   const initialValues = {
-    name: 'name',
-    breed: 'breed',
-    age: 'age',
-    vaccination: 'vaccination',
-    personality: 'personality',
-    foodPreference: 'foodPreference',
-    dateAvailable: 'dateAvailable',
-    location: 'location',
-    description: 'description',
+    name: '',
+    breed: '',
+    age: '',
+    vaccination: '',
+    personality: '',
+    foodPreference: '',
+    dateAvailable: '',
+    location: '',
+    description: '',
   }
   const validationSchema = Yup.object({
-    // email: Yup.string()
-    //   .email('Invalid email addresss`')
-    //   .required('Required'),
-    // password: Yup.string()
-    //   .min(6, 'Password has to be longer than 6 characters')
-    //   .required('Required'),
+    name: Yup.string()
+      .min(3, 'Name has to be minimum 6 characters')
+      .required('Required'),
   })
 
   const submitHandler = async formValues => {
