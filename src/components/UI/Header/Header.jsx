@@ -11,9 +11,9 @@ const Header = () => {
   }
 
   const protectedNavLinks = isAuthenticated ? (
-    <button onClick={handleClick}>logout</button>
+    <button onClick={handleClick}>Logout</button>
   ) : (
-    <CustomNavLink to='/auth'>auth</CustomNavLink>
+    <CustomNavLink to='/auth'>Auth</CustomNavLink>
   )
 
   return (
@@ -25,10 +25,10 @@ const Header = () => {
         gap: '20px',
       }}>
       <CustomNavLink to='/' exact>
-        home
+        Home
       </CustomNavLink>
-      <CustomNavLink to='/pets'>pets</CustomNavLink>
-      <CustomNavLink to='/donate'>donate</CustomNavLink>
+      <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
+      <CustomNavLink to='/donate'>Donate</CustomNavLink>
       {protectedNavLinks}
     </header>
   )

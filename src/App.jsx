@@ -62,8 +62,8 @@ function App() {
     <AuthContext.Provider value={authContextValue}>
       <Layout>
         <Switch>
-          <Route path='/pets/:id' component={PetDetails} />
-          <Route path='/pets' component={Pets} />
+          <Route path='/adopt/:id' component={PetDetails} />
+          <Route path='/adopt' component={Pets} />
           <Route path='/donate' component={Donate} />
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
           <Route path='/' exact component={Home} />

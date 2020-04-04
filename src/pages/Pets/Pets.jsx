@@ -20,7 +20,7 @@ const Pets = () => {
 
   return (
     <>
-      <h3>Pets</h3>
+      <h3>Adopt</h3>
       {loading ? (
         'Loading...'
       ) : pets.length ? (
