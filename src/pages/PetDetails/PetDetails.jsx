@@ -3,58 +3,71 @@ import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
-import adoptionService from '../../http/adoption'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loadingPet, setLoadingPet] = useState(true)
+  const [adopting, setAdopting] = useState(false)
   const { id: petId } = useParams()
   const { isAuthenticated, token, userId } = useContext(AuthContext)
   const history = useHistory()
   const { pathname } = useLocation()
 
   const getPet = async id => {
-    const data = await petService.fetch(id)
+    const data = await petService.fetchDetails(id)
     setPet(data)
-    setLoading(false)
+    setLoadingPet(false)
   }
 
   useEffect(() => {
     getPet(petId)
   }, [petId])
 
-  const adoptHandler = () => {
-    const adoption = {
-      petId,
-      adopterUserId: userId,
-    }
-    adoptionService.add(adoption, token)
-  }
-
   const signinHandler = () => {
     history.push('/auth', { from: pathname })
   }
+
+  const adoptHandler = async () => {
+    setAdopting(true)
+    await petService.adopt(petId, userId, token)
+    history.push('/my-profile')
+  }
+
+  const template = message => (
+    <>
+      <p>{message}</p>
+      <Link to='/adopt'>view all pets</Link>
+    </>
+  )
+  const action = pet =>
+    isAuthenticated ? (
+      pet.adopterUserId ? (
+        template('This pet has already been adopted.')
+      ) : pet.donorUserId === userId ? (
+        template('You cannot adopt your own donations.')
+      ) : (
+        <>
+          <button onClick={adoptHandler}>adopt</button>
+          {adopting && <p>Adopting...</p>}
+        </>
+      )
+    ) : (
+      <button onClick={signinHandler}>signin to adopt</button>
+    )
 
   return (
     <>
       <h3>Details</h3>
       <div>
-        {loading ? (
+        {loadingPet ? (
           'Loading...'
         ) : pet ? (
           <>
             <pre>{JSON.stringify(pet, null, 2)}</pre>
-            {isAuthenticated ? (
-              <button onClick={adoptHandler}>adopt</button>
-            ) : (
-              <button onClick={signinHandler}>signin to adopt</button>
-            )}
+            {action(pet)}
           </>
         ) : (
-          <>
-            <p>This ad has been removed.</p>
-            <Link to='/adopt'>view all pets</Link>
-          </>
+          template('This ad has been removed.')
         )}
       </div>
     </>
