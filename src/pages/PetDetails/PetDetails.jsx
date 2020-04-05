@@ -17,7 +17,7 @@ const PetDetails = () => {
   const history = useHistory()
   const { pathname } = useLocation()
 
-  const getPet = async id => {
+  const getPet = async (id) => {
     const data = await petService.fetchDetails(id)
     setPet(data)
     setLoadingPet(false)
@@ -37,7 +37,7 @@ const PetDetails = () => {
     setAdopted(true)
   }
 
-  const action = pet =>
+  const action = (pet) =>
     isAuthenticated ? (
       pet.adopterUserId ? (
         'This pet has already been adopted.'
@@ -64,17 +64,15 @@ const PetDetails = () => {
 
   return (
     <>
-      <h3>Details</h3>
+      <h3>Details {loading && <Spinner animation='grow' />}</h3>
       <div>
-        {loadingPet ? (
-          'Loading...'
-        ) : pet ? (
+        {!loadingPet && !pet ? (
+          <p>This ad has been removed.</p>
+        ) : (
           <>
             <PetDetailsView pet={pet} />
             {action(pet)}
           </>
-        ) : (
-          'This ad has been removed.'
         )}
         <Link to='/adopt' className='ml-4'>
           View all pets
