@@ -34,7 +34,7 @@ const Donate = () => {
       .required('Required'),
   })
 
-  const submitHandler = async formValues => {
+  const submitHandler = async (formValues, { setSubmitting }) => {
     try {
       setError(null)
       const petId = await pet.addForAdoption(
@@ -45,6 +45,7 @@ const Donate = () => {
     } catch (error) {
       setError(error)
     }
+    setSubmitting(false)
   }
 
   const signinHandler = () => {
