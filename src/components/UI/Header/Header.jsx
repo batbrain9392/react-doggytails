@@ -18,13 +18,13 @@ const Header = () => {
 
   const protectedNavLinks = isAuthenticated ? (
     <>
-      <CustomNavLink to='/my-profile'>MY PROFILE</CustomNavLink>
+      <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>
       <Button variant='link' as={Nav.Link} onClick={handleClick}>
-        LOGOUT
+        Logout
       </Button>
     </>
   ) : (
-    <CustomNavLink to='/auth'>AUTH</CustomNavLink>
+    <CustomNavLink to='/auth'>Sign in/Sign up</CustomNavLink>
   )
 
   return (
@@ -40,8 +40,8 @@ const Header = () => {
             {/* <CustomNavLink to='/' exact>
          Home
        </CustomNavLink> */}
-            <CustomNavLink to='/adopt'>ADOPT</CustomNavLink>
-            <CustomNavLink to='/donate'>DONATE</CustomNavLink>
+            <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
+            <CustomNavLink to='/donate'>Donate</CustomNavLink>
             {protectedNavLinks}
           </Nav>
         </Navbar.Collapse>
