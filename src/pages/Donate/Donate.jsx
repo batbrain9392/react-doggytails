@@ -59,7 +59,7 @@ const Donate = () => {
       <h1 className='mb-5'>Donate</h1>
       <Row>
         <Col md={6} className='mb-4'>
-          <h4 className='mb-3'>Find Your Pet A Loving Forever Home</h4>
+          <h4 className='mb-4'>Find Your Pet A Loving Forever Home</h4>
           <p>
             You can be moving cities or crossing international borders your dog
             does not have to go to an animal shelter. We, here at DoggyTails,
@@ -85,7 +85,7 @@ const Donate = () => {
       <hr className='my-5 border-top border-dark' />
       <Row>
         <Col md={6} className='mb-4'>
-          <h4 className='mb-3'>Post an Ad today to donate your furry friend</h4>
+          <h4 className='mb-4'>Post an Ad today to donate your furry friend</h4>
           We understand that giving up on your companion can be difficult but we
           are here to help. Simply fill the form on your right and we will help
           you find the desired new home for your dog.
