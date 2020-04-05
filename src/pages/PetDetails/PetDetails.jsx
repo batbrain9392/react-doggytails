@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
@@ -64,7 +65,7 @@ const PetDetails = () => {
 
   return (
     <>
-      <h3>Details {loading && <Spinner animation='grow' />}</h3>
+      <h3>Details {loadingPet && <Spinner animation='grow' />}</h3>
       <div>
         {!loadingPet && !pet ? (
           <p>This ad has been removed.</p>
