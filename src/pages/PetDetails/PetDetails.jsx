@@ -77,6 +77,9 @@ const PetDetails = () => {
         ) : pet ? (
           <>
             <PetDetailsView pet={pet} />
+            <Link to='/adopt' className='mr-4'>
+              Back
+            </Link>
             {action(pet)}
           </>
         ) : (
