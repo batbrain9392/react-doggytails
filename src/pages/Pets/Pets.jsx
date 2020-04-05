@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useRouteMatch, Link } from 'react-router-dom'
-import Card from 'react-bootstrap/Card'
+import { useRouteMatch } from 'react-router-dom'
 
 import petService from '../../http/pet'
-
-import img from '../../dog.jpeg'
+import PetCard from '../../components/UI/PetCard/PetCard'
 
 const Pets = () => {
   const [pets, setPets] = useState([])
@@ -29,22 +27,7 @@ const Pets = () => {
       ) : pets.length ? (
         <section className='pet-grid'>
           {pets.map(pet => (
-            <Card key={pet.id}>
-              <Card.Img variant='top' src={img} />
-              <Card.Body>
-                <Card.Title>{pet.name}</Card.Title>
-                <Card.Subtitle className='mb-3 text-muted'>
-                  <small>{pet.breed}</small>
-                </Card.Subtitle>
-                <Card.Text>{pet.description}</Card.Text>
-                <Link to={`${url}/${pet.id}`}>View details</Link>
-              </Card.Body>
-              <Card.Footer>
-                <small className='text-muted'>
-                  <strong>Date available: </strong> {pet.dateAvailable}
-                </small>
-              </Card.Footer>
-            </Card>
+            <PetCard key={pet.id} pet={pet} url={url} />
           ))}
         </section>
       ) : (
