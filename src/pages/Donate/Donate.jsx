@@ -56,22 +56,27 @@ const Donate = () => {
 
   return (
     <>
-      <h3>Donate</h3>
+      <h1 className='mb-5'>Donate</h1>
       <Row>
         <Col md={6} className='mb-4'>
-          <h5 className='mb-3'>Find Your Pet A Loving Forever Home</h5>
+          <h4 className='mb-3'>Find Your Pet A Loving Forever Home</h4>
           <p>
             You can be moving cities or crossing international borders your dog
             does not have to go to an animal shelter. We, here at DoggyTails,
             have made it our mission to find the next perfect home for your dog.
           </p>
-          <p>
+          <p className='mb-5'>
             Rehoming your pet should be easy and stress-free both for you and
             your pet. Our experts at DoggyTails, the newest and most promising
             non-profit pet adoption platform, with support from amazing dog
             lovers around us, have created a simple, reliable, free website to
             help you place your pet from your loving home directly to another.
           </p>
+          {!isAuthenticated && (
+            <Button variant='primary' onClick={signinHandler}>
+              Sign in to donate
+            </Button>
+          )}
         </Col>
         <Col>
           <img src={dogToon} alt='toon dog' />
@@ -80,13 +85,13 @@ const Donate = () => {
       <hr className='my-5 border-top border-dark' />
       <Row>
         <Col md={6} className='mb-4'>
-          <h5 className='mb-3'>Post an Ad today to donate your furry friend</h5>
+          <h4 className='mb-3'>Post an Ad today to donate your furry friend</h4>
           We understand that giving up on your companion can be difficult but we
           are here to help. Simply fill the form on your right and we will help
           you find the desired new home for your dog.
         </Col>
         <Col>
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -174,10 +179,6 @@ const Donate = () => {
                 </Form>
               )}
             </Formik>
-          ) : (
-            <Button variant='primary' onClick={signinHandler}>
-              Sign in to donate
-            </Button>
           )}
         </Col>
       </Row>

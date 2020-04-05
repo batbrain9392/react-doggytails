@@ -18,7 +18,7 @@ const Header = () => {
 
   const protectedNavLinks = isAuthenticated ? (
     <>
-      <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>
+      {/* <CustomNavLink to='/my-profile'>My Profile</CustomNavLink> */}
       <Button variant='link' as={Nav.Link} onClick={handleClick}>
         Logout
       </Button>

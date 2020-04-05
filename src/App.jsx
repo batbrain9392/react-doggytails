@@ -65,7 +65,7 @@ function App() {
           <Route path='/adopt/:id' component={PetDetails} />
           <Route path='/adopt' component={Pets} />
           <Route path='/donate' component={Donate} />
-          <ProtectedRoute path='/my-profile' component={MyProfile} />
+          {/* <ProtectedRoute path='/my-profile' component={MyProfile} /> */}
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
           {/* <Route path='/' exact component={Home} /> */}
           <Redirect to='/adopt' />
