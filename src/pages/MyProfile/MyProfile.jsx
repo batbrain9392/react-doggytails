@@ -56,7 +56,7 @@ const MyProfile = () => {
     <>
       <h3>My Profile</h3>
       <section>
-        <h4>My Adoptions</h4>
+        <h5>My Adoptions</h5>
         {loadingAdoption ? (
           'Loading...'
         ) : adoptions.length ? (
@@ -77,7 +77,7 @@ const MyProfile = () => {
       </section>
       <hr />
       <section>
-        <h4>My Donations</h4>
+        <h5>My Donations</h5>
         {loadingDonation ? (
           'Loading...'
         ) : donations.length ? (
