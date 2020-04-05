@@ -19,7 +19,11 @@ const Header = () => {
   const protectedNavLinks = isAuthenticated ? (
     <>
       {/* <CustomNavLink to='/my-profile'>My Profile</CustomNavLink> */}
-      <Button variant='link' as={Nav.Link} onClick={handleClick}>
+      <Button
+        variant='link'
+        as={Nav.Link}
+        onClick={handleClick}
+        className='ml-5'>
         Logout
       </Button>
     </>
@@ -28,11 +32,15 @@ const Header = () => {
   )
 
   return (
-    <Navbar bg='dark' variant='dark' expand='md'>
+    <Navbar bg='dark' variant='dark' expand='md' className='py-3'>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
-          <img alt='logo' src={logo} height='50' className='d-inline-block' />{' '}
-          <span style={{ fontFamily: 'cursive' }}>DoggyTails</span>
+          <img alt='logo' src={logo} height='50' />
+          <span
+            className='align-bottom'
+            style={{ fontFamily: '"Dancing Script",cursive' }}>
+            DoggyTails
+          </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
