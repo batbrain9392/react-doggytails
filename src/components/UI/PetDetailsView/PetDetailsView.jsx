@@ -7,7 +7,7 @@ import img from '../../../dog.jpeg'
 
 const PetDetailsView = ({ pet }) => {
   return (
-    <Row>
+    <Row className='mb-2'>
       <Col md={5} className='mb-4'>
         <Image src={img} thumbnail />
       </Col>
