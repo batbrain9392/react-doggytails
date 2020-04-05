@@ -28,7 +28,7 @@ const Header = () => {
       </Button>
     </>
   ) : (
-    <CustomNavLink to='/auth'>Sign in/Sign up</CustomNavLink>
+    <CustomNavLink to='/auth'>Sign in / Sign up</CustomNavLink>
   )
 
   return (
