@@ -1,4 +1,5 @@
 import React from 'react'
+import Container from 'react-bootstrap/Container'
 
 import Header from '../Header/Header'
 
@@ -6,7 +7,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <Container>
+        <main>{children}</main>
+      </Container>
     </>
   )
 }
