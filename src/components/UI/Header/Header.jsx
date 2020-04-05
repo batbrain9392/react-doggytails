@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <Navbar bg='dark' variant='dark' expand='md'>
       <Container>
-        <Navbar.Brand href='#home'>DoggyTails</Navbar.Brand>
+        <Navbar.Brand>DoggyTails</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
