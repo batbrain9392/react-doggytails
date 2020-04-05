@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { Formik, Form } from 'formik'
+import { Formik } from 'formik'
 import * as Yup from 'yup'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 import AuthContext from '../../lib/auth-context'
 import pet from '../../http/pet'
@@ -54,9 +56,10 @@ const Donate = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
+          validateOnMount={true}
           onSubmit={submitHandler}>
-          {({ isValid, isSubmitting }) => (
-            <Form>
+          {({ isValid, isSubmitting, handleSubmit }) => (
+            <Form noValidate onSubmit={handleSubmit}>
               <TextInput label='Name' name='name' type='text' />
               <TextInput label='Breed' name='breed' type='text' />
               <TextInput label='Age' name='age' type='text' />
@@ -74,9 +77,12 @@ const Donate = () => {
               />
               <TextInput label='Location' name='location' type='text' />
               <TextInput label='Description' name='description' type='text' />
-              <button type='submit' disabled={!isValid}>
-                submit
-              </button>
+              <Button
+                variant='primary'
+                type='submit'
+                disabled={!isValid || isSubmitting}>
+                Submit
+              </Button>
               {isSubmitting && <p>Donating...</p>}
               {error && <p>{error}</p>}
             </Form>
