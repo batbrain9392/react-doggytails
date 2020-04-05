@@ -53,6 +53,7 @@ const Auth = () => {
           <Form>
             <TextInput label='Email' name='email' type='text' />
             <TextInput label='Password' name='password' type='password' />
+            <br />
             <Button
               variant='primary'
               type='submit'
