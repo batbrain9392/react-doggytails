@@ -27,18 +27,19 @@ const Pets = () => {
   return (
     <>
       <h3>Adopt {loading && <Spinner animation='grow' />}</h3>
-      {!loading && !pets.length ? (
-        <p>
-          There are no pets up for adoption now. <br />
-          Please come back later.
-        </p>
-      ) : (
-        <section className='pet-grid'>
-          {pets.map(pet => (
-            <PetCard key={pet.id} pet={pet} url={url} />
-          ))}
-        </section>
-      )}
+      {!loading &&
+        (!pets.length ? (
+          <p>
+            There are no pets up for adoption now. <br />
+            Please come back later.
+          </p>
+        ) : (
+          <section className='pet-grid'>
+            {pets.map((pet) => (
+              <PetCard key={pet.id} pet={pet} url={url} />
+            ))}
+          </section>
+        ))}
     </>
   )
 }

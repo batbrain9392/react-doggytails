@@ -67,14 +67,15 @@ const PetDetails = () => {
     <>
       <h3>Details {loadingPet && <Spinner animation='grow' />}</h3>
       <div>
-        {!loadingPet && !pet ? (
-          <p>This ad has been removed.</p>
-        ) : (
-          <>
-            <PetDetailsView pet={pet} />
-            {action(pet)}
-          </>
-        )}
+        {!loadingPet &&
+          (!pet ? (
+            <p>This ad has been removed.</p>
+          ) : (
+            <>
+              <PetDetailsView pet={pet} />
+              {action(pet)}
+            </>
+          ))}
         <Link to='/adopt' className='ml-4'>
           View all pets
         </Link>
