@@ -37,21 +37,15 @@ const PetDetails = () => {
     setAdopted(true)
   }
 
-  const template = message => (
-    <>
-      <p>{message}</p>
-      <Link to='/adopt'>View all pets</Link>
-    </>
-  )
   const action = pet =>
     isAuthenticated ? (
       pet.adopterUserId ? (
-        template('This pet has already been adopted.')
+        'This pet has already been adopted.'
       ) : pet.donorUserId === userId ? (
-        template('You cannot adopt your own donations.')
+        'You cannot adopt your own donations.'
       ) : adopted ? (
         <>
-          <p>Congrats! It's yours. </p>
+          Congrats! It's yours.
           <Link to='/my-profile'>View my adoptions</Link>
         </>
       ) : (
@@ -77,14 +71,14 @@ const PetDetails = () => {
         ) : pet ? (
           <>
             <PetDetailsView pet={pet} />
-            <Link to='/adopt' className='mr-4'>
-              Back
-            </Link>
             {action(pet)}
           </>
         ) : (
-          template('This ad has been removed.')
+          'This ad has been removed.'
         )}
+        <Link to='/adopt' className='ml-4'>
+          View all pets
+        </Link>
       </div>
     </>
   )
