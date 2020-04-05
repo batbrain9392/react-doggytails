@@ -12,6 +12,7 @@ import AuthContext from '../../lib/auth-context'
 import pet from '../../http/pet'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
+import dogToon from '../../run.webp'
 
 const Donate = () => {
   const { isAuthenticated, token, userId } = useContext(AuthContext)
@@ -56,6 +57,27 @@ const Donate = () => {
   return (
     <>
       <h3>Donate</h3>
+      <Row>
+        <Col md={6} className='mb-4'>
+          <h5 className='mb-3'>Find Your Pet A Loving Forever Home</h5>
+          <p>
+            You can be moving cities or crossing international borders your dog
+            does not have to go to an animal shelter. We, here at DoggyTails,
+            have made it our mission to find the next perfect home for your dog.
+          </p>
+          <p>
+            Rehoming your pet should be easy and stress-free both for you and
+            your pet. Our experts at DoggyTails, the newest and most promising
+            non-profit pet adoption platform, with support from amazing dog
+            lovers around us, have created a simple, reliable, free website to
+            help you place your pet from your loving home directly to another.
+          </p>
+        </Col>
+        <Col>
+          <img src={dogToon} alt='toon dog' />
+        </Col>
+      </Row>
+      <hr className='my-5 border-top border-dark' />
       <Row>
         <Col md={6} className='mb-4'>
           <h5 className='mb-3'>Post an Ad today to donate your furry friend</h5>
