@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <Container as='main' className='mt-4'>
+      <Container as='main' className='mt-4 pb-5'>
         {children}
       </Container>
     </>
