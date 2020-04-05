@@ -26,7 +26,9 @@ const Pets = () => {
 
   return (
     <>
-      <h3>Adopt {loading && <Spinner animation='grow' />}</h3>
+      <h1 className='mb-5'>
+        Adoptions {loading && <Spinner animation='grow' />}
+      </h1>
       {!loading &&
         (!pets.length ? (
           <p>

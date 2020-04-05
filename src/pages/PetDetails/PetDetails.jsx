@@ -65,7 +65,9 @@ const PetDetails = () => {
 
   return (
     <>
-      <h3>Details {loadingPet && <Spinner animation='grow' />}</h3>
+      <h1 className='mb-5'>
+        Details {loadingPet && <Spinner animation='grow' />}
+      </h1>
       <div>
         {!loadingPet &&
           (!pet ? (
