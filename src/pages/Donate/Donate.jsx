@@ -57,7 +57,7 @@ const Donate = () => {
     <>
       <h3>Donate</h3>
       <Row>
-        <Col md={6}>
+        <Col md={6} className='mb-4'>
           <h5 className='mb-3'>Post an Ad today to donate your furry friend</h5>
           We understand that giving up on your companion can be difficult but we
           are here to help. Simply fill the form on your right and we will help
