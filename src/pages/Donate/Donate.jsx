@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
 
 import AuthContext from '../../lib/auth-context'
 import pet from '../../http/pet'
@@ -58,7 +59,7 @@ const Donate = () => {
     <>
       <h1 className='mb-5'>Donate</h1>
       <Row>
-        <Col md={6} className='mb-4'>
+        <Col md={6} className='mb-5'>
           <h4 className='mb-4'>Find Your Pet A Loving Forever Home</h4>
           <p>
             You can be moving cities or crossing international borders your dog
@@ -78,8 +79,8 @@ const Donate = () => {
             </Button>
           )}
         </Col>
-        <Col>
-          <img src={dogToon} alt='toon dog' />
+        <Col className='text-center'>
+          <Image src={dogToon} alt='toon dog' fluid />
         </Col>
       </Row>
       <hr className='my-5 border-top border-dark' />

@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
 
 import AuthContext from '../../../lib/auth-context'
 
@@ -35,7 +36,7 @@ const Header = () => {
     <Navbar bg='dark' variant='dark' expand='md' className='py-3 shadow'>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
-          <img alt='logo' src={logo} height='50' />
+          <Image alt='logo' src={logo} height='50' />
           <span
             className='align-bottom'
             style={{ fontFamily: '"Dancing Script",cursive' }}>
