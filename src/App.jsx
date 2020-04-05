@@ -10,7 +10,6 @@ import Pets from './pages/Pets/Pets'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
 import Donate from './pages/Donate/Donate'
-import MyProfile from './pages/MyProfile/MyProfile'
 
 function App() {
   const postSignin = (authInfo) => {
