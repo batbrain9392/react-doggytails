@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
+
+import PetDetailsView from '../../components/UI/PetDetailsView/PetDetailsView'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
@@ -37,7 +40,7 @@ const PetDetails = () => {
   const template = message => (
     <>
       <p>{message}</p>
-      <Link to='/adopt'>view all pets</Link>
+      <Link to='/adopt'>View all pets</Link>
     </>
   )
   const action = pet =>
@@ -49,16 +52,20 @@ const PetDetails = () => {
       ) : adopted ? (
         <>
           <p>Congrats! It's yours. </p>
-          <Link to='/my-profile'>view my adoptions</Link>
+          <Link to='/my-profile'>View my adoptions</Link>
         </>
       ) : (
         <>
-          <button onClick={adoptHandler}>adopt</button>
+          <Button variant='primary' onClick={adoptHandler}>
+            Adopt
+          </Button>
           {adopting && <p>Adopting...</p>}
         </>
       )
     ) : (
-      <button onClick={signinHandler}>signin to adopt</button>
+      <Button variant='primary' onClick={signinHandler}>
+        Sign in to adopt
+      </Button>
     )
 
   return (
@@ -69,7 +76,7 @@ const PetDetails = () => {
           'Loading...'
         ) : pet ? (
           <>
-            <pre>{JSON.stringify(pet, null, 2)}</pre>
+            <PetDetailsView pet={pet} />
             {action(pet)}
           </>
         ) : (
