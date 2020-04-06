@@ -172,7 +172,7 @@ const Donate = () => {
                       <TextInput
                         placeholder='Description'
                         name='description'
-                        type='text'
+                        as='textarea'
                       />
                     </Col>
                   </Form.Row>
