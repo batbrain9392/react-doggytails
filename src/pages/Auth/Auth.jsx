@@ -18,8 +18,8 @@ const Auth = () => {
   const location = useLocation()
   const { from } = location.state || { from: { pathname: '/' } }
   const initialValues = {
-    email: 'asd@asd.asd',
-    password: '123456',
+    email: '',
+    password: '',
   }
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email addresss').required('Required'),
