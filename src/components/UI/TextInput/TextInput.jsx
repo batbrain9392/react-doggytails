@@ -2,7 +2,7 @@ import React from 'react'
 import { useField } from 'formik'
 import Form from 'react-bootstrap/Form'
 
-const TextInput = ({ name, label, checkValid, ...props }) => {
+const TextInput = ({ name, label, checkValid = true, ...props }) => {
   const [field, meta] = useField(name)
   const { touched, error } = meta
 
