@@ -162,7 +162,7 @@ const Donate = () => {
                     disabled={!isValid || isSubmitting}
                     className='mt-3'>
                     {!isSubmitting ? (
-                      'Submit'
+                      'Donate'
                     ) : (
                       <>
                         <Spinner
@@ -172,7 +172,7 @@ const Donate = () => {
                           role='status'
                           aria-hidden='true'
                         />
-                        <span className='ml-2'>Donating...</span>
+                        <span className='ml-2'>Donating</span>
                       </>
                     )}
                   </Button>

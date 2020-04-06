@@ -34,8 +34,9 @@ const PetDetails = () => {
 
   const adoptHandler = async () => {
     setAdopting(true)
-    await petService.adopt(petId, userId, token)
-    setAdopted(true)
+    console.log('object')
+    // await petService.adopt(petId, userId, token)
+    // setAdopted(true)
   }
 
   const action = (pet) =>
@@ -51,10 +52,25 @@ const PetDetails = () => {
         </>
       ) : (
         <>
-          <Button variant='secondary' onClick={adoptHandler}>
-            Adopt
+          <Button
+            variant='secondary'
+            onClick={adoptHandler}
+            disabled={adopting}>
+            {!adopting ? (
+              'Adopt'
+            ) : (
+              <>
+                <Spinner
+                  as='span'
+                  animation='grow'
+                  size='sm'
+                  role='status'
+                  aria-hidden='true'
+                />
+                <span className='ml-2'>Adopting</span>
+              </>
+            )}
           </Button>
-          {adopting && <p>Adopting...</p>}
         </>
       )
     ) : (
