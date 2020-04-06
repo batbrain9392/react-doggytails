@@ -1,7 +1,7 @@
 import React from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 
-import { ReactComponent as Star } from '../../../assets/img/star.svg'
+import { ReactComponent as Star } from '../../../assets/icons/star.svg'
 
 const Hr = ({ children, width, loading }) => {
   return (
