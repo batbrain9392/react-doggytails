@@ -8,7 +8,7 @@ const TextInput = ({ name, label, checkValid = true, ...props }) => {
 
   return (
     <Form.Group controlId={`${name}Control`}>
-      <Form.Label>{label}</Form.Label>
+      {label && <Form.Label>{label}</Form.Label>}
       <Form.Control
         {...field}
         {...props}

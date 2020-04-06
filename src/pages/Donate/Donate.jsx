@@ -34,8 +34,22 @@ const Donate = () => {
     description: '',
   }
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .min(3, 'Name has to be minimum 3 characters')
+    name: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    breed: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    age: Yup.string().required('Required'),
+    vaccination: Yup.string()
+      .required('Required')
+      .min(2, 'Minimum 2 characters'),
+    personality: Yup.string()
+      .min(3, 'Minimum 3 characters')
+      .required('Required'),
+    foodPreference: Yup.string()
+      .min(3, 'Minimum 3 characters')
+      .required('Required'),
+    dateAvailable: Yup.date().typeError('Invalid date').required('Required'),
+    location: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    description: Yup.string()
+      .min(3, 'Minimum 10 characters')
       .required('Required'),
   })
 
@@ -103,19 +117,19 @@ const Donate = () => {
                 <Form noValidate onSubmit={handleSubmit}>
                   <Form.Row>
                     <Col lg={6}>
-                      <TextInput label='Name' name='name' type='text' />
+                      <TextInput placeholder='Name' name='name' type='text' />
                     </Col>
                     <Col>
-                      <TextInput label='Breed' name='breed' type='text' />
+                      <TextInput placeholder='Breed' name='breed' type='text' />
                     </Col>
                   </Form.Row>
                   <Form.Row>
                     <Col lg={6}>
-                      <TextInput label='Age' name='age' type='text' />
+                      <TextInput placeholder='Age' name='age' type='text' />
                     </Col>
                     <Col>
                       <TextInput
-                        label='Vaccination'
+                        placeholder='Vaccination'
                         name='vaccination'
                         type='text'
                       />
@@ -124,14 +138,14 @@ const Donate = () => {
                   <Form.Row>
                     <Col lg={6}>
                       <TextInput
-                        label='Personality'
+                        placeholder='Personality'
                         name='personality'
                         type='text'
                       />
                     </Col>
                     <Col>
                       <TextInput
-                        label='Food Preference'
+                        placeholder='Food Preference'
                         name='foodPreference'
                         type='text'
                       />
@@ -140,19 +154,23 @@ const Donate = () => {
                   <Form.Row>
                     <Col lg={6}>
                       <TextInput
-                        label='Date Available'
+                        placeholder='Date Available (mm/dd/yyyy)'
                         name='dateAvailable'
                         type='text'
                       />
                     </Col>
                     <Col>
-                      <TextInput label='Location' name='location' type='text' />
+                      <TextInput
+                        placeholder='Location'
+                        name='location'
+                        type='text'
+                      />
                     </Col>
                   </Form.Row>
                   <Form.Row>
                     <Col>
                       <TextInput
-                        label='Description'
+                        placeholder='Description'
                         name='description'
                         type='text'
                       />
