@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import Spinner from 'react-bootstrap/Spinner'
 
 import petService from '../../http/pet'
+
 import PetCard from '../../components/UI/PetCard/PetCard'
+import Header from '../../components/UI/Header/Header'
 
 const Pets = () => {
   const [pets, setPets] = useState([])
@@ -26,9 +27,7 @@ const Pets = () => {
 
   return (
     <>
-      <h1 className='mb-5'>
-        Adoptions {loading && <Spinner animation='grow' />}
-      </h1>
+      <Header loading={loading}>Adoptions</Header>
       {!loading &&
         (!pets.length ? (
           <p>

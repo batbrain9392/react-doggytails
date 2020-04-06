@@ -7,6 +7,7 @@ import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
 
 import PetDetailsView from '../../components/UI/PetDetailsView/PetDetailsView'
+import Header from '../../components/UI/Header/Header'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
@@ -34,9 +35,8 @@ const PetDetails = () => {
 
   const adoptHandler = async () => {
     setAdopting(true)
-    console.log('object')
-    // await petService.adopt(petId, userId, token)
-    // setAdopted(true)
+    await petService.adopt(petId, userId, token)
+    setAdopted(true)
   }
 
   const action = (pet) =>
@@ -81,23 +81,19 @@ const PetDetails = () => {
 
   return (
     <>
-      <h1 className='mb-5'>
-        Details {loadingPet && <Spinner animation='grow' />}
-      </h1>
-      <div>
-        {!loadingPet &&
-          (!pet ? (
-            <p>This ad has been removed.</p>
-          ) : (
-            <>
-              <PetDetailsView pet={pet} />
-              {action(pet)}
-            </>
-          ))}
-        <Link to='/adopt' className='ml-4'>
-          View all pets
-        </Link>
-      </div>
+      <Header loading={loadingPet}>Pet Details</Header>
+      {!loadingPet &&
+        (!pet ? (
+          <p>This ad has been removed.</p>
+        ) : (
+          <>
+            <PetDetailsView pet={pet} />
+            {action(pet)}
+          </>
+        ))}
+      <Link to='/adopt' className='ml-4'>
+        View all pets
+      </Link>
     </>
   )
 }

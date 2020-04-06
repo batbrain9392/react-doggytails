@@ -8,6 +8,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import AuthContext from '../../lib/auth-context'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
+import Header from '../../components/UI/Header/Header'
 
 const Auth = () => {
   const { signin, signup } = useContext(AuthContext)
@@ -44,7 +45,7 @@ const Auth = () => {
 
   return (
     <>
-      <h3>{!isSignUp ? 'Sign in' : 'Sign up'}</h3>
+      <Header>{!isSignUp ? 'Sign In' : 'Sign Up'}</Header>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

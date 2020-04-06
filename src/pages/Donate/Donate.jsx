@@ -13,6 +13,8 @@ import AuthContext from '../../lib/auth-context'
 import pet from '../../http/pet'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
+import Header from '../../components/UI/Header/Header'
+import Hr from '../../components/UI/Hr/Hr'
 import dogToon from '../../assets/img/run.webp'
 
 const Donate = () => {
@@ -57,7 +59,7 @@ const Donate = () => {
 
   return (
     <>
-      <h1 className='mb-5'>Donate</h1>
+      <Header>Donate</Header>
       <Row>
         <Col md={6} className='mb-5'>
           <h4 className='mb-4'>Find Your Pet A Loving Forever Home</h4>
@@ -83,7 +85,7 @@ const Donate = () => {
           <Image src={dogToon} alt='toon dog' fluid className='mb-5' />
         </Col>
       </Row>
-      <hr className='mt-0 mb-5' />
+      <Hr width='16.3' />
       <Row>
         <Col md={6} className='mb-4'>
           <h4 className='mb-4'>Post an Ad today to donate your furry friend</h4>
