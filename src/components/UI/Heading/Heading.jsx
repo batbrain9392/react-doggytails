@@ -2,7 +2,7 @@ import React from 'react'
 
 import Hr from '../Hr/Hr'
 
-const Header = ({ children, loading }) => {
+const Heading = ({ children, loading }) => {
   return (
     <Hr loading={loading}>
       <h1>{children}</h1>
@@ -10,4 +10,4 @@ const Header = ({ children, loading }) => {
   )
 }
 
-export default Header
+export default Heading

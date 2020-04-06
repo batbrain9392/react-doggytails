@@ -7,7 +7,7 @@ import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
 
 import PetDetailsView from '../../components/UI/PetDetailsView/PetDetailsView'
-import Header from '../../components/UI/Header/Header'
+import Heading from '../../components/UI/Heading/Heading'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
@@ -81,7 +81,7 @@ const PetDetails = () => {
 
   return (
     <>
-      <Header loading={loadingPet}>Pet Details</Header>
+      <Heading loading={loadingPet}>Pet Details</Heading>
       {!loadingPet &&
         (!pet ? (
           <p>This ad has been removed.</p>

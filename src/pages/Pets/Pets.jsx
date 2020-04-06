@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router-dom'
 import petService from '../../http/pet'
 
 import PetCard from '../../components/UI/PetCard/PetCard'
-import Header from '../../components/UI/Header/Header'
+import Heading from '../../components/UI/Heading/Heading'
 
 const Pets = () => {
   const [pets, setPets] = useState([])
@@ -27,7 +27,7 @@ const Pets = () => {
 
   return (
     <>
-      <Header loading={loading}>Adoptions</Header>
+      <Heading loading={loading}>Adoptions</Heading>
       {!loading &&
         (!pets.length ? (
           <p>
