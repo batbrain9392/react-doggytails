@@ -33,7 +33,7 @@ const Header = () => {
   )
 
   return (
-    <Navbar bg='dark' variant='dark' expand='md' className='py-3 shadow'>
+    <Navbar bg='primary' variant='dark' expand='md' className='py-3 shadow'>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />

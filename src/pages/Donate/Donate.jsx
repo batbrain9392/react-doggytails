@@ -74,7 +74,7 @@ const Donate = () => {
             help you place your pet from your loving home directly to another.
           </p>
           {!isAuthenticated && (
-            <Button variant='primary' onClick={signinHandler}>
+            <Button variant='secondary' onClick={signinHandler}>
               Sign in to donate
             </Button>
           )}
@@ -157,7 +157,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Button
-                    variant='primary'
+                    variant='secondary'
                     type='submit'
                     disabled={!isValid || isSubmitting}
                     className='mt-3'>

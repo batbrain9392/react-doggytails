@@ -51,14 +51,14 @@ const PetDetails = () => {
         </>
       ) : (
         <>
-          <Button variant='primary' onClick={adoptHandler}>
+          <Button variant='secondary' onClick={adoptHandler}>
             Adopt
           </Button>
           {adopting && <p>Adopting...</p>}
         </>
       )
     ) : (
-      <Button variant='primary' onClick={signinHandler}>
+      <Button variant='secondary' onClick={signinHandler}>
         Sign in to adopt
       </Button>
     )
