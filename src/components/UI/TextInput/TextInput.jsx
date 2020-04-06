@@ -2,7 +2,7 @@ import React from 'react'
 import { useField } from 'formik'
 import Form from 'react-bootstrap/Form'
 
-const TextInput = ({ name, label, ...props }) => {
+const TextInput = ({ name, label, checkValid, ...props }) => {
   const [field, meta] = useField(name)
   const { touched, error } = meta
 
@@ -13,7 +13,7 @@ const TextInput = ({ name, label, ...props }) => {
         {...field}
         {...props}
         isInvalid={touched && !!error}
-        isValid={touched && !error}
+        isValid={checkValid && touched && !error}
       />
       <Form.Control.Feedback type='invalid'>{error}</Form.Control.Feedback>
     </Form.Group>

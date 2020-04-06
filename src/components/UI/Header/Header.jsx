@@ -9,7 +9,7 @@ import Image from 'react-bootstrap/Image'
 import AuthContext from '../../../lib/auth-context'
 
 import CustomNavLink from '../CustomNavLink/CustomNavLink'
-import logo from '../../../logo.webp'
+import logo from '../../../assets/img/logo.webp'
 
 const Header = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)

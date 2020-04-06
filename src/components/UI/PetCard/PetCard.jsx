@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 
-import img from '../../../dog.jpeg'
+import img from '../../../assets/img/dog.jpeg'
 
 const PetCard = ({ pet, url }) => {
   return (

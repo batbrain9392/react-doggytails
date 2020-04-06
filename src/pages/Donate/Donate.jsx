@@ -13,7 +13,7 @@ import AuthContext from '../../lib/auth-context'
 import pet from '../../http/pet'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
-import dogToon from '../../run.webp'
+import dogToon from '../../assets/img/run.webp'
 
 const Donate = () => {
   const { isAuthenticated, token, userId } = useContext(AuthContext)
