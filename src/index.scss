@@ -32,4 +32,10 @@ h3 {
   }
 }
 
+div[id='root'] {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');

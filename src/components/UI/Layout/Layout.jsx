@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 
 import Appbar from '../Appbar/Appbar'
+import Footer from '../Footer/Footer'
 
 const Layout = ({ children }) => {
   return (
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
       <Container as='main' className='py-5'>
         {children}
       </Container>
+      <Footer />
     </>
   )
 }
