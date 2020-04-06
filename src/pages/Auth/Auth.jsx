@@ -8,6 +8,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import AuthContext from '../../lib/auth-context'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
+import Heading from '../../components/UI/Heading/Heading'
 
 const Auth = () => {
   const { signin, signup } = useContext(AuthContext)
@@ -21,7 +22,7 @@ const Auth = () => {
     password: '123456',
   }
   const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid email addresss`').required('Required'),
+    email: Yup.string().email('Invalid email addresss').required('Required'),
     password: Yup.string()
       .min(6, 'Password has to be minimum 6 characters')
       .required('Required'),
@@ -44,22 +45,36 @@ const Auth = () => {
 
   return (
     <>
-      <h3>{!isSignUp ? 'Sign in' : 'Sign up'}</h3>
+      <Heading>{!isSignUp ? 'Sign In' : 'Sign Up'}</Heading>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={submitHandler}>
         {({ isValid, isSubmitting }) => (
           <Form>
-            <TextInput label='Email' name='email' type='text' />
-            <TextInput label='Password' name='password' type='password' />
+            <TextInput
+              label='Email'
+              name='email'
+              type='text'
+              checkValid={isSignUp}
+            />
+            <TextInput
+              label='Password'
+              name='password'
+              type='password'
+              checkValid={isSignUp}
+            />
             <br />
             <Button
-              variant='primary'
+              variant='secondary'
               type='submit'
               disabled={!isValid || isSubmitting}>
               {!isSubmitting ? (
-                'Submit'
+                !isSignUp ? (
+                  'Sign in'
+                ) : (
+                  'Sign up'
+                )
               ) : (
                 <>
                   <Spinner
@@ -69,7 +84,9 @@ const Auth = () => {
                     role='status'
                     aria-hidden='true'
                   />
-                  <span className='ml-2'>Submitting...</span>
+                  <span className='ml-2'>
+                    {!isSignUp ? 'Signing in' : 'Signing up'}
+                  </span>
                 </>
               )}
             </Button>

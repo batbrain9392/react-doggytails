@@ -7,6 +7,7 @@ import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
 
 import PetDetailsView from '../../components/UI/PetDetailsView/PetDetailsView'
+import Heading from '../../components/UI/Heading/Heading'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
@@ -51,37 +52,48 @@ const PetDetails = () => {
         </>
       ) : (
         <>
-          <Button variant='primary' onClick={adoptHandler}>
-            Adopt
+          <Button
+            variant='secondary'
+            onClick={adoptHandler}
+            disabled={adopting}>
+            {!adopting ? (
+              'Adopt'
+            ) : (
+              <>
+                <Spinner
+                  as='span'
+                  animation='grow'
+                  size='sm'
+                  role='status'
+                  aria-hidden='true'
+                />
+                <span className='ml-2'>Adopting</span>
+              </>
+            )}
           </Button>
-          {adopting && <p>Adopting...</p>}
         </>
       )
     ) : (
-      <Button variant='primary' onClick={signinHandler}>
+      <Button variant='secondary' onClick={signinHandler}>
         Sign in to adopt
       </Button>
     )
 
   return (
     <>
-      <h1 className='mb-5'>
-        Details {loadingPet && <Spinner animation='grow' />}
-      </h1>
-      <div>
-        {!loadingPet &&
-          (!pet ? (
-            <p>This ad has been removed.</p>
-          ) : (
-            <>
-              <PetDetailsView pet={pet} />
-              {action(pet)}
-            </>
-          ))}
-        <Link to='/adopt' className='ml-4'>
-          View all pets
-        </Link>
-      </div>
+      <Heading loading={loadingPet}>Pet Details</Heading>
+      {!loadingPet &&
+        (!pet ? (
+          <p>This ad has been removed.</p>
+        ) : (
+          <>
+            <PetDetailsView pet={pet} />
+            {action(pet)}
+          </>
+        ))}
+      <Link to='/adopt' className='ml-4'>
+        View all pets
+      </Link>
     </>
   )
 }

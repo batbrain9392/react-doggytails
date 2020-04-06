@@ -1,4 +1,25 @@
-@import 'custom-theme-bootstrap';
+@import 'assets/css/custom-theme-bootstrap';
+
+div[id='root'] {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
+.Body {
+  padding-top: 3rem;
+  padding-bottom: 7rem;
+}
+
+.FooterIconLink {
+  display: grid;
+  grid-template-columns: 20px auto;
+  gap: 5px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: max-content auto;
+  }
+}
 
 h3 {
   margin-bottom: 1.5rem;
@@ -8,6 +29,29 @@ h3 {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.Hr {
+  display: grid;
+  align-items: center;
+  grid-template-columns: max-content max-content auto;
+  gap: 20px;
+
+  h1 {
+    margin: 0;
+  }
+
+  .Svg {
+    display: grid;
+    grid-auto-flow: column;
+    width: 80px;
+  }
+}
+
+svg {
+  $size: 20px;
+  height: $size;
+  width: $size;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');

@@ -1,0 +1,23 @@
+$theme-colors: (
+  'primary': #2a6f85,
+  'secondary': #451449,
+);
+
+@import '~bootstrap/scss/bootstrap';
+
+hr {
+  border-top: 2px dotted theme-color('secondary');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: theme-color('secondary');
+}
+
+.Hr svg {
+  fill: theme-color('secondary');
+}

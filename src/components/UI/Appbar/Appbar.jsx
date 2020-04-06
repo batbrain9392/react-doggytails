@@ -9,9 +9,9 @@ import Image from 'react-bootstrap/Image'
 import AuthContext from '../../../lib/auth-context'
 
 import CustomNavLink from '../CustomNavLink/CustomNavLink'
-import logo from '../../../logo.webp'
+import logo from '../../../assets/img/logo.webp'
 
-const Header = () => {
+const Appbar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)
   const handleClick = () => {
     logout()
@@ -33,7 +33,7 @@ const Header = () => {
   )
 
   return (
-    <Navbar bg='dark' variant='dark' expand='md' className='py-3 shadow'>
+    <Navbar bg='primary' variant='dark' expand='md' className='py-3 shadow'>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />
@@ -59,4 +59,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Appbar

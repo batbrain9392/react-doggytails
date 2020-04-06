@@ -13,7 +13,9 @@ import AuthContext from '../../lib/auth-context'
 import pet from '../../http/pet'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
-import dogToon from '../../run.webp'
+import Heading from '../../components/UI/Heading/Heading'
+import Hr from '../../components/UI/Hr/Hr'
+import dogToon from '../../assets/img/run.webp'
 
 const Donate = () => {
   const { isAuthenticated, token, userId } = useContext(AuthContext)
@@ -32,8 +34,22 @@ const Donate = () => {
     description: '',
   }
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .min(3, 'Name has to be minimum 3 characters')
+    name: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    breed: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    age: Yup.string().required('Required'),
+    vaccination: Yup.string()
+      .required('Required')
+      .min(2, 'Minimum 2 characters'),
+    personality: Yup.string()
+      .min(3, 'Minimum 3 characters')
+      .required('Required'),
+    foodPreference: Yup.string()
+      .min(3, 'Minimum 3 characters')
+      .required('Required'),
+    dateAvailable: Yup.date().typeError('Invalid date').required('Required'),
+    location: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    description: Yup.string()
+      .min(3, 'Minimum 10 characters')
       .required('Required'),
   })
 
@@ -57,7 +73,7 @@ const Donate = () => {
 
   return (
     <>
-      <h1 className='mb-5'>Donate</h1>
+      <Heading>Donate</Heading>
       <Row>
         <Col md={6} className='mb-5'>
           <h4 className='mb-4'>Find Your Pet A Loving Forever Home</h4>
@@ -74,16 +90,16 @@ const Donate = () => {
             help you place your pet from your loving home directly to another.
           </p>
           {!isAuthenticated && (
-            <Button variant='primary' onClick={signinHandler}>
+            <Button variant='secondary' onClick={signinHandler}>
               Sign in to donate
             </Button>
           )}
         </Col>
         <Col className='text-center'>
-          <Image src={dogToon} alt='toon dog' fluid />
+          <Image src={dogToon} alt='toon dog' fluid className='mb-5' />
         </Col>
       </Row>
-      <hr className='my-5 border-top border-dark' />
+      <Hr width='16.3' />
       <Row>
         <Col md={6} className='mb-4'>
           <h4 className='mb-4'>Post an Ad today to donate your furry friend</h4>
@@ -101,19 +117,19 @@ const Donate = () => {
                 <Form noValidate onSubmit={handleSubmit}>
                   <Form.Row>
                     <Col lg={6}>
-                      <TextInput label='Name' name='name' type='text' />
+                      <TextInput placeholder='Name' name='name' type='text' />
                     </Col>
                     <Col>
-                      <TextInput label='Breed' name='breed' type='text' />
+                      <TextInput placeholder='Breed' name='breed' type='text' />
                     </Col>
                   </Form.Row>
                   <Form.Row>
                     <Col lg={6}>
-                      <TextInput label='Age' name='age' type='text' />
+                      <TextInput placeholder='Age' name='age' type='text' />
                     </Col>
                     <Col>
                       <TextInput
-                        label='Vaccination'
+                        placeholder='Vaccination'
                         name='vaccination'
                         type='text'
                       />
@@ -122,14 +138,14 @@ const Donate = () => {
                   <Form.Row>
                     <Col lg={6}>
                       <TextInput
-                        label='Personality'
+                        placeholder='Personality'
                         name='personality'
                         type='text'
                       />
                     </Col>
                     <Col>
                       <TextInput
-                        label='Food Preference'
+                        placeholder='Food Preference'
                         name='foodPreference'
                         type='text'
                       />
@@ -138,31 +154,35 @@ const Donate = () => {
                   <Form.Row>
                     <Col lg={6}>
                       <TextInput
-                        label='Date Available'
+                        placeholder='Date Available (mm/dd/yyyy)'
                         name='dateAvailable'
                         type='text'
                       />
                     </Col>
                     <Col>
-                      <TextInput label='Location' name='location' type='text' />
+                      <TextInput
+                        placeholder='Location'
+                        name='location'
+                        type='text'
+                      />
                     </Col>
                   </Form.Row>
                   <Form.Row>
                     <Col>
                       <TextInput
-                        label='Description'
+                        placeholder='Description'
                         name='description'
-                        type='text'
+                        as='textarea'
                       />
                     </Col>
                   </Form.Row>
                   <Button
-                    variant='primary'
+                    variant='secondary'
                     type='submit'
                     disabled={!isValid || isSubmitting}
                     className='mt-3'>
                     {!isSubmitting ? (
-                      'Submit'
+                      'Donate'
                     ) : (
                       <>
                         <Spinner
@@ -172,7 +192,7 @@ const Donate = () => {
                           role='status'
                           aria-hidden='true'
                         />
-                        <span className='ml-2'>Donating...</span>
+                        <span className='ml-2'>Donating</span>
                       </>
                     )}
                   </Button>

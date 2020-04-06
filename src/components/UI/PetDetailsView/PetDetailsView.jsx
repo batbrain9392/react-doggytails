@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 
-import img from '../../../dog.jpeg'
+import img from '../../../assets/img/dog.jpeg'
 
 const PetDetailsView = ({ pet }) => {
   return (
