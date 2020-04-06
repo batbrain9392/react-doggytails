@@ -6,6 +6,11 @@ div[id='root'] {
   grid-template-rows: max-content auto max-content;
 }
 
+.Body {
+  padding-top: 3rem;
+  padding-bottom: 7rem;
+}
+
 .FooterIconLink {
   display: grid;
   grid-template-columns: 20px auto;

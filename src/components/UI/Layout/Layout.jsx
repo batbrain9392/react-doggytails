@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Appbar />
-      <Container as='main' className='py-5'>
+      <Container as='main' className='Body'>
         {children}
       </Container>
       <Footer />
