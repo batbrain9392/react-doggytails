@@ -116,7 +116,7 @@ const Donate = () => {
               {({ isValid, isSubmitting, handleSubmit }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput placeholder='Name' name='name' type='text' />
                     </Col>
                     <Col>
@@ -124,7 +124,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput placeholder='Age' name='age' type='text' />
                     </Col>
                     <Col>
@@ -136,7 +136,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput
                         placeholder='Personality'
                         name='personality'
@@ -152,7 +152,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput
                         placeholder='Date Available (mm/dd/yyyy)'
                         name='dateAvailable'
