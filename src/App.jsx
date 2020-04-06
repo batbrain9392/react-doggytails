@@ -6,7 +6,7 @@ import auth from './http/auth'
 
 import Layout from './components/UI/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
-import Pets from './pages/Pets/Pets'
+import Adopt from './pages/Adopt/Adopt'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
 import Donate from './pages/Donate/Donate'
@@ -62,7 +62,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path='/adopt/:id' component={PetDetails} />
-          <Route path='/adopt' component={Pets} />
+          <Route path='/adopt' component={Adopt} />
           <Route path='/donate' component={Donate} />
           {/* <ProtectedRoute path='/my-profile' component={MyProfile} /> */}
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
