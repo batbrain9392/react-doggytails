@@ -13,7 +13,7 @@ const Hr = ({ children, width, loading }) => {
       )}
       <div className='Svg'>
         {loading ? (
-          <Spinner animation='grow' className='m-auto' />
+          <Spinner animation='grow' variant='secondary' className='m-auto' />
         ) : (
           <>
             <Star />
