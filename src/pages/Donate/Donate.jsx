@@ -80,10 +80,10 @@ const Donate = () => {
           )}
         </Col>
         <Col className='text-center'>
-          <Image src={dogToon} alt='toon dog' fluid />
+          <Image src={dogToon} alt='toon dog' fluid className='mb-5' />
         </Col>
       </Row>
-      <hr className='my-5 border-top border-dark' />
+      <hr className='mt-0 mb-5 border-top border-dark' />
       <Row>
         <Col md={6} className='mb-4'>
           <h4 className='mb-4'>Post an Ad today to donate your furry friend</h4>
