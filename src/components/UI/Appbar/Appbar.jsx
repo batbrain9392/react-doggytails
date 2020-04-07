@@ -11,6 +11,8 @@ import AuthContext from '../../../lib/auth-context'
 import CustomNavLink from '../CustomNavLink/CustomNavLink'
 import logo from '../../../assets/img/logo.webp'
 
+import './Appbar.module.scss'
+
 const Appbar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)
   const handleClick = () => {

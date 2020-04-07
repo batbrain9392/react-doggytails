@@ -1,0 +1,30 @@
+@import '../../../assets/css/bootstrap-utils';
+
+.grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: max-content max-content auto;
+  gap: 20px;
+
+  hr {
+    border-top: 2px dotted theme-color('secondary');
+  }
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.svgContainer {
+  display: grid;
+  grid-auto-flow: column;
+  place-items: center;
+  width: 80px;
+}
+
+.Svg {
+  $size: 20px;
+  height: $size;
+  width: $size;
+  fill: theme-color('secondary');
+}

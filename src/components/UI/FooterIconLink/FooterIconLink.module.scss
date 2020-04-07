@@ -1,0 +1,11 @@
+@import '../../../assets/css/bootstrap-utils';
+
+.FooterIconLink {
+  display: grid;
+  grid-template-columns: 20px auto;
+  gap: 5px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: max-content auto;
+  }
+}
