@@ -8,58 +8,70 @@ import ImgContainer from '../ImgContainer/ImgContainer'
 const PetDetailsView = ({ pet }) => {
   return (
     <Row>
-      <Col md={5} className='mb-4'>
+      <Col md={5} className='mb-5'>
         <ImgContainer>
           {pet.imgUrl && (
             <Image src={pet.imgUrl} alt='Image unavailable' thumbnail />
           )}
         </ImgContainer>
       </Col>
-      <Col md={7} className='mb-4'>
-        <p>
-          <strong>NAME : </strong>
-          {pet.name}
-        </p>
-        <p>
-          <strong>BREED : </strong>
-          {pet.breed}
-        </p>
-        <p>
-          <strong>AGE : </strong>
-          {pet.age}
-        </p>
-        <p>
-          <strong>VACCINATION : </strong>
-          {pet.vaccination}
-        </p>
-        <p>
-          <strong>PERSONALITY : </strong>
-          {pet.personality}
-        </p>
-        <p>
-          <strong>FOOD PREFERENCE : </strong>
-          {pet.foodPreference}
-        </p>
-        <p>
-          <strong>DATE AVAILABLE : </strong>
-          {pet.dateAvailable}
-        </p>
-        <p>
-          <strong>LOCATION : </strong>
-          {pet.location}
-        </p>
-        <p>
-          <strong>DESCRIPTION : </strong>
-          {pet.description}
-        </p>
-        <p>
-          <strong>DONOR NAME : </strong>
-          {pet.donorName}
-        </p>
-        <p>
-          <strong>DONOR PHONE : </strong>
-          {pet.donorPhone}
-        </p>
+      <Col md={7} className='mb-3 details'>
+        <Row>
+          <Col as='p' lg>
+            <strong>NAME : </strong>
+            {pet.name}
+          </Col>
+          <Col as='p'>
+            <strong>BREED : </strong>
+            {pet.breed}
+          </Col>
+        </Row>
+        <Row>
+          <Col as='p' lg>
+            <strong>AGE : </strong>
+            {pet.age}
+          </Col>
+          <Col as='p'>
+            <strong>VACCINATION : </strong>
+            {pet.vaccination}
+          </Col>
+        </Row>
+        <Row>
+          <Col as='p' lg>
+            <strong>PERSONALITY : </strong>
+            {pet.personality}
+          </Col>
+          <Col as='p'>
+            <strong>FOOD PREFERENCE : </strong>
+            {pet.foodPreference}
+          </Col>
+        </Row>
+        <Row>
+          <Col as='p' lg>
+            <strong>DATE AVAILABLE : </strong>
+            {pet.dateAvailable}
+          </Col>
+          <Col as='p'>
+            <strong>LOCATION : </strong>
+            {pet.location}
+          </Col>
+        </Row>
+        <Row>
+          <Col as='p' lg>
+            <strong>DONOR NAME : </strong>
+            {pet.donorName}
+          </Col>
+          <Col as='p'>
+            <strong>DONOR PHONE : </strong>
+            {pet.donorPhone}
+          </Col>
+        </Row>
+        <Row>
+          <Col as='p' lg>
+            <strong>DESCRIPTION : </strong>
+            {pet.description}
+          </Col>
+        </Row>
       </Col>
     </Row>
   )
