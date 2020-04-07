@@ -2,12 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 
-import img from '../../../assets/img/dog.jpeg'
+import ImgContainer from '../ImgContainer/ImgContainer'
 
 const PetCard = ({ pet, url }) => {
   return (
     <Card>
-      <Card.Img variant='top' src={img} />
+      <ImgContainer height='250px'>
+        {pet.imgUrl && (
+          <Card.Img variant='top' src={pet.imgUrl} alt='Image unavailable' />
+        )}
+      </ImgContainer>
       <Card.Body>
         <Card.Title>{pet.name}</Card.Title>
         <Card.Subtitle className='mb-3 text-muted'>

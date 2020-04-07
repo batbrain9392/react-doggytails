@@ -42,39 +42,38 @@ const PetDetails = () => {
   const action = (pet) =>
     isAuthenticated ? (
       pet.adopterUserId ? (
-        'This pet has already been adopted.'
+        <p>This pet has already been adopted.</p>
       ) : pet.donorUserId === userId ? (
-        'You cannot adopt your own donations.'
+        <p>You cannot adopt your own donations.</p>
       ) : adopted ? (
-        <>
+        <p>
           Congrats! It's yours.
-          <Link to='/my-profile'>View my adoptions</Link>
-        </>
+          {/* <Link to='/my-profile'>View my adoptions</Link> */}
+        </p>
       ) : (
-        <>
-          <Button
-            variant='secondary'
-            onClick={adoptHandler}
-            disabled={adopting}>
-            {!adopting ? (
-              'Adopt'
-            ) : (
-              <>
-                <Spinner
-                  as='span'
-                  animation='grow'
-                  size='sm'
-                  role='status'
-                  aria-hidden='true'
-                />
-                <span className='ml-2'>Adopting</span>
-              </>
-            )}
-          </Button>
-        </>
+        <Button
+          variant='secondary'
+          onClick={adoptHandler}
+          disabled={adopting}
+          className='mr-3'>
+          {!adopting ? (
+            'Adopt'
+          ) : (
+            <>
+              <Spinner
+                as='span'
+                animation='grow'
+                size='sm'
+                role='status'
+                aria-hidden='true'
+              />
+              <span className='ml-2'>Adopting</span>
+            </>
+          )}
+        </Button>
       )
     ) : (
-      <Button variant='secondary' onClick={signinHandler}>
+      <Button variant='secondary' onClick={signinHandler} className='mr-3'>
         Sign in to adopt
       </Button>
     )
@@ -91,9 +90,7 @@ const PetDetails = () => {
             {action(pet)}
           </>
         ))}
-      <Link to='/adopt' className='ml-4'>
-        View all pets
-      </Link>
+      <Link to='/adopt'>View all pets</Link>
     </>
   )
 }

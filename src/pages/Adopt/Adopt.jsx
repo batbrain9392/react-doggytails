@@ -6,7 +6,7 @@ import petService from '../../http/pet'
 import PetCard from '../../components/UI/PetCard/PetCard'
 import Heading from '../../components/UI/Heading/Heading'
 
-const Pets = () => {
+const Adopt = () => {
   const [pets, setPets] = useState([])
   const [loading, setLoading] = useState(true)
   const { url } = useRouteMatch()
@@ -45,4 +45,4 @@ const Pets = () => {
   )
 }
 
-export default Pets
+export default Adopt

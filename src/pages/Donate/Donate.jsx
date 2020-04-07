@@ -15,10 +15,12 @@ import pet from '../../http/pet'
 import TextInput from '../../components/UI/TextInput/TextInput'
 import Heading from '../../components/UI/Heading/Heading'
 import Hr from '../../components/UI/Hr/Hr'
-import dogToon from '../../assets/img/run.webp'
+import mascotRunning from '../../assets/img/mascot_running.webp'
 
 const Donate = () => {
-  const { isAuthenticated, token, userId } = useContext(AuthContext)
+  const { isAuthenticated, token, userId, userDetails } = useContext(
+    AuthContext
+  )
   const history = useHistory()
   const { pathname } = useLocation()
   const [error, setError] = useState(null)
@@ -31,6 +33,7 @@ const Donate = () => {
     foodPreference: '',
     dateAvailable: '',
     location: '',
+    imgUrl: '',
     description: '',
   }
   const validationSchema = Yup.object({
@@ -38,16 +41,13 @@ const Donate = () => {
     breed: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
     age: Yup.string().required('Required'),
     vaccination: Yup.string()
-      .required('Required')
-      .min(2, 'Minimum 2 characters'),
-    personality: Yup.string()
-      .min(3, 'Minimum 3 characters')
+      .min(2, 'Minimum 2 characters')
       .required('Required'),
-    foodPreference: Yup.string()
-      .min(3, 'Minimum 3 characters')
-      .required('Required'),
+    personality: Yup.string().min(3, 'Minimum 3 characters'),
+    foodPreference: Yup.string().min(3, 'Minimum 3 characters'),
     dateAvailable: Yup.date().typeError('Invalid date').required('Required'),
     location: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    imgUrl: Yup.string().url('Invalid url'),
     description: Yup.string()
       .min(3, 'Minimum 10 characters')
       .required('Required'),
@@ -57,7 +57,12 @@ const Donate = () => {
     try {
       setError(null)
       const petId = await pet.addForAdoption(
-        { ...formValues, donorUserId: userId },
+        {
+          ...formValues,
+          donorUserId: userId,
+          donorName: userDetails.name,
+          donorPhone: userDetails.phone,
+        },
         token
       )
       history.push(`/adopt/${petId}`)
@@ -96,7 +101,7 @@ const Donate = () => {
           )}
         </Col>
         <Col className='text-center'>
-          <Image src={dogToon} alt='toon dog' fluid className='mb-5' />
+          <Image src={mascotRunning} alt='toon dog' fluid className='mb-5' />
         </Col>
       </Row>
       <Hr width='16.3' />
@@ -112,11 +117,12 @@ const Donate = () => {
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
-              onSubmit={submitHandler}>
+              onSubmit={submitHandler}
+              enableReinitialize>
               {({ isValid, isSubmitting, handleSubmit }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput placeholder='Name' name='name' type='text' />
                     </Col>
                     <Col>
@@ -124,7 +130,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput placeholder='Age' name='age' type='text' />
                     </Col>
                     <Col>
@@ -136,7 +142,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput
                         placeholder='Personality'
                         name='personality'
@@ -152,7 +158,7 @@ const Donate = () => {
                     </Col>
                   </Form.Row>
                   <Form.Row>
-                    <Col lg={6}>
+                    <Col lg>
                       <TextInput
                         placeholder='Date Available (mm/dd/yyyy)'
                         name='dateAvailable'
@@ -163,6 +169,15 @@ const Donate = () => {
                       <TextInput
                         placeholder='Location'
                         name='location'
+                        type='text'
+                      />
+                    </Col>
+                  </Form.Row>
+                  <Form.Row>
+                    <Col>
+                      <TextInput
+                        placeholder='Image Url'
+                        name='imgUrl'
                         type='text'
                       />
                     </Col>

@@ -3,15 +3,19 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 
-import img from '../../../assets/img/dog.jpeg'
+import ImgContainer from '../ImgContainer/ImgContainer'
 
 const PetDetailsView = ({ pet }) => {
   return (
-    <Row className='mb-2'>
+    <Row>
       <Col md={5} className='mb-4'>
-        <Image src={img} thumbnail />
+        <ImgContainer>
+          {pet.imgUrl && (
+            <Image src={pet.imgUrl} alt='Image unavailable' thumbnail />
+          )}
+        </ImgContainer>
       </Col>
-      <Col md={7}>
+      <Col md={7} className='mb-4'>
         <p>
           <strong>NAME : </strong>
           {pet.name}
@@ -47,6 +51,14 @@ const PetDetailsView = ({ pet }) => {
         <p>
           <strong>DESCRIPTION : </strong>
           {pet.description}
+        </p>
+        <p>
+          <strong>DONOR NAME : </strong>
+          {pet.donorName}
+        </p>
+        <p>
+          <strong>DONOR PHONE : </strong>
+          {pet.donorPhone}
         </p>
       </Col>
     </Row>

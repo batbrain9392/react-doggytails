@@ -28,7 +28,7 @@ h3 {
 .pet-grid {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 }
 
 .Hr {
@@ -52,6 +52,18 @@ svg {
   $size: 20px;
   height: $size;
   width: $size;
+}
+
+.ImgContainer {
+  background: url(assets/icons/dog.svg) center/50% no-repeat;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+    background-color: initial;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
