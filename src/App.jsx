@@ -27,13 +27,8 @@ function App() {
   const [token, setToken] = useState(authInfo?.token)
   const [userId, setUserId] = useState(authInfo?.userId)
 
-  const authenticate = async (email, password, isSignUp = false) => {
-    const authInfo = await auth.authenticate(
-      email,
-      password,
-      isSignUp,
-      postLogout
-    )
+  const authenticate = async (email, password, rest) => {
+    const authInfo = await auth.authenticate(email, password, rest, postLogout)
     postSignin(authInfo)
   }
 
@@ -47,7 +42,7 @@ function App() {
     token,
     userId,
     signin: (email, password) => authenticate(email, password),
-    signup: (email, password) => authenticate(email, password, true),
+    signup: (email, password, rest) => authenticate(email, password, rest),
     logout,
   }
 

@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { Formik, Form } from 'formik'
+import { Formik } from 'formik'
 import * as Yup from 'yup'
+import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import AuthContext from '../../lib/auth-context'
 
@@ -20,18 +23,32 @@ const Auth = () => {
   const initialValues = {
     email: '',
     password: '',
+    name: '',
+    phone: '',
   }
-  const validationSchema = Yup.object({
+  let yupObject = {
     email: Yup.string().email('Invalid email addresss').required('Required'),
-    password: Yup.string()
-      .min(6, 'Password has to be minimum 6 characters')
-      .required('Required'),
-  })
+    password: Yup.string().min(6, 'Minimum 6 characters').required('Required'),
+  }
+  yupObject = !isSignUp
+    ? yupObject
+    : {
+        ...yupObject,
+        name: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+        phone: Yup.number()
+          .integer('Invalid phone number')
+          .min(1000000000, 'Minimum 10 characters')
+          .max(9999999999, 'Maximum 10 characters')
+          .required('Required'),
+      }
+  const validationSchema = Yup.object(yupObject)
 
-  const submitHandler = async ({ email, password }) => {
+  const submitHandler = async ({ email, password, ...rest }) => {
     try {
       setError(null)
-      !isSignUp ? await signin(email, password) : await signup(email, password)
+      !isSignUp
+        ? await signin(email, password)
+        : await signup(email, password, rest)
       history.replace(from)
     } catch (error) {
       setError(error)
@@ -50,20 +67,46 @@ const Auth = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={submitHandler}>
-        {({ isValid, isSubmitting }) => (
-          <Form>
-            <TextInput
-              label='Email'
-              name='email'
-              type='text'
-              checkValid={isSignUp}
-            />
-            <TextInput
-              label='Password'
-              name='password'
-              type='password'
-              checkValid={isSignUp}
-            />
+        {({ isValid, isSubmitting, handleSubmit }) => (
+          <Form noValidate onSubmit={handleSubmit}>
+            <Row>
+              <Col sm>
+                <TextInput
+                  label='Email'
+                  name='email'
+                  type='text'
+                  checkValid={isSignUp}
+                />
+              </Col>
+              <Col>
+                <TextInput
+                  label='Password'
+                  name='password'
+                  type='password'
+                  checkValid={isSignUp}
+                />
+              </Col>
+            </Row>
+            {isSignUp && (
+              <Row>
+                <Col sm>
+                  <TextInput
+                    label='Name'
+                    name='name'
+                    type='text'
+                    checkValid={isSignUp}
+                  />
+                </Col>
+                <Col>
+                  <TextInput
+                    label='Phone'
+                    name='phone'
+                    type='number'
+                    checkValid={isSignUp}
+                  />
+                </Col>
+              </Row>
+            )}
             <br />
             <Button
               variant='secondary'

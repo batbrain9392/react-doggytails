@@ -1,4 +1,5 @@
 import axios from 'axios'
+import userService from './user'
 
 let timeout = null
 
@@ -22,14 +23,14 @@ const setAuthTimeout = (expiresIn, postLogout) => {
   }, expiresIn)
 }
 
-const authenticate = async (email, password, isSignUp, postLogout) => {
+const authenticate = async (email, password, rest, postLogout) => {
   const authData = {
     email: email,
     password: password,
     returnSecureToken: true,
   }
   const API_KEY = 'AIzaSyDSJIZsMHUxKonvnsXXXY0-SyLiKq6MQY4'
-  const method = isSignUp ? 'signUp' : 'signInWithPassword'
+  const method = rest ? 'signUp' : 'signInWithPassword'
   const url = `https://identitytoolkit.googleapis.com/v1/accounts:${method}?key=${API_KEY}`
   try {
     const {
@@ -37,16 +38,18 @@ const authenticate = async (email, password, isSignUp, postLogout) => {
     } = await axios.post(url, authData)
     setAuthTimeout(expiresIn * 1000, postLogout)
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+    localStorage.setItem('expirationDate', expirationDate)
     localStorage.setItem('token', token)
     localStorage.setItem('userId', userId)
-    localStorage.setItem('expirationDate', expirationDate)
+    await userService.addUser(userId, rest)
     return { token, userId }
   } catch (error) {
+    logout()
     throw error.response.data.error.message
   }
 }
 
-const checkAuth = postLogout => {
+const checkAuth = (postLogout) => {
   const token = localStorage.getItem('token')
   if (!token) {
     logout()
