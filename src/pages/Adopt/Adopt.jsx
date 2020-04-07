@@ -6,6 +6,8 @@ import petService from '../../http/pet'
 import PetCard from '../../components/UI/PetCard/PetCard'
 import Heading from '../../components/UI/Heading/Heading'
 
+import classes from './Adopt.module.scss'
+
 const Adopt = () => {
   const [pets, setPets] = useState([])
   const [loading, setLoading] = useState(true)
@@ -35,7 +37,7 @@ const Adopt = () => {
             Please come back later.
           </p>
         ) : (
-          <section className='pet-grid'>
+          <section className={classes.grid}>
             {pets.map((pet) => (
               <PetCard key={pet.id} pet={pet} url={url} />
             ))}

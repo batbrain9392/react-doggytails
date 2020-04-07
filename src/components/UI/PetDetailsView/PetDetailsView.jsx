@@ -5,6 +5,8 @@ import Image from 'react-bootstrap/Image'
 
 import ImgContainer from '../ImgContainer/ImgContainer'
 
+import classes from './PetDetailsView.module.scss'
+
 const PetDetailsView = ({ pet }) => {
   return (
     <Row>
@@ -15,7 +17,7 @@ const PetDetailsView = ({ pet }) => {
           )}
         </ImgContainer>
       </Col>
-      <Col md={7} className='mb-3 details'>
+      <Col md={7} className={`${classes.details} mb-3`}>
         <Row>
           <Col as='p' lg>
             <strong>NAME : </strong>
