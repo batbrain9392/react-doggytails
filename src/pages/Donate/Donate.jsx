@@ -47,9 +47,7 @@ const Donate = () => {
     foodPreference: Yup.string().min(3, 'Minimum 3 characters'),
     dateAvailable: Yup.date().typeError('Invalid date').required('Required'),
     location: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
-    imgUrl: Yup.string()
-      .url('Invalid url')
-      .default('https://placedog.net/400/300'),
+    imgUrl: Yup.string().url('Invalid url'),
     description: Yup.string()
       .min(3, 'Minimum 10 characters')
       .required('Required'),
