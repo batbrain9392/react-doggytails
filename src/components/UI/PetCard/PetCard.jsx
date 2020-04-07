@@ -9,7 +9,12 @@ const PetCard = ({ pet, url }) => {
     <Card>
       <ImgContainer height='250px'>
         {pet.imgUrl && (
-          <Card.Img variant='top' src={pet.imgUrl} alt='Image unavailable' />
+          <Card.Img
+            variant='top'
+            src={pet.imgUrl}
+            alt='Image unavailable'
+            loading='lazy'
+          />
         )}
       </ImgContainer>
       <Card.Body>
