@@ -15,7 +15,7 @@ import pet from '../../http/pet'
 import TextInput from '../../components/UI/TextInput/TextInput'
 import Heading from '../../components/UI/Heading/Heading'
 import Hr from '../../components/UI/Hr/Hr'
-import dogToon from '../../assets/img/run.webp'
+import mascotRunning from '../../assets/img/mascot_running.webp'
 
 const Donate = () => {
   const { isAuthenticated, token, userId, userDetails } = useContext(
@@ -103,7 +103,7 @@ const Donate = () => {
           )}
         </Col>
         <Col className='text-center'>
-          <Image src={dogToon} alt='toon dog' fluid className='mb-5' />
+          <Image src={mascotRunning} alt='toon dog' fluid className='mb-5' />
         </Col>
       </Row>
       <Hr width='16.3' />
