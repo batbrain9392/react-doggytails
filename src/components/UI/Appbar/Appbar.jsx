@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
 import AuthContext from '../../../lib/auth-context'
@@ -15,6 +14,7 @@ import classes from './Appbar.module.scss'
 
 const Appbar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)
+
   const handleClick = () => {
     logout()
   }
@@ -22,13 +22,9 @@ const Appbar = () => {
   const protectedNavLinks = isAuthenticated ? (
     <>
       {/* <CustomNavLink to='/my-profile'>My Profile</CustomNavLink> */}
-      <Button
-        variant='link'
-        as={Nav.Link}
-        onClick={handleClick}
-        className='ml-5'>
+      <Nav.Link className='ml-5' onClick={handleClick}>
         Logout
-      </Button>
+      </Nav.Link>
     </>
   ) : (
     <CustomNavLink to='/auth'>Sign in / Sign up</CustomNavLink>
