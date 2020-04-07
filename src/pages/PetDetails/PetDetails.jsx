@@ -48,7 +48,7 @@ const PetDetails = () => {
       ) : adopted ? (
         <p>
           Congrats! It's yours.
-          <Link to='/my-profile'>View my adoptions</Link>
+          {/* <Link to='/my-profile'>View my adoptions</Link> */}
         </p>
       ) : (
         <Button
