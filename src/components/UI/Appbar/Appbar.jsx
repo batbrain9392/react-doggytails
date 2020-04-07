@@ -11,7 +11,7 @@ import AuthContext from '../../../lib/auth-context'
 import CustomNavLink from '../CustomNavLink/CustomNavLink'
 import logo from '../../../assets/img/logo.webp'
 
-import './Appbar.module.scss'
+import classes from './Appbar.module.scss'
 
 const Appbar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext)
@@ -39,9 +39,7 @@ const Appbar = () => {
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />
-          <span
-            className='align-bottom'
-            style={{ fontFamily: '"Dancing Script",cursive' }}>
+          <span className={`${classes.brandText} align-bottom`}>
             DoggyTails
           </span>
         </Navbar.Brand>
