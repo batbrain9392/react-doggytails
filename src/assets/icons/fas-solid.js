@@ -1,1 +1,1 @@
-export { faDog } from '@fortawesome/free-solid-svg-icons'
+// export { faDog } from '@fortawesome/free-solid-svg-icons'
