@@ -18,7 +18,9 @@ import Hr from '../../components/UI/Hr/Hr'
 import dogToon from '../../assets/img/run.webp'
 
 const Donate = () => {
-  const { isAuthenticated, token, userId } = useContext(AuthContext)
+  const { isAuthenticated, token, userId, userDetails } = useContext(
+    AuthContext
+  )
   const history = useHistory()
   const { pathname } = useLocation()
   const [error, setError] = useState(null)
@@ -31,6 +33,7 @@ const Donate = () => {
     foodPreference: '',
     dateAvailable: '',
     location: '',
+    imgUrl: '',
     description: '',
   }
   const validationSchema = Yup.object({
@@ -38,16 +41,15 @@ const Donate = () => {
     breed: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
     age: Yup.string().required('Required'),
     vaccination: Yup.string()
-      .required('Required')
-      .min(2, 'Minimum 2 characters'),
-    personality: Yup.string()
-      .min(3, 'Minimum 3 characters')
+      .min(2, 'Minimum 2 characters')
       .required('Required'),
-    foodPreference: Yup.string()
-      .min(3, 'Minimum 3 characters')
-      .required('Required'),
+    personality: Yup.string().min(3, 'Minimum 3 characters'),
+    foodPreference: Yup.string().min(3, 'Minimum 3 characters'),
     dateAvailable: Yup.date().typeError('Invalid date').required('Required'),
     location: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
+    imgUrl: Yup.string()
+      .url('Invalid url')
+      .default('https://placedog.net/400/300'),
     description: Yup.string()
       .min(3, 'Minimum 10 characters')
       .required('Required'),
@@ -57,7 +59,12 @@ const Donate = () => {
     try {
       setError(null)
       const petId = await pet.addForAdoption(
-        { ...formValues, donorUserId: userId },
+        {
+          ...formValues,
+          donorUserId: userId,
+          donorName: userDetails.name,
+          donorPhone: userDetails.phone,
+        },
         token
       )
       history.push(`/adopt/${petId}`)
@@ -112,7 +119,8 @@ const Donate = () => {
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
-              onSubmit={submitHandler}>
+              onSubmit={submitHandler}
+              enableReinitialize>
               {({ isValid, isSubmitting, handleSubmit }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                   <Form.Row>
@@ -163,6 +171,15 @@ const Donate = () => {
                       <TextInput
                         placeholder='Location'
                         name='location'
+                        type='text'
+                      />
+                    </Col>
+                  </Form.Row>
+                  <Form.Row>
+                    <Col>
+                      <TextInput
+                        placeholder='Image Url'
+                        name='imgUrl'
                         type='text'
                       />
                     </Col>
