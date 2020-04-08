@@ -3,6 +3,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 
+import { toDateLocale } from '../../../lib/util'
+
 import ImgContainer from '../ImgContainer/ImgContainer'
 
 import classes from './PetDetailsView.module.scss'
@@ -51,7 +53,7 @@ const PetDetailsView = ({ pet }) => {
         <Row>
           <Col as='p' lg>
             <strong>DATE AVAILABLE : </strong>
-            {pet.dateAvailable}
+            {toDateLocale(pet.dateAvailable)}
           </Col>
           <Col as='p'>
             <strong>LOCATION : </strong>
