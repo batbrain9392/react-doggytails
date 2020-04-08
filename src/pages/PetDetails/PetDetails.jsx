@@ -22,8 +22,12 @@ const PetDetails = () => {
   const { pathname } = useLocation()
 
   const getPet = async (id) => {
-    const data = await petService.fetchDetails(id)
-    setPet(data)
+    try {
+      const data = await petService.fetchDetails(id)
+      setPet(data)
+    } catch (error) {
+      console.log(error)
+    }
     setLoadingPet(false)
   }
 
@@ -36,10 +40,15 @@ const PetDetails = () => {
   }
 
   const adoptHandler = async () => {
-    setAdopting(true)
-    await petService.adopt(petId, userId, token)
-    setAdopted(true)
-    setModalShow(true)
+    try {
+      setAdopting(true)
+      await petService.adopt(petId, userId, token)
+      setAdopted(true)
+      setModalShow(true)
+    } catch (error) {
+      console.log(error)
+    }
+    setAdopting(false)
   }
 
   const successModal = (

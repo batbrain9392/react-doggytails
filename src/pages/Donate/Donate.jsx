@@ -57,8 +57,8 @@ const Donate = () => {
   })
 
   const submitHandler = async (formValues, { setSubmitting }) => {
+    setError(null)
     try {
-      setError(null)
       const id = await pet.addForAdoption(
         {
           ...formValues,
