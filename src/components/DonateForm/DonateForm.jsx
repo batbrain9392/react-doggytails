@@ -6,9 +6,14 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
+import { toDateInput } from '../../lib/util'
+
 import TextInput from '../../components/UI/TextInput/TextInput'
 
 const DonateForm = ({ edit, onSubmit }) => {
+  if (edit) {
+    edit.dateAvailable = toDateInput(edit.dateAvailable)
+  }
   const initialValues = {
     name: edit?.name || '',
     breed: edit?.breed || '',
@@ -53,35 +58,27 @@ const DonateForm = ({ edit, onSubmit }) => {
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Row>
             <Col lg>
-              <TextInput placeholder='Name *' name='name' type='text' />
+              <TextInput label='Name *' name='name' type='text' />
             </Col>
             <Col>
-              <TextInput placeholder='Breed *' name='breed' type='text' />
+              <TextInput label='Breed *' name='breed' type='text' />
             </Col>
           </Form.Row>
           <Form.Row>
             <Col lg>
-              <TextInput placeholder='Age *' name='age' type='text' />
+              <TextInput label='Age *' name='age' type='text' />
             </Col>
             <Col>
-              <TextInput
-                placeholder='Vaccination *'
-                name='vaccination'
-                type='text'
-              />
+              <TextInput label='Vaccination *' name='vaccination' type='text' />
             </Col>
           </Form.Row>
           <Form.Row>
             <Col lg>
-              <TextInput
-                placeholder='Personality'
-                name='personality'
-                type='text'
-              />
+              <TextInput label='Personality' name='personality' type='text' />
             </Col>
             <Col>
               <TextInput
-                placeholder='Food Preference'
+                label='Food Preference'
                 name='foodPreference'
                 type='text'
               />
@@ -90,24 +87,24 @@ const DonateForm = ({ edit, onSubmit }) => {
           <Form.Row>
             <Col lg>
               <TextInput
-                placeholder='Date Available (mm/dd/yyyy) *'
+                label='Date Available *'
                 name='dateAvailable'
-                type='text'
+                type='date'
               />
             </Col>
             <Col>
-              <TextInput placeholder='Location *' name='location' type='text' />
+              <TextInput label='Location *' name='location' type='text' />
             </Col>
           </Form.Row>
           <Form.Row>
             <Col>
-              <TextInput placeholder='Image Url' name='imgUrl' type='text' />
+              <TextInput label='Image Url' name='imgUrl' type='text' />
             </Col>
           </Form.Row>
           <Form.Row>
             <Col>
               <TextInput
-                placeholder='Description *'
+                label='Description *'
                 name='description'
                 as='textarea'
               />
