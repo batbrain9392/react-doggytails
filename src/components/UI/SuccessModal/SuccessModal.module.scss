@@ -1,0 +1,17 @@
+@import '../../../assets/css/bootstrap-utils';
+
+.grid {
+  display: grid;
+  place-items: center;
+  $gap: 24px;
+  gap: $gap;
+  padding: $gap;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: max-content auto;
+  }
+}
+
+.mascotImg {
+  height: 200px;
+}
