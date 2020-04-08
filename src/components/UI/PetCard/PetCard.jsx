@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 
+import { toDateLocale } from '../../../lib/util'
+
 import ImgContainer from '../ImgContainer/ImgContainer'
 
 const PetCard = ({ pet, url }) => {
@@ -27,7 +29,7 @@ const PetCard = ({ pet, url }) => {
       </Card.Body>
       <Card.Footer>
         <small className='text-muted'>
-          <strong>Date available: </strong> {pet.dateAvailable}
+          <strong>Date available: </strong> {toDateLocale(pet.dateAvailable)}
         </small>
       </Card.Footer>
     </Card>

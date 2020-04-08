@@ -1,4 +1,4 @@
-export const toArray = object => {
+export const toArray = (object) => {
   const array = []
   for (const key in object) {
     if (object.hasOwnProperty(key)) {
@@ -6,4 +6,8 @@ export const toArray = object => {
     }
   }
   return array
+}
+
+export const toDateLocale = (datetimeInMilliseconds) => {
+  return new Date(datetimeInMilliseconds).toLocaleDateString()
 }

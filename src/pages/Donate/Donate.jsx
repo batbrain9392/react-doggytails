@@ -59,6 +59,7 @@ const Donate = () => {
   const submitHandler = async (formValues, { setSubmitting }) => {
     setError(null)
     try {
+      formValues.dateAvailable = new Date(formValues.dateAvailable).getTime()
       const id = await pet.addForAdoption(
         {
           ...formValues,
