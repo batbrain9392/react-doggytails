@@ -8,18 +8,18 @@ import Spinner from 'react-bootstrap/Spinner'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
 
-const DonateForm = ({ onSubmit }) => {
+const DonateForm = ({ edit, onSubmit }) => {
   const initialValues = {
-    name: '',
-    breed: '',
-    age: '',
-    vaccination: '',
-    personality: '',
-    foodPreference: '',
-    dateAvailable: '',
-    location: '',
-    imgUrl: '',
-    description: '',
+    name: edit?.name || '',
+    breed: edit?.breed || '',
+    age: edit?.age || '',
+    vaccination: edit?.vaccination || '',
+    personality: edit?.personality || '',
+    foodPreference: edit?.foodPreference || '',
+    dateAvailable: edit?.dateAvailable || '',
+    location: edit?.location || '',
+    imgUrl: edit?.imgUrl || '',
+    description: edit?.description || '',
   }
   const validationSchema = Yup.object({
     name: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
