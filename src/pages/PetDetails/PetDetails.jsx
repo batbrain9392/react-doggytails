@@ -47,9 +47,7 @@ const PetDetails = () => {
       show={modalShow}
       onHide={() => setModalShow(false)}
       title='Adopted'>
-      <div className='mb-2'>
-        Congrats, you're on your way to get a new friend!
-      </div>
+      <p>Congrats, you're on your way to get a new friend!</p>
       Please call donor{' '}
       <strong>
         {pet?.donorName} @ {pet?.donorPhone}
