@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, Link } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Form from 'react-bootstrap/Form'
@@ -15,6 +15,7 @@ import pet from '../../http/pet'
 import TextInput from '../../components/UI/TextInput/TextInput'
 import Heading from '../../components/UI/Heading/Heading'
 import Hr from '../../components/UI/Hr/Hr'
+import SuccessModal from '../../components/UI/SuccessModal/SuccessModal'
 import mascotRunning from '../../assets/img/mascot_running.webp'
 
 const Donate = () => {
@@ -24,6 +25,8 @@ const Donate = () => {
   const history = useHistory()
   const { pathname } = useLocation()
   const [error, setError] = useState(null)
+  const [modalShow, setModalShow] = useState(false)
+  const [petId, setPetId] = useState(null)
   const initialValues = {
     name: '',
     breed: '',
@@ -56,7 +59,7 @@ const Donate = () => {
   const submitHandler = async (formValues, { setSubmitting }) => {
     try {
       setError(null)
-      const petId = await pet.addForAdoption(
+      const id = await pet.addForAdoption(
         {
           ...formValues,
           donorUserId: userId,
@@ -65,7 +68,8 @@ const Donate = () => {
         },
         token
       )
-      history.push(`/adopt/${petId}`)
+      setPetId(id)
+      setModalShow(true)
     } catch (error) {
       setError(error)
     }
@@ -75,6 +79,20 @@ const Donate = () => {
   const signinHandler = () => {
     history.push('/auth', { from: pathname })
   }
+
+  const successModal = (
+    <SuccessModal
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+      title='Donated'>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <p>
+        Quam facilis iste perspiciatis debitis, sunt perferendis aliquam non
+        maiores autem.
+      </p>
+      <Link to={`/adopt/${petId}`}>View donated pet</Link>
+    </SuccessModal>
+  )
 
   return (
     <>
@@ -114,107 +132,114 @@ const Donate = () => {
         </Col>
         <Col>
           {isAuthenticated && (
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={submitHandler}
-              enableReinitialize>
-              {({ isValid, isSubmitting, handleSubmit }) => (
-                <Form noValidate onSubmit={handleSubmit}>
-                  <Form.Row>
-                    <Col lg>
-                      <TextInput placeholder='Name' name='name' type='text' />
-                    </Col>
-                    <Col>
-                      <TextInput placeholder='Breed' name='breed' type='text' />
-                    </Col>
-                  </Form.Row>
-                  <Form.Row>
-                    <Col lg>
-                      <TextInput placeholder='Age' name='age' type='text' />
-                    </Col>
-                    <Col>
-                      <TextInput
-                        placeholder='Vaccination'
-                        name='vaccination'
-                        type='text'
-                      />
-                    </Col>
-                  </Form.Row>
-                  <Form.Row>
-                    <Col lg>
-                      <TextInput
-                        placeholder='Personality'
-                        name='personality'
-                        type='text'
-                      />
-                    </Col>
-                    <Col>
-                      <TextInput
-                        placeholder='Food Preference'
-                        name='foodPreference'
-                        type='text'
-                      />
-                    </Col>
-                  </Form.Row>
-                  <Form.Row>
-                    <Col lg>
-                      <TextInput
-                        placeholder='Date Available (mm/dd/yyyy)'
-                        name='dateAvailable'
-                        type='text'
-                      />
-                    </Col>
-                    <Col>
-                      <TextInput
-                        placeholder='Location'
-                        name='location'
-                        type='text'
-                      />
-                    </Col>
-                  </Form.Row>
-                  <Form.Row>
-                    <Col>
-                      <TextInput
-                        placeholder='Image Url'
-                        name='imgUrl'
-                        type='text'
-                      />
-                    </Col>
-                  </Form.Row>
-                  <Form.Row>
-                    <Col>
-                      <TextInput
-                        placeholder='Description'
-                        name='description'
-                        as='textarea'
-                      />
-                    </Col>
-                  </Form.Row>
-                  <Button
-                    variant='secondary'
-                    type='submit'
-                    disabled={!isValid || isSubmitting}
-                    className='mt-3'>
-                    {!isSubmitting ? (
-                      'Donate'
-                    ) : (
-                      <>
-                        <Spinner
-                          as='span'
-                          animation='grow'
-                          size='sm'
-                          role='status'
-                          aria-hidden='true'
+            <>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={submitHandler}
+                enableReinitialize>
+                {({ isValid, isSubmitting, handleSubmit }) => (
+                  <Form noValidate onSubmit={handleSubmit}>
+                    <Form.Row>
+                      <Col lg>
+                        <TextInput placeholder='Name' name='name' type='text' />
+                      </Col>
+                      <Col>
+                        <TextInput
+                          placeholder='Breed'
+                          name='breed'
+                          type='text'
                         />
-                        <span className='ml-2'>Donating</span>
-                      </>
-                    )}
-                  </Button>
-                  {error && <p>{error}</p>}
-                </Form>
-              )}
-            </Formik>
+                      </Col>
+                    </Form.Row>
+                    <Form.Row>
+                      <Col lg>
+                        <TextInput placeholder='Age' name='age' type='text' />
+                      </Col>
+                      <Col>
+                        <TextInput
+                          placeholder='Vaccination'
+                          name='vaccination'
+                          type='text'
+                        />
+                      </Col>
+                    </Form.Row>
+                    <Form.Row>
+                      <Col lg>
+                        <TextInput
+                          placeholder='Personality'
+                          name='personality'
+                          type='text'
+                        />
+                      </Col>
+                      <Col>
+                        <TextInput
+                          placeholder='Food Preference'
+                          name='foodPreference'
+                          type='text'
+                        />
+                      </Col>
+                    </Form.Row>
+                    <Form.Row>
+                      <Col lg>
+                        <TextInput
+                          placeholder='Date Available (mm/dd/yyyy)'
+                          name='dateAvailable'
+                          type='text'
+                        />
+                      </Col>
+                      <Col>
+                        <TextInput
+                          placeholder='Location'
+                          name='location'
+                          type='text'
+                        />
+                      </Col>
+                    </Form.Row>
+                    <Form.Row>
+                      <Col>
+                        <TextInput
+                          placeholder='Image Url'
+                          name='imgUrl'
+                          type='text'
+                        />
+                      </Col>
+                    </Form.Row>
+                    <Form.Row>
+                      <Col>
+                        <TextInput
+                          placeholder='Description'
+                          name='description'
+                          as='textarea'
+                        />
+                      </Col>
+                    </Form.Row>
+                    <Button
+                      variant='secondary'
+                      type='submit'
+                      disabled={!isValid || isSubmitting}
+                      className='mt-3'>
+                      {!isSubmitting ? (
+                        'Donate'
+                      ) : (
+                        <>
+                          <Spinner
+                            as='span'
+                            animation='grow'
+                            size='sm'
+                            role='status'
+                            aria-hidden='true'
+                          />
+                          <span className='ml-2'>Donating</span>
+                        </>
+                      )}
+                    </Button>
+                    {error && <p>{error}</p>}
+                  </Form>
+                )}
+              </Formik>
+              {successModal}
+            </>
           )}
         </Col>
       </Row>
