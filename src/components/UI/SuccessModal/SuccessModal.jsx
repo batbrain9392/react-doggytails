@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Image from 'react-bootstrap/Image'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import mascotSitting from '../../../assets/img/mascot_sitting.webp'
+
+import classes from './SuccessModal.module.scss'
 
 const SuccessModal = ({
   title = 'Success',
@@ -16,13 +16,9 @@ const SuccessModal = ({
       <Modal.Header closeButton>
         <Modal.Title id='success-modal'>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Row>
-          <Col sm className='mb-4 mb-sm-0 text-center'>
-            <Image src={mascotSitting} className='modalImg' fluid />
-          </Col>
-          <Col>{children}</Col>
-        </Row>
+      <Modal.Body className={classes.grid}>
+        <Image src={mascotSitting} className={classes.mascotImg} fluid />
+        <div>{children}</div>
       </Modal.Body>
     </Modal>
   )

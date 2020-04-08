@@ -7,11 +7,15 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
 
 import AuthContext from '../../lib/auth-context'
 
 import TextInput from '../../components/UI/TextInput/TextInput'
 import Heading from '../../components/UI/Heading/Heading'
+import mascotSitting from '../../assets/img/mascot_sitting.webp'
+
+import classes from './Auth.module.scss'
 
 const Auth = () => {
   const { signin, signup } = useContext(AuthContext)
@@ -63,83 +67,80 @@ const Auth = () => {
   return (
     <>
       <Heading>{!isSignUp ? 'Sign In' : 'Sign Up'}</Heading>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={submitHandler}>
-        {({ isValid, isSubmitting, handleSubmit }) => (
-          <Form noValidate onSubmit={handleSubmit}>
-            <Row>
-              <Col sm>
+      <Row>
+        <Col sm className='mb-5 mb-sm-0 text-center'>
+          <Image src={mascotSitting} className={classes.mascotImg} fluid />
+        </Col>
+        <Col>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={submitHandler}>
+            {({ isValid, isSubmitting, handleSubmit }) => (
+              <Form noValidate onSubmit={handleSubmit}>
                 <TextInput
                   label='Email'
                   name='email'
                   type='text'
                   checkValid={isSignUp}
                 />
-              </Col>
-              <Col>
                 <TextInput
                   label='Password'
                   name='password'
                   type='password'
                   checkValid={isSignUp}
                 />
-              </Col>
-            </Row>
-            {isSignUp && (
-              <Row>
-                <Col sm>
-                  <TextInput
-                    label='Name'
-                    name='name'
-                    type='text'
-                    checkValid={isSignUp}
-                  />
-                </Col>
-                <Col>
-                  <TextInput
-                    label='Phone'
-                    name='phone'
-                    type='number'
-                    checkValid={isSignUp}
-                  />
-                </Col>
-              </Row>
+                {isSignUp && (
+                  <>
+                    <TextInput
+                      label='Name'
+                      name='name'
+                      type='text'
+                      checkValid={isSignUp}
+                    />
+                    <TextInput
+                      label='Phone'
+                      name='phone'
+                      type='number'
+                      checkValid={isSignUp}
+                    />
+                  </>
+                )}
+                <br />
+                <Button
+                  variant='secondary'
+                  type='submit'
+                  disabled={!isValid || isSubmitting}>
+                  {!isSubmitting ? (
+                    !isSignUp ? (
+                      'Sign in'
+                    ) : (
+                      'Sign up'
+                    )
+                  ) : (
+                    <>
+                      <Spinner
+                        as='span'
+                        animation='grow'
+                        size='sm'
+                        role='status'
+                        aria-hidden='true'
+                      />
+                      <span className='ml-2'>
+                        {!isSignUp ? 'Signing in' : 'Signing up'}
+                      </span>
+                    </>
+                  )}
+                </Button>
+                <Button variant='link' type='button' onClick={switchHandler}>
+                  Switch to {!isSignUp ? 'Sign up' : 'Sign in'}
+                </Button>
+                {error && <p>{error}</p>}
+              </Form>
             )}
-            <br />
-            <Button
-              variant='secondary'
-              type='submit'
-              disabled={!isValid || isSubmitting}>
-              {!isSubmitting ? (
-                !isSignUp ? (
-                  'Sign in'
-                ) : (
-                  'Sign up'
-                )
-              ) : (
-                <>
-                  <Spinner
-                    as='span'
-                    animation='grow'
-                    size='sm'
-                    role='status'
-                    aria-hidden='true'
-                  />
-                  <span className='ml-2'>
-                    {!isSignUp ? 'Signing in' : 'Signing up'}
-                  </span>
-                </>
-              )}
-            </Button>
-            <Button variant='link' type='button' onClick={switchHandler}>
-              Switch to {!isSignUp ? 'Sign up' : 'Sign in'}
-            </Button>
-            {error && <p>{error}</p>}
-          </Form>
-        )}
-      </Formik>
+          </Formik>
+        </Col>
+      </Row>
     </>
   )
 }
