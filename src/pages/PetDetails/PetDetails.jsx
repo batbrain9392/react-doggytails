@@ -2,18 +2,24 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
+import Image from 'react-bootstrap/Image'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
 
 import PetDetailsView from '../../components/UI/PetDetailsView/PetDetailsView'
 import Heading from '../../components/UI/Heading/Heading'
+import SuccessModal from '../../components/UI/SuccessModal/SuccessModal'
+import mascotSitting from '../../assets/img/mascot_sitting.webp'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
   const [loadingPet, setLoadingPet] = useState(true)
   const [adopting, setAdopting] = useState(false)
   const [adopted, setAdopted] = useState(false)
+  const [modalShow, setModalShow] = useState(false)
   const { id: petId } = useParams()
   const { isAuthenticated, token, userId } = useContext(AuthContext)
   const history = useHistory()
@@ -37,7 +43,31 @@ const PetDetails = () => {
     setAdopting(true)
     await petService.adopt(petId, userId, token)
     setAdopted(true)
+    setModalShow(true)
   }
+
+  const successModal = (
+    <SuccessModal
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+      title='Adopted'>
+      <Row>
+        <Col sm className='mb-4 mb-sm-0 text-center'>
+          <Image src={mascotSitting} className='modalImg' fluid />
+        </Col>
+        <Col>
+          <div className='mb-2'>
+            Congrats, you're on your way to get a new friend!
+          </div>
+          Please call donor{' '}
+          <strong>
+            {pet?.donorName} @ {pet?.donorPhone}
+          </strong>{' '}
+          for further details.
+        </Col>
+      </Row>
+    </SuccessModal>
+  )
 
   const action = (pet) =>
     isAuthenticated ? (
@@ -47,8 +77,9 @@ const PetDetails = () => {
         <p>You cannot adopt your own donations.</p>
       ) : adopted ? (
         <p>
-          Congrats! It's yours.
+          Adopted!
           {/* <Link to='/my-profile'>View my adoptions</Link> */}
+          {successModal}
         </p>
       ) : (
         <Button
