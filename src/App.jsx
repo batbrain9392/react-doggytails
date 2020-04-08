@@ -16,6 +16,7 @@ function App() {
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
   const [userDetails, setUserDetails] = useState(null)
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false)
 
   const postSignin = (authInfo) => {
     setToken(authInfo.token)
@@ -30,6 +31,7 @@ function App() {
   }
 
   const authenticate = async (email, password, rest) => {
+    setIsCheckingAuth(true)
     try {
       const authInfoData = await auth.authenticate(
         email,
@@ -41,6 +43,7 @@ function App() {
     } catch (error) {
       console.log(error)
     }
+    setIsCheckingAuth(false)
   }
 
   const logout = () => {
@@ -49,6 +52,7 @@ function App() {
   }
 
   const authContextValue = {
+    isCheckingAuth,
     isAuthenticated: !!userDetails,
     token,
     userId,
@@ -59,6 +63,7 @@ function App() {
   }
 
   const checkAuth = useCallback(async () => {
+    setIsCheckingAuth(true)
     try {
       const authInfoData = await auth.checkAuth(postLogout)
       if (authInfoData) {
@@ -67,6 +72,7 @@ function App() {
     } catch (error) {
       console.log(error)
     }
+    setIsCheckingAuth(false)
   }, [])
 
   useEffect(() => {
