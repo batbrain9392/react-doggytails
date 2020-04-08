@@ -79,13 +79,13 @@ const Auth = () => {
             {({ isValid, isSubmitting, handleSubmit }) => (
               <Form noValidate onSubmit={handleSubmit}>
                 <TextInput
-                  label='Email'
+                  label={`Email ${isSignUp ? '*' : ''}`}
                   name='email'
                   type='text'
                   checkValid={isSignUp}
                 />
                 <TextInput
-                  label='Password'
+                  label={`Password ${isSignUp ? '*' : ''}`}
                   name='password'
                   type='password'
                   checkValid={isSignUp}
@@ -93,13 +93,13 @@ const Auth = () => {
                 {isSignUp && (
                   <>
                     <TextInput
-                      label='Name'
+                      label='Name *'
                       name='name'
                       type='text'
                       checkValid={isSignUp}
                     />
                     <TextInput
-                      label='Phone'
+                      label='Phone *'
                       name='phone'
                       type='number'
                       checkValid={isSignUp}
