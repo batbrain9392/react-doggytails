@@ -3,6 +3,11 @@ import userService from './user'
 
 let timeout = null
 
+const errorHandler = (error) => {
+  logout()
+  throw error.response.data.error.message
+}
+
 const clearAuthTimeout = () => {
   if (timeout) clearTimeout(timeout)
 }
@@ -46,8 +51,7 @@ const authenticate = async (email, password, rest, postLogout) => {
     localStorage.setItem('userId', userId)
     return { token, userId, userDetails }
   } catch (error) {
-    logout()
-    throw error.response.data.error.message
+    errorHandler(error)
   }
 }
 
@@ -70,8 +74,7 @@ const checkAuth = async (postLogout) => {
         setAuthTimeout(expiresIn, postLogout)
         return { token, userId, userDetails }
       } catch (error) {
-        logout()
-        throw error.response.data.error.message
+        errorHandler(error)
       }
     }
   }

@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Image from 'react-bootstrap/Image'
+import Spinner from 'react-bootstrap/Spinner'
 
 import AuthContext from '../../../lib/auth-context'
 
@@ -13,13 +14,20 @@ import logo from '../../../assets/img/logo.webp'
 import classes from './Appbar.module.scss'
 
 const Appbar = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext)
+  const { isCheckingAuth, isAuthenticated, logout } = useContext(AuthContext)
+  const history = useHistory()
 
   const handleClick = () => {
     logout()
+    history.push('/auth')
   }
 
-  const protectedNavLinks = isAuthenticated ? (
+  const protectedNavLinks = isCheckingAuth ? (
+    <Nav.Link className='ml-5' disabled>
+      <Spinner animation='grow' size='sm' className='mr-1' />
+      Authenticating
+    </Nav.Link>
+  ) : isAuthenticated ? (
     <>
       {/* <CustomNavLink to='/my-profile'>My Profile</CustomNavLink> */}
       <Nav.Link className='ml-5' onClick={handleClick}>
@@ -31,7 +39,12 @@ const Appbar = () => {
   )
 
   return (
-    <Navbar bg='primary' variant='dark' expand='md' className='py-3 shadow'>
+    <Navbar
+      bg='primary'
+      variant='dark'
+      expand='md'
+      collapseOnSelect
+      className='py-3 shadow'>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />

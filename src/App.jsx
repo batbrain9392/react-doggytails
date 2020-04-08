@@ -13,6 +13,11 @@ import Donate from './pages/Donate/Donate'
 import MyProfile from './pages/MyProfile/MyProfile'
 
 function App() {
+  const [token, setToken] = useState(null)
+  const [userId, setUserId] = useState(null)
+  const [userDetails, setUserDetails] = useState(null)
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false)
+
   const postSignin = (authInfo) => {
     setToken(authInfo.token)
     setUserId(authInfo.userId)
@@ -25,15 +30,20 @@ function App() {
     setUserDetails(null)
   }
 
-  const authInfo = auth.checkAuth(postLogout)
-  const [token, setToken] = useState(authInfo?.token)
-  const [userId, setUserId] = useState(authInfo?.userId)
-  const [userDetails, setUserDetails] = useState(authInfo?.userDetails)
-  // const [isCheckingAuth, setIsCheckingAuth] = useState(false)
-
   const authenticate = async (email, password, rest) => {
-    const authInfo = await auth.authenticate(email, password, rest, postLogout)
-    postSignin(authInfo)
+    setIsCheckingAuth(true)
+    try {
+      const authInfoData = await auth.authenticate(
+        email,
+        password,
+        rest,
+        postLogout
+      )
+      postSignin(authInfoData)
+    } catch (error) {
+      console.log(error)
+    }
+    setIsCheckingAuth(false)
   }
 
   const logout = () => {
@@ -42,6 +52,7 @@ function App() {
   }
 
   const authContextValue = {
+    isCheckingAuth,
     isAuthenticated: !!userDetails,
     token,
     userId,
@@ -52,16 +63,16 @@ function App() {
   }
 
   const checkAuth = useCallback(async () => {
-    // setIsCheckingAuth(true)
+    setIsCheckingAuth(true)
     try {
-      const authInfo = await auth.checkAuth(postLogout)
-      if (authInfo) {
-        postSignin(authInfo)
+      const authInfoData = await auth.checkAuth(postLogout)
+      if (authInfoData) {
+        postSignin(authInfoData)
       }
     } catch (error) {
       console.log(error)
     }
-    // setIsCheckingAuth(false)
+    setIsCheckingAuth(false)
   }, [])
 
   useEffect(() => {
