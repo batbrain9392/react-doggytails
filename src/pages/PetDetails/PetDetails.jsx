@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
-import Image from 'react-bootstrap/Image'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
@@ -12,7 +9,6 @@ import petService from '../../http/pet'
 import PetDetailsView from '../../components/UI/PetDetailsView/PetDetailsView'
 import Heading from '../../components/UI/Heading/Heading'
 import SuccessModal from '../../components/UI/SuccessModal/SuccessModal'
-import mascotSitting from '../../assets/img/mascot_sitting.webp'
 
 const PetDetails = () => {
   const [pet, setPet] = useState(null)
@@ -51,21 +47,14 @@ const PetDetails = () => {
       show={modalShow}
       onHide={() => setModalShow(false)}
       title='Adopted'>
-      <Row>
-        <Col sm className='mb-4 mb-sm-0 text-center'>
-          <Image src={mascotSitting} className='modalImg' fluid />
-        </Col>
-        <Col>
-          <div className='mb-2'>
-            Congrats, you're on your way to get a new friend!
-          </div>
-          Please call donor{' '}
-          <strong>
-            {pet?.donorName} @ {pet?.donorPhone}
-          </strong>{' '}
-          for further details.
-        </Col>
-      </Row>
+      <div className='mb-2'>
+        Congrats, you're on your way to get a new friend!
+      </div>
+      Please call donor{' '}
+      <strong>
+        {pet?.donorName} @ {pet?.donorPhone}
+      </strong>{' '}
+      for further details.
     </SuccessModal>
   )
 

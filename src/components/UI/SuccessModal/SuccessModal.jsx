@@ -1,6 +1,10 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+import Image from 'react-bootstrap/Image'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+import mascotSitting from '../../../assets/img/mascot_sitting.webp'
 
 const SuccessModal = ({
   title = 'Success',
@@ -9,15 +13,17 @@ const SuccessModal = ({
 }) => {
   return (
     <Modal {...rest} aria-labelledby='success-modal' centered>
-      <Modal.Header>
-        <Modal.Title id='success-modal' className='mx-auto mx-sm-0'>
-          {title}
-        </Modal.Title>
+      <Modal.Header closeButton>
+        <Modal.Title id='success-modal'>{title}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{children}</Modal.Body>
-      <Modal.Footer>
-        <Button onClick={rest.onHide}>Close</Button>
-      </Modal.Footer>
+      <Modal.Body>
+        <Row>
+          <Col sm className='mb-4 mb-sm-0 text-center'>
+            <Image src={mascotSitting} className='modalImg' fluid />
+          </Col>
+          <Col>{children}</Col>
+        </Row>
+      </Modal.Body>
     </Modal>
   )
 }
