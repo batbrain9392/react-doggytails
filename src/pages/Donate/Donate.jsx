@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useHistory, useLocation, Link } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -22,12 +22,11 @@ const Donate = () => {
   const { pathname } = useLocation()
   const [error, setError] = useState(null)
   const [modalShow, setModalShow] = useState(false)
-  const [petId, setPetId] = useState(null)
 
   const submitHandler = async (formValues, setSubmitting) => {
     setError(null)
     try {
-      const id = await pet.addForAdoption(
+      await pet.addForAdoption(
         {
           ...formValues,
           donorUserId: userId,
@@ -36,7 +35,6 @@ const Donate = () => {
         },
         token
       )
-      setPetId(id)
       setModalShow(true)
     } catch (error) {
       setError(error)
@@ -58,7 +56,6 @@ const Donate = () => {
         Quam facilis iste perspiciatis debitis, sunt perferendis aliquam non
         maiores autem.
       </p>
-      <Link to={`/adopt/${petId}`}>View donated pet</Link>
     </SuccessModal>
   )
 
