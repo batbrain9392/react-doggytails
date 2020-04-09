@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Badge from 'react-bootstrap/Badge'
 
 const MyPetBadge = ({ variant, children }) => {
@@ -9,4 +9,4 @@ const MyPetBadge = ({ variant, children }) => {
   )
 }
 
-export default MyPetBadge
+export default memo(MyPetBadge)
