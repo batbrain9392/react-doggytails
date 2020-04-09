@@ -17,7 +17,9 @@ const PetDetails = () => {
   const [adopted, setAdopted] = useState(false)
   const [modalShow, setModalShow] = useState(false)
   const { id: petId } = useParams()
-  const { isAuthenticated, token, userId } = useContext(AuthContext)
+  const { isAuthenticated, token, userId, userDetails } = useContext(
+    AuthContext
+  )
   const history = useHistory()
   const { pathname } = useLocation()
 
@@ -42,7 +44,12 @@ const PetDetails = () => {
   const adoptHandler = async () => {
     try {
       setAdopting(true)
-      await petService.adopt(petId, userId, token)
+      const adopter = {
+        adopterUserId: userId,
+        adopterName: userDetails.name,
+        adopterPhone: userDetails.phone,
+      }
+      await petService.adopt(petId, adopter, token)
       setAdopted(true)
       setModalShow(true)
     } catch (error) {
