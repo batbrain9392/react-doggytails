@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
+import Badge from 'react-bootstrap/Badge'
 
 import { toDateLocale } from '../../../lib/util'
 
 import ImgContainer from '../ImgContainer/ImgContainer'
 
-const PetCard = ({ pet, url }) => {
+const PetCard = ({ pet, url, mine }) => {
   return (
     <Card>
       <ImgContainer height='250px'>
@@ -20,7 +21,10 @@ const PetCard = ({ pet, url }) => {
         )}
       </ImgContainer>
       <Card.Body>
-        <Card.Title>{pet.name}</Card.Title>
+        <Card.Title className='d-flex justify-content-between'>
+          <span>{pet.name}</span>
+          {mine && <Badge variant='warning'>mine</Badge>}
+        </Card.Title>
         <Card.Subtitle className='mb-3 text-muted'>
           <small>{pet.breed}</small>
         </Card.Subtitle>
@@ -29,11 +33,11 @@ const PetCard = ({ pet, url }) => {
       </Card.Body>
       <Card.Footer>
         <small className='text-muted'>
-          <strong>Date available: </strong> {toDateLocale(pet.dateAvailable)}
+          Available from {toDateLocale(pet.dateAvailable)}
         </small>
       </Card.Footer>
     </Card>
   )
 }
 
-export default PetCard
+export default memo(PetCard)
