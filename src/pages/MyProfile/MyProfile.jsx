@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
+
+import Heading from '../../components/UI/Heading/Heading'
+import MyPets from '../../components/UI/MyPets/MyPets'
 
 const MyProfile = () => {
   const [adoptions, setAdoptions] = useState([])
@@ -48,6 +52,10 @@ const MyProfile = () => {
     }
   }
 
+  const editDonationHandler = async (petId) => {
+    console.log(petId)
+  }
+
   const cancelDonationHandler = async (petId) => {
     const original = [...donations]
     const updated = donations.filter((pet) => pet.id !== petId)
@@ -62,48 +70,26 @@ const MyProfile = () => {
 
   return (
     <>
-      <h3>My Profile</h3>
-      <section>
-        <h5>My Adoptions</h5>
-        {loadingAdoption ? (
-          'Loading...'
-        ) : adoptions.length ? (
-          adoptions.map((pet) => (
-            <div key={pet.id}>
-              <pre>{JSON.stringify(pet, null, 2)}</pre>
-              <button onClick={() => cancelAdoptionHandler(pet.id)}>
-                cancel
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>
-            You haven't adopted any yet. <br />
-            <Link to='/adopt'>adopt now</Link>
-          </p>
-        )}
-      </section>
-      <hr />
-      <section>
-        <h5>My Donations</h5>
-        {loadingDonation ? (
-          'Loading...'
-        ) : donations.length ? (
-          donations.map((pet) => (
-            <div key={pet.id}>
-              <pre>{JSON.stringify(pet, null, 2)}</pre>
-              <button onClick={() => cancelDonationHandler(pet.id)}>
-                cancel
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>
-            You haven't donated any yet. <br />
-            <Link to='/donate'>donate now</Link>
-          </p>
-        )}
-      </section>
+      <Heading loading={loadingAdoption || loadingDonation}>My Profile</Heading>
+      <Row>
+        <Col md className='mb-5 mb-md-0'>
+          <MyPets
+            type='adopted'
+            loading={loadingAdoption}
+            pets={adoptions}
+            onDelete={cancelAdoptionHandler}
+          />
+        </Col>
+        <Col>
+          <MyPets
+            type='donated'
+            loading={loadingDonation}
+            pets={donations}
+            onEdit={editDonationHandler}
+            onDelete={cancelDonationHandler}
+          />
+        </Col>
+      </Row>
     </>
   )
 }
