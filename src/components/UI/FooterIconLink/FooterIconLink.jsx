@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import classes from './FooterIconLink.module.scss'
@@ -14,4 +14,4 @@ const FooterIconLink = ({ children, icon, type }) => {
   )
 }
 
-export default FooterIconLink
+export default memo(FooterIconLink)

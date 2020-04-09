@@ -12,7 +12,7 @@ import { toDateLocale } from '../../../lib/util'
 
 import ImgContainer from '../ImgContainer/ImgContainer'
 import MyPetBadge from '../MyPetBadge/MyPetBadge'
-import OverlayTooltip from '../OverlayTooltip/OverlayTooltip'
+import CustomTooltip from '../CustomTooltip/CustomTooltip'
 
 import classes from './MyPets.module.scss'
 
@@ -77,30 +77,30 @@ const MyPets = ({ loading, pets, type, onEdit, onDelete }) => {
                   </Card.Body>
                   <Card.Footer className={classes.cardFooter}>
                     <ButtonGroup size='sm'>
-                      <OverlayTooltip text='View'>
+                      <CustomTooltip text='View'>
                         <Button
                           as={Link}
                           to={`adopt/${pet.id}`}
                           variant='outline-secondary'>
                           <FontAwesomeIcon icon='eye' size='sm' />
                         </Button>
-                      </OverlayTooltip>
+                      </CustomTooltip>
                       {!isAdopted && (
-                        <OverlayTooltip text='Edit'>
+                        <CustomTooltip text='Edit'>
                           <Button
                             variant='outline-secondary'
                             onClick={() => onEdit(pet.id)}>
                             <FontAwesomeIcon icon='edit' size='sm' />
                           </Button>
-                        </OverlayTooltip>
+                        </CustomTooltip>
                       )}
-                      <OverlayTooltip text='Delete'>
+                      <CustomTooltip text='Delete'>
                         <Button
                           variant='outline-secondary'
                           onClick={() => onDelete(pet.id)}>
                           <FontAwesomeIcon icon='trash' size='sm' />
                         </Button>
-                      </OverlayTooltip>
+                      </CustomTooltip>
                     </ButtonGroup>
                     <span>
                       {isAdopted ? (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
@@ -81,4 +81,4 @@ const PetDetailsView = ({ pet }) => {
   )
 }
 
-export default PetDetailsView
+export default memo(PetDetailsView)

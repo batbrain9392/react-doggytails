@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
 
@@ -15,4 +15,4 @@ const OverlayTooltip = ({ text, children }) => {
   )
 }
 
-export default OverlayTooltip
+export default memo(OverlayTooltip)

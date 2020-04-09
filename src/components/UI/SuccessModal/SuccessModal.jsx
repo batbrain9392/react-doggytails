@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Image from 'react-bootstrap/Image'
 
@@ -24,4 +24,4 @@ const SuccessModal = ({
   )
 }
 
-export default SuccessModal
+export default memo(SuccessModal)

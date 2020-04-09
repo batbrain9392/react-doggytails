@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import classes from './ImgContainer.module.scss'
 
@@ -12,4 +12,4 @@ const ImgContainer = ({ children, height = '350px', width = '100%' }) => {
   )
 }
 
-export default ImgContainer
+export default memo(ImgContainer)
