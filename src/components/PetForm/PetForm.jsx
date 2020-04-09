@@ -8,9 +8,9 @@ import Spinner from 'react-bootstrap/Spinner'
 
 import { toDateInput } from '../../lib/util'
 
-import TextInput from '../../components/UI/TextInput/TextInput'
+import TextInput from '../UI/TextInput/TextInput'
 
-const DonateForm = ({ edit, onSubmit }) => {
+const PetForm = ({ edit, onSubmit }) => {
   if (edit) {
     edit.dateAvailable = toDateInput(edit.dateAvailable)
   }
@@ -136,4 +136,4 @@ const DonateForm = ({ edit, onSubmit }) => {
   )
 }
 
-export default DonateForm
+export default PetForm

@@ -11,7 +11,7 @@ import pet from '../../http/pet'
 import Heading from '../../components/UI/Heading/Heading'
 import Hr from '../../components/UI/Hr/Hr'
 import SuccessModal from '../../components/UI/SuccessModal/SuccessModal'
-import DonateForm from '../../components/DonateForm/DonateForm'
+import PetForm from '../../components/PetForm/PetForm'
 import mascotRunning from '../../assets/img/mascot_running.webp'
 
 const Donate = () => {
@@ -98,7 +98,7 @@ const Donate = () => {
         <Col>
           {isAuthenticated && (
             <>
-              <DonateForm onSubmit={submitHandler} />
+              <PetForm onSubmit={submitHandler} />
               {error && <p>{error}</p>}
               {successModal}
             </>
