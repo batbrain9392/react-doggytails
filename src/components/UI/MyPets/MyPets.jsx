@@ -39,44 +39,49 @@ const MyPets = ({ loading, pets, type, onEdit, onDelete }) => {
             {pets.map((pet) => {
               const imgSize = '60px'
               return (
-                <Card body key={pet.id}>
-                  <Row>
-                    <Col xs='auto' className='mb-2'>
-                      <ImgContainer height={imgSize} width={imgSize}>
-                        {pet.imgUrl && (
-                          <Card.Img
-                            src={pet.imgUrl}
-                            alt='failed'
-                            loading='lazy'
-                          />
-                        )}
-                      </ImgContainer>
-                    </Col>
-                    <Col>
-                      <Card.Title>{pet.name}</Card.Title>
-                      <Card.Subtitle className='mb-2 text-muted'>
-                        <small>
-                          {pet.age} old {pet.personality.toLocaleLowerCase()}{' '}
-                          {pet.breed}
-                        </small>
-                      </Card.Subtitle>
-                    </Col>
-                  </Row>
-                  <Card.Text>
-                    <>
-                      Available from {toDateLocale(pet.dateAvailable)} at{' '}
-                      {pet.location}.{' '}
-                      {isAdopted
-                        ? `Call ${pet.donorName} @ ${pet.donorPhone}.`
-                        : pet.adopterUserId
-                        ? `Call ${pet.adopterName} @ ${pet.adopterPhone}.`
-                        : ''}
-                    </>
-                  </Card.Text>
-                  <div className={classes.cardFooter}>
+                <Card key={pet.id}>
+                  <Card.Body>
+                    <Row>
+                      <Col xs='auto' className='mb-2'>
+                        <ImgContainer height={imgSize} width={imgSize}>
+                          {pet.imgUrl && (
+                            <Card.Img
+                              src={pet.imgUrl}
+                              alt='failed'
+                              loading='lazy'
+                            />
+                          )}
+                        </ImgContainer>
+                      </Col>
+                      <Col>
+                        <Card.Title>{pet.name}</Card.Title>
+                        <Card.Subtitle className='mb-2 text-muted'>
+                          <small>
+                            {pet.age} old {pet.personality.toLocaleLowerCase()}{' '}
+                            {pet.breed}
+                          </small>
+                        </Card.Subtitle>
+                      </Col>
+                    </Row>
+                    <Card.Text>
+                      <>
+                        Available from {toDateLocale(pet.dateAvailable)} at{' '}
+                        {pet.location}.{' '}
+                        {isAdopted
+                          ? `Call ${pet.donorName} @ ${pet.donorPhone}.`
+                          : pet.adopterUserId
+                          ? `Call ${pet.adopterName} @ ${pet.adopterPhone}.`
+                          : ''}
+                      </>
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className={classes.cardFooter}>
                     <ButtonGroup size='sm'>
                       <OverlayTooltip text='View'>
-                        <Button variant='outline-secondary'>
+                        <Button
+                          as={Link}
+                          to={`adopt/${pet.id}`}
+                          variant='outline-secondary'>
                           <FontAwesomeIcon icon='eye' size='sm' />
                         </Button>
                       </OverlayTooltip>
@@ -110,7 +115,7 @@ const MyPets = ({ loading, pets, type, onEdit, onDelete }) => {
                         </MyPetBadge>
                       )}
                     </span>
-                  </div>
+                  </Card.Footer>
                 </Card>
               )
             })}
