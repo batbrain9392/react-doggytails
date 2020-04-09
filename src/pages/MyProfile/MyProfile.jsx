@@ -12,15 +12,23 @@ const MyProfile = () => {
   const { userId, token } = useContext(AuthContext)
 
   const fetchMyAdoptions = useCallback(async () => {
-    const data = await petService.fetchAllOfAdopter(userId, token)
-    setAdoptions(data)
-    setLoadingAdoption(false)
+    try {
+      const data = await petService.fetchAllOfAdopter(userId, token)
+      setAdoptions(data)
+      setLoadingAdoption(false)
+    } catch (error) {
+      console.log(error)
+    }
   }, [userId, token])
 
   const fetchMyDonations = useCallback(async () => {
-    const data = await petService.fetchAllOfDonor(userId)
-    setDonations(data)
-    setLoadingDonation(false)
+    try {
+      const data = await petService.fetchAllOfDonor(userId)
+      setDonations(data)
+      setLoadingDonation(false)
+    } catch (error) {
+      console.log(error)
+    }
   }, [userId])
 
   useEffect(() => {
@@ -28,9 +36,9 @@ const MyProfile = () => {
     fetchMyAdoptions()
   }, [fetchMyDonations, fetchMyAdoptions])
 
-  const cancelAdoptionHandler = async petId => {
+  const cancelAdoptionHandler = async (petId) => {
     const original = [...adoptions]
-    const updated = adoptions.filter(pet => pet.id !== petId)
+    const updated = adoptions.filter((pet) => pet.id !== petId)
     setAdoptions(updated)
     try {
       await petService.removeAdoption(petId, token)
@@ -40,9 +48,9 @@ const MyProfile = () => {
     }
   }
 
-  const cancelDonationHandler = async petId => {
+  const cancelDonationHandler = async (petId) => {
     const original = [...donations]
-    const updated = donations.filter(pet => pet.id !== petId)
+    const updated = donations.filter((pet) => pet.id !== petId)
     setDonations(updated)
     try {
       await petService.removeDonation(petId, token)
@@ -60,7 +68,7 @@ const MyProfile = () => {
         {loadingAdoption ? (
           'Loading...'
         ) : adoptions.length ? (
-          adoptions.map(pet => (
+          adoptions.map((pet) => (
             <div key={pet.id}>
               <pre>{JSON.stringify(pet, null, 2)}</pre>
               <button onClick={() => cancelAdoptionHandler(pet.id)}>
@@ -81,7 +89,7 @@ const MyProfile = () => {
         {loadingDonation ? (
           'Loading...'
         ) : donations.length ? (
-          donations.map(pet => (
+          donations.map((pet) => (
             <div key={pet.id}>
               <pre>{JSON.stringify(pet, null, 2)}</pre>
               <button onClick={() => cancelDonationHandler(pet.id)}>
