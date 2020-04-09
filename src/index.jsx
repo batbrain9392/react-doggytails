@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import './assets/icons/fontawesome'
+import './lib/fontawesome'
 import './index.scss'
 import App from './App'
 
