@@ -66,7 +66,7 @@ const Donate = () => {
     <>
       <Heading>Donate</Heading>
       <Row>
-        <Col md={6} className='mb-5'>
+        <Col md className='mb-5'>
           <h4 className='mb-4'>Find Your Pet A Loving Forever Home</h4>
           <p>
             You can be moving cities or crossing international borders your dog
@@ -92,7 +92,7 @@ const Donate = () => {
       </Row>
       <Hr width='9.52vw' />
       <Row>
-        <Col md={6} className='mb-4'>
+        <Col md className='mb-4'>
           <h4 className='mb-4'>Post an Ad today to donate your furry friend</h4>
           We understand that giving up on your companion can be difficult but we
           are here to help. Simply fill the form on your right and we will help
