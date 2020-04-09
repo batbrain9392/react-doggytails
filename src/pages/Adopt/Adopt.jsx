@@ -37,11 +37,11 @@ const Adopt = () => {
             Please come back later.
           </p>
         ) : (
-          <section className={classes.grid}>
+          <div className={classes.grid}>
             {pets.map((pet) => (
               <PetCard key={pet.id} pet={pet} url={url} />
             ))}
-          </section>
+          </div>
         ))}
     </>
   )
