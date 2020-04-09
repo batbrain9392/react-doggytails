@@ -68,10 +68,7 @@ const Auth = () => {
     <>
       <Heading>{!isSignUp ? 'Sign In' : 'Sign Up'}</Heading>
       <Row>
-        <Col sm className='mb-5 mb-sm-0 text-center'>
-          <Image src={mascotSitting} className={classes.mascotImg} fluid />
-        </Col>
-        <Col>
+        <Col sm className='mb-5 mb-sm-0'>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -139,6 +136,9 @@ const Auth = () => {
               </Form>
             )}
           </Formik>
+        </Col>
+        <Col className='text-center'>
+          <Image src={mascotSitting} className={classes.mascotImg} fluid />
         </Col>
       </Row>
     </>
