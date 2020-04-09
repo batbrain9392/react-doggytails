@@ -2,9 +2,11 @@ import React from 'react'
 
 import classes from './ImgContainer.module.scss'
 
-const ImgContainer = ({ children, height = '350px' }) => {
+const ImgContainer = ({ children, height = '350px', width = '100%' }) => {
   return (
-    <div style={{ height }} className={`${classes.ImgContainer} bg-light`}>
+    <div
+      style={{ height, width }}
+      className={`${classes.ImgContainer} bg-light`}>
       {children}
     </div>
   )
