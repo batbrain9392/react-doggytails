@@ -1,0 +1,11 @@
+.cardsGrid {
+  display: grid;
+  gap: 15px;
+}
+
+.cardFooter {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
