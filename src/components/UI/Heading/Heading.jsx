@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import Hr from '../Hr/Hr'
 
@@ -12,4 +12,4 @@ const Heading = ({ children, loading }) => {
   )
 }
 
-export default Heading
+export default memo(Heading)

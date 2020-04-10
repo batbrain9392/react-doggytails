@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 
 import { ReactComponent as Star } from '../../../assets/icons/star.svg'
@@ -23,4 +23,4 @@ const Hr = ({ children, width, loading }) => {
   )
 }
 
-export default Hr
+export default memo(Hr)

@@ -6,10 +6,10 @@ import Nav from 'react-bootstrap/Nav'
 import Image from 'react-bootstrap/Image'
 import Spinner from 'react-bootstrap/Spinner'
 
-import AuthContext from '../../../lib/auth-context'
+import AuthContext from '../../lib/auth-context'
 
-import CustomNavLink from '../CustomNavLink/CustomNavLink'
-import logo from '../../../assets/img/logo.webp'
+import CustomNavLink from '../UI/CustomNavLink/CustomNavLink'
+import logo from '../../assets/img/logo.webp'
 
 import classes from './Appbar.module.scss'
 
@@ -29,7 +29,7 @@ const Appbar = () => {
     </Nav.Link>
   ) : isAuthenticated ? (
     <>
-      {/* <CustomNavLink to='/my-profile'>My Profile</CustomNavLink> */}
+      <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>
       <Nav.Link className='ml-5' onClick={handleClick}>
         Logout
       </Nav.Link>

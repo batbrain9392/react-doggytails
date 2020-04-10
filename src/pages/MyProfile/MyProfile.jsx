@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
+
+import Heading from '../../components/UI/Heading/Heading'
+import MyPets from '../../components/UI/MyPets/MyPets'
 
 const MyProfile = () => {
   const [adoptions, setAdoptions] = useState([])
@@ -12,15 +16,23 @@ const MyProfile = () => {
   const { userId, token } = useContext(AuthContext)
 
   const fetchMyAdoptions = useCallback(async () => {
-    const data = await petService.fetchAllOfAdopter(userId, token)
-    setAdoptions(data)
-    setLoadingAdoption(false)
+    try {
+      const data = await petService.fetchAllOfAdopter(userId, token)
+      setAdoptions(data)
+      setLoadingAdoption(false)
+    } catch (error) {
+      console.log(error)
+    }
   }, [userId, token])
 
   const fetchMyDonations = useCallback(async () => {
-    const data = await petService.fetchAllOfDonor(userId)
-    setDonations(data)
-    setLoadingDonation(false)
+    try {
+      const data = await petService.fetchAllOfDonor(userId)
+      setDonations(data)
+      setLoadingDonation(false)
+    } catch (error) {
+      console.log(error)
+    }
   }, [userId])
 
   useEffect(() => {
@@ -28,9 +40,9 @@ const MyProfile = () => {
     fetchMyAdoptions()
   }, [fetchMyDonations, fetchMyAdoptions])
 
-  const cancelAdoptionHandler = async petId => {
+  const deleteAdoptionHandler = async (petId) => {
     const original = [...adoptions]
-    const updated = adoptions.filter(pet => pet.id !== petId)
+    const updated = adoptions.filter((pet) => pet.id !== petId)
     setAdoptions(updated)
     try {
       await petService.removeAdoption(petId, token)
@@ -40,9 +52,23 @@ const MyProfile = () => {
     }
   }
 
-  const cancelDonationHandler = async petId => {
+  const editDonationHandler = async (petId, editedValues) => {
     const original = [...donations]
-    const updated = donations.filter(pet => pet.id !== petId)
+    const updated = donations.map((pet) =>
+      pet.id === petId ? { ...pet, ...editedValues } : pet
+    )
+    setDonations(updated)
+    try {
+      await petService.updateDonation(petId, editedValues, token)
+    } catch (error) {
+      console.log(error)
+      setDonations(original)
+    }
+  }
+
+  const deleteDonationHandler = async (petId) => {
+    const original = [...donations]
+    const updated = donations.filter((pet) => pet.id !== petId)
     setDonations(updated)
     try {
       await petService.removeDonation(petId, token)
@@ -54,48 +80,26 @@ const MyProfile = () => {
 
   return (
     <>
-      <h3>My Profile</h3>
-      <section>
-        <h5>My Adoptions</h5>
-        {loadingAdoption ? (
-          'Loading...'
-        ) : adoptions.length ? (
-          adoptions.map(pet => (
-            <div key={pet.id}>
-              <pre>{JSON.stringify(pet, null, 2)}</pre>
-              <button onClick={() => cancelAdoptionHandler(pet.id)}>
-                cancel
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>
-            You haven't adopted any yet. <br />
-            <Link to='/adopt'>adopt now</Link>
-          </p>
-        )}
-      </section>
-      <hr />
-      <section>
-        <h5>My Donations</h5>
-        {loadingDonation ? (
-          'Loading...'
-        ) : donations.length ? (
-          donations.map(pet => (
-            <div key={pet.id}>
-              <pre>{JSON.stringify(pet, null, 2)}</pre>
-              <button onClick={() => cancelDonationHandler(pet.id)}>
-                cancel
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>
-            You haven't donated any yet. <br />
-            <Link to='/donate'>donate now</Link>
-          </p>
-        )}
-      </section>
+      <Heading loading={loadingAdoption || loadingDonation}>My Profile</Heading>
+      <Row>
+        <Col md className='mb-5 mb-md-0'>
+          <MyPets
+            type='adopted'
+            loading={loadingAdoption}
+            pets={adoptions}
+            onDelete={deleteAdoptionHandler}
+          />
+        </Col>
+        <Col>
+          <MyPets
+            type='donated'
+            loading={loadingDonation}
+            pets={donations}
+            onEdit={editDonationHandler}
+            onDelete={deleteDonationHandler}
+          />
+        </Col>
+      </Row>
     </>
   )
 }

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useRouteMatch } from 'react-router-dom'
 
+import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
 
 import PetCard from '../../components/UI/PetCard/PetCard'
@@ -12,6 +13,7 @@ const Adopt = () => {
   const [pets, setPets] = useState([])
   const [loading, setLoading] = useState(true)
   const { url } = useRouteMatch()
+  const { userId } = useContext(AuthContext)
 
   const getPets = async () => {
     try {
@@ -37,11 +39,16 @@ const Adopt = () => {
             Please come back later.
           </p>
         ) : (
-          <section className={classes.grid}>
+          <div className={classes.grid}>
             {pets.map((pet) => (
-              <PetCard key={pet.id} pet={pet} url={url} />
+              <PetCard
+                key={pet.id}
+                pet={pet}
+                url={url}
+                mine={pet.donorUserId === userId}
+              />
             ))}
-          </section>
+          </div>
         ))}
     </>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 import AuthContext from './lib/auth-context'
 import auth from './http/auth'
@@ -17,12 +17,23 @@ function App() {
   const [userId, setUserId] = useState(null)
   const [userDetails, setUserDetails] = useState(null)
   const [isCheckingAuth, setIsCheckingAuth] = useState(false)
+  const history = useHistory()
 
-  const postSignin = (authInfo) => {
-    setToken(authInfo.token)
-    setUserId(authInfo.userId)
-    setUserDetails(authInfo.userDetails)
-  }
+  const postSignin = useCallback(
+    (authInfo, from) => {
+      if (authInfo) {
+        setToken(authInfo.token)
+        setUserId(authInfo.userId)
+        setUserDetails(authInfo.userDetails)
+        if (from) {
+          history.replace(from)
+        }
+      } else {
+        postLogout()
+      }
+    },
+    [history]
+  )
 
   const postLogout = () => {
     setToken(null)
@@ -30,19 +41,10 @@ function App() {
     setUserDetails(null)
   }
 
-  const authenticate = async (email, password, rest) => {
+  const authenticate = async ({ from, ...creds }) => {
     setIsCheckingAuth(true)
-    try {
-      const authInfoData = await auth.authenticate(
-        email,
-        password,
-        rest,
-        postLogout
-      )
-      postSignin(authInfoData)
-    } catch (error) {
-      console.log(error)
-    }
+    const authInfo = await auth.authenticate(creds, postLogout)
+    postSignin(authInfo, from)
     setIsCheckingAuth(false)
   }
 
@@ -57,23 +59,20 @@ function App() {
     token,
     userId,
     userDetails,
-    signin: (email, password) => authenticate(email, password),
-    signup: (email, password, rest) => authenticate(email, password, rest),
+    authenticate,
     logout,
   }
 
   const checkAuth = useCallback(async () => {
     setIsCheckingAuth(true)
     try {
-      const authInfoData = await auth.checkAuth(postLogout)
-      if (authInfoData) {
-        postSignin(authInfoData)
-      }
+      const authInfo = await auth.checkAuth(postLogout)
+      postSignin(authInfo)
     } catch (error) {
       console.log(error)
     }
     setIsCheckingAuth(false)
-  }, [])
+  }, [postSignin])
 
   useEffect(() => {
     checkAuth()

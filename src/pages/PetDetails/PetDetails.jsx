@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
+import { useParams, useHistory, useLocation } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -14,10 +14,12 @@ const PetDetails = () => {
   const [pet, setPet] = useState(null)
   const [loadingPet, setLoadingPet] = useState(true)
   const [adopting, setAdopting] = useState(false)
-  const [adopted, setAdopted] = useState(false)
+  const [adopted, setAdopted] = useState(null)
   const [modalShow, setModalShow] = useState(false)
   const { id: petId } = useParams()
-  const { isAuthenticated, token, userId } = useContext(AuthContext)
+  const { isAuthenticated, token, userId, userDetails } = useContext(
+    AuthContext
+  )
   const history = useHistory()
   const { pathname } = useLocation()
 
@@ -42,8 +44,13 @@ const PetDetails = () => {
   const adoptHandler = async () => {
     try {
       setAdopting(true)
-      await petService.adopt(petId, userId, token)
-      setAdopted(true)
+      const adopter = {
+        adopterUserId: userId,
+        adopterName: userDetails.name,
+        adopterPhone: userDetails.phone,
+      }
+      await petService.adopt(petId, adopter, token)
+      setAdopted(adopter)
       setModalShow(true)
     } catch (error) {
       console.log(error)
@@ -51,32 +58,37 @@ const PetDetails = () => {
     setAdopting(false)
   }
 
+  const successModalCloseHandler = () => {
+    setModalShow(false)
+    setPet({ ...pet, ...adopted })
+  }
   const successModal = (
     <SuccessModal
       show={modalShow}
-      onHide={() => setModalShow(false)}
+      onHide={successModalCloseHandler}
       title='Adopted'>
       <p>Congrats, you're on your way to get a new friend!</p>
-      Please call donor{' '}
-      <strong>
-        {pet?.donorName} @ {pet?.donorPhone}
-      </strong>{' '}
-      for further details.
+      <p>
+        Please call donor{' '}
+        <strong>
+          {pet?.donorName} @ {pet?.donorPhone}
+        </strong>{' '}
+        for further details.
+      </p>
     </SuccessModal>
   )
 
-  const action = (pet) =>
-    isAuthenticated ? (
-      pet.adopterUserId ? (
-        <p>This pet has already been adopted.</p>
-      ) : pet.donorUserId === userId ? (
-        <p>You cannot adopt your own donations.</p>
-      ) : adopted ? (
-        <p>
-          Adopted!
-          {/* <Link to='/my-profile'>View my adoptions</Link> */}
-          {successModal}
-        </p>
+  const action = () => {
+    if (!isAuthenticated) {
+      return (
+        <Button variant='secondary' onClick={signinHandler} className='mr-3'>
+          Sign in to adopt
+        </Button>
+      )
+    }
+    if (!pet.adopterUserId && pet.donorUserId !== userId) {
+      return adopted ? (
+        successModal
       ) : (
         <Button
           variant='secondary'
@@ -99,11 +111,12 @@ const PetDetails = () => {
           )}
         </Button>
       )
-    ) : (
-      <Button variant='secondary' onClick={signinHandler} className='mr-3'>
-        Sign in to adopt
-      </Button>
-    )
+    }
+  }
+
+  const onBackHandler = () => {
+    history.goBack()
+  }
 
   return (
     <>
@@ -113,11 +126,13 @@ const PetDetails = () => {
           <p>This ad has been removed.</p>
         ) : (
           <>
-            <PetDetailsView pet={pet} />
-            {action(pet)}
+            <PetDetailsView pet={pet} loggedInUser={userId} />
+            {action()}
           </>
         ))}
-      <Link to='/adopt'>View all pets</Link>
+      <Button variant='link' className='p-0' onClick={onBackHandler}>
+        Go back
+      </Button>
     </>
   )
 }

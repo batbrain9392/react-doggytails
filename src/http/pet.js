@@ -41,10 +41,10 @@ const fetchDetails = async (petId) => {
   return data
 }
 
-const adopt = async (petId, adopterUserId, token) => {
+const adopt = async (petId, adopter, token) => {
   const queryParams = addToken(token)
   const { data } = await db.patch(`/${url}/${petId}.json?${queryParams}`, {
-    adopterUserId,
+    ...adopter,
   })
   return data
 }
@@ -53,12 +53,22 @@ const removeAdoption = (petId, token) => {
   const queryParams = addToken(token)
   return db.patch(`/${url}/${petId}.json?${queryParams}`, {
     adopterUserId: null,
+    adopterName: null,
+    adopterPhone: null,
   })
 }
 
 const removeDonation = (petId, token) => {
   const queryParams = addToken(token)
   return db.delete(`/${url}/${petId}.json?${queryParams}`)
+}
+
+const updateDonation = async (petId, editedValues, token) => {
+  const queryParams = addToken(token)
+  const { data } = await db.patch(`/${url}/${petId}.json?${queryParams}`, {
+    ...editedValues,
+  })
+  return data
 }
 
 export default {
@@ -70,4 +80,5 @@ export default {
   adopt,
   removeAdoption,
   removeDonation,
+  updateDonation,
 }
