@@ -40,7 +40,7 @@ const MyProfile = () => {
     fetchMyAdoptions()
   }, [fetchMyDonations, fetchMyAdoptions])
 
-  const cancelAdoptionHandler = async (petId) => {
+  const deleteAdoptionHandler = async (petId) => {
     const original = [...adoptions]
     const updated = adoptions.filter((pet) => pet.id !== petId)
     setAdoptions(updated)
@@ -53,10 +53,20 @@ const MyProfile = () => {
   }
 
   const editDonationHandler = async (petId, editedValues) => {
-    console.log(petId, editedValues)
+    const original = [...donations]
+    const updated = donations.map((pet) =>
+      pet.id === petId ? { ...pet, ...editedValues } : pet
+    )
+    setDonations(updated)
+    try {
+      await petService.updateDonation(petId, editedValues, token)
+    } catch (error) {
+      console.log(error)
+      setDonations(original)
+    }
   }
 
-  const cancelDonationHandler = async (petId) => {
+  const deleteDonationHandler = async (petId) => {
     const original = [...donations]
     const updated = donations.filter((pet) => pet.id !== petId)
     setDonations(updated)
@@ -77,7 +87,7 @@ const MyProfile = () => {
             type='adopted'
             loading={loadingAdoption}
             pets={adoptions}
-            onDelete={cancelAdoptionHandler}
+            onDelete={deleteAdoptionHandler}
           />
         </Col>
         <Col>
@@ -86,7 +96,7 @@ const MyProfile = () => {
             loading={loadingDonation}
             pets={donations}
             onEdit={editDonationHandler}
-            onDelete={cancelDonationHandler}
+            onDelete={deleteDonationHandler}
           />
         </Col>
       </Row>
