@@ -30,9 +30,7 @@ const Appbar = () => {
   ) : isAuthenticated ? (
     <>
       <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>
-      <Nav.Link className='ml-5' onClick={handleClick}>
-        Logout
-      </Nav.Link>
+      <Nav.Link onClick={handleClick}>Logout</Nav.Link>
     </>
   ) : (
     <CustomNavLink to='/auth'>Sign in / Sign up</CustomNavLink>
@@ -54,7 +52,7 @@ const Appbar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='ml-auto'>
+          <Nav className={classes.navGrid}>
             <CustomNavLink to='/' exact>
               Home
             </CustomNavLink>
