@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -7,17 +7,29 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { toDateLocale } from '../../../lib/util'
+import { toDateLocale } from '../../lib/util'
 
-import ImgContainer from '../ImgContainer/ImgContainer'
-import MyPetBadge from '../MyPetBadge/MyPetBadge'
-import CustomTooltip from '../CustomTooltip/CustomTooltip'
+import ImgContainer from '../UI/ImgContainer/ImgContainer'
+import MyPetBadge from '../UI/MyPetBadge/MyPetBadge'
+import CustomTooltip from '../UI/CustomTooltip/CustomTooltip'
+import FormModal from '../UI/FormModal/FormModal'
 
 import classes from './MyPetCard.module.scss'
 
 const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
   const imgSize = '60px'
-  console.log(isAdopted)
+  const [modalShow, setModalShow] = useState(false)
+
+  const onSubmitHandler = (editedValues) => onEdit(pet.id, editedValues)
+
+  const formModal = (
+    <FormModal
+      pet={pet}
+      onSubmit={onSubmitHandler}
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+    />
+  )
 
   return (
     <Card>
@@ -61,13 +73,16 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
             </Button>
           </CustomTooltip>
           {!isAdopted && (
-            <CustomTooltip text='Edit'>
-              <Button
-                variant='outline-secondary'
-                onClick={() => onEdit(pet.id)}>
-                <FontAwesomeIcon icon='edit' size='sm' />
-              </Button>
-            </CustomTooltip>
+            <>
+              <CustomTooltip text='Edit'>
+                <Button
+                  variant='outline-secondary'
+                  onClick={() => setModalShow(true)}>
+                  <FontAwesomeIcon icon='edit' size='sm' />
+                </Button>
+              </CustomTooltip>
+              {formModal}
+            </>
           )}
           <CustomTooltip text='Delete'>
             <Button
@@ -91,4 +106,4 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
   )
 }
 
-export default memo(MyPetCard)
+export default MyPetCard

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import MyPetCard from '../MyPetCard/MyPetCard'
+import MyPetCard from '../../MyPetCard/MyPetCard'
 
 import classes from './MyPets.module.scss'
 
