@@ -5,3 +5,7 @@ div[id='root'] {
   display: grid;
   grid-template-rows: max-content auto max-content;
 }
+
+hr {
+  border-top: 2px dotted theme-color('secondary');
+}
