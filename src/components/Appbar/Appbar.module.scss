@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 @import '../../assets/css/bootstrap-utils';
 
 .brandText {
@@ -10,8 +9,8 @@
 
   @include media-breakpoint-up(md) {
     margin: 0 0 0 auto;
-    display: grid;
-    grid-auto-flow: column;
-    gap: 44px;
+    a:not(:last-child) {
+      margin-right: 44px;
+    }
   }
 }
