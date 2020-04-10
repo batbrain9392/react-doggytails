@@ -3,8 +3,6 @@ import Modal from 'react-bootstrap/Modal'
 
 import PetForm from '../../PetForm/PetForm'
 
-// import classes from './SuccessModal.module.scss'
-
 const FormModal = ({ pet, onSubmit, ...rest }) => {
   return (
     <Modal {...rest} aria-labelledby='form-modal' centered>
