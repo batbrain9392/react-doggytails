@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { toDateLocale } from '../../lib/util'
@@ -18,20 +19,60 @@ import classes from './MyPetCard.module.scss'
 
 const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
   const imgSize = '60px'
-  const [modalShow, setModalShow] = useState(false)
+  const [deletePetId, setDeletePetId] = useState(null)
 
+  const [formModalShow, setFormModalShow] = useState(false)
   const onSubmitHandler = (editedValues) => {
-    setModalShow(false)
+    setFormModalShow(false)
     onEdit(pet.id, editedValues)
   }
-
   const formModal = (
     <FormModal
       pet={pet}
       onSubmit={onSubmitHandler}
-      show={modalShow}
-      onHide={() => setModalShow(false)}
+      show={formModalShow}
+      onHide={() => setFormModalShow(false)}
     />
+  )
+
+  const [deleteModalShow, setDeleteModalShow] = useState(false)
+  const onDeleteHandler = (petId) => {
+    setDeleteModalShow(true)
+    setDeletePetId(petId)
+  }
+  const deleteModalEventHandler = (affirmative) => {
+    if (affirmative) {
+      onDelete(deletePetId)
+    }
+    setDeletePetId(null)
+    setDeleteModalShow(false)
+  }
+  const deleteModal = (
+    <Modal
+      size='sm'
+      show={deleteModalShow}
+      onHide={() => setDeleteModalShow(false)}
+      aria-labelledby='deleteModal'
+      centered>
+      <Modal.Header>
+        <Modal.Title id='deleteModal'>Delete</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Are you sure?</Modal.Body>
+      <Modal.Footer className='border-0'>
+        <Button
+          variant='danger'
+          size='sm'
+          onClick={() => deleteModalEventHandler(true)}>
+          Delete
+        </Button>
+        <Button
+          variant='outline-secondary'
+          size='sm'
+          onClick={() => deleteModalEventHandler(false)}>
+          Cancel
+        </Button>
+      </Modal.Footer>
+    </Modal>
   )
 
   return (
@@ -80,20 +121,23 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
               <CustomTooltip text='Edit'>
                 <Button
                   variant='outline-secondary'
-                  onClick={() => setModalShow(true)}>
+                  onClick={() => setFormModalShow(true)}>
                   <FontAwesomeIcon icon='edit' size='sm' />
                 </Button>
               </CustomTooltip>
               {formModal}
             </>
           )}
-          <CustomTooltip text='Delete'>
-            <Button
-              variant='outline-secondary'
-              onClick={() => onDelete(pet.id)}>
-              <FontAwesomeIcon icon='trash' size='sm' />
-            </Button>
-          </CustomTooltip>
+          <>
+            <CustomTooltip text='Delete'>
+              <Button
+                variant='outline-secondary'
+                onClick={() => onDeleteHandler(pet.id)}>
+                <FontAwesomeIcon icon='trash' size='sm' />
+              </Button>
+            </CustomTooltip>
+            {deleteModal}
+          </>
         </ButtonGroup>
         <span>
           {isAdopted ? (
