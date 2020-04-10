@@ -20,7 +20,10 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
   const imgSize = '60px'
   const [modalShow, setModalShow] = useState(false)
 
-  const onSubmitHandler = (editedValues) => onEdit(pet.id, editedValues)
+  const onSubmitHandler = (editedValues) => {
+    setModalShow(false)
+    onEdit(pet.id, editedValues)
+  }
 
   const formModal = (
     <FormModal
