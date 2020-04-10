@@ -22,15 +22,11 @@ function App() {
 
   const postSignin = useCallback(
     (authInfo, from) => {
-      if (authInfo) {
-        setToken(authInfo.token)
-        setUserId(authInfo.userId)
-        setUserDetails(authInfo.userDetails)
-        if (from) {
-          history.replace(from)
-        }
-      } else {
-        postLogout()
+      setToken(authInfo.token)
+      setUserId(authInfo.userId)
+      setUserDetails(authInfo.userDetails)
+      if (from) {
+        history.replace(from)
       }
     },
     [history]
@@ -43,10 +39,15 @@ function App() {
   }
 
   const authenticate = async ({ from, ...creds }) => {
-    setIsCheckingAuth(true)
-    const authInfo = await auth.authenticate(creds, postLogout)
-    postSignin(authInfo, from)
-    setIsCheckingAuth(false)
+    try {
+      setIsCheckingAuth(true)
+      const authInfo = await auth.authenticate(creds, postLogout)
+      postSignin(authInfo, from)
+      setIsCheckingAuth(false)
+    } catch (error) {
+      setIsCheckingAuth(false)
+      throw error
+    }
   }
 
   const logout = () => {

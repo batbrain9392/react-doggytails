@@ -23,7 +23,7 @@ const Appbar = () => {
   }
 
   const protectedNavLinks = isCheckingAuth ? (
-    <Nav.Link className='ml-5' disabled>
+    <Nav.Link disabled>
       <Spinner animation='grow' size='sm' className='mr-1' />
       Authenticating
     </Nav.Link>
