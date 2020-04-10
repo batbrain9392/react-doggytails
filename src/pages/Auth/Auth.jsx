@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Form from 'react-bootstrap/Form'
@@ -18,10 +18,9 @@ import mascotSitting from '../../assets/img/mascot_sitting.webp'
 import classes from './Auth.module.scss'
 
 const Auth = () => {
-  const { signin, signup } = useContext(AuthContext)
+  const { authenticate } = useContext(AuthContext)
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState(null)
-  const history = useHistory()
   const location = useLocation()
   const { from } = location.state || { from: { pathname: '/adopt' } }
   const initialValues = {
@@ -47,13 +46,13 @@ const Auth = () => {
       }
   const validationSchema = Yup.object(yupObject)
 
-  const submitHandler = async ({ email, password, ...rest }) => {
+  const submitHandler = async ({ email, password, ...signupObj }) => {
     try {
       setError(null)
+      const creds = { email, password, from }
       !isSignUp
-        ? await signin(email, password)
-        : await signup(email, password, rest)
-      history.replace(from)
+        ? await authenticate(creds)
+        : await authenticate({ ...creds, signupObj })
     } catch (error) {
       setError(error)
     }
@@ -132,7 +131,7 @@ const Auth = () => {
                 <Button variant='link' type='button' onClick={switchHandler}>
                   Switch to {!isSignUp ? 'Sign up' : 'Sign in'}
                 </Button>
-                {error && <p>{error}</p>}
+                {error && <div className='mt-4 text-danger'>{error}</div>}
               </Form>
             )}
           </Formik>

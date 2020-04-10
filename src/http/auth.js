@@ -28,14 +28,14 @@ const setAuthTimeout = (expiresIn, postLogout) => {
   }, expiresIn)
 }
 
-const authenticate = async (email, password, rest, postLogout) => {
+const authenticate = async ({ signupObj, ...creds }, postLogout) => {
   const authData = {
-    email: email,
-    password: password,
+    email: creds.email,
+    password: creds.password,
     returnSecureToken: true,
   }
   const API_KEY = 'AIzaSyDSJIZsMHUxKonvnsXXXY0-SyLiKq6MQY4'
-  const method = rest ? 'signUp' : 'signInWithPassword'
+  const method = signupObj ? 'signUp' : 'signInWithPassword'
   const url = `https://identitytoolkit.googleapis.com/v1/accounts:${method}?key=${API_KEY}`
   try {
     const {
@@ -43,8 +43,8 @@ const authenticate = async (email, password, rest, postLogout) => {
     } = await axios.post(url, authData)
     setAuthTimeout(expiresIn * 1000, postLogout)
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
-    const userDetails = rest
-      ? await userService.addUser(userId, rest)
+    const userDetails = signupObj
+      ? await userService.addUser(userId, signupObj)
       : await userService.fetchDetails(userId)
     localStorage.setItem('expirationDate', expirationDate)
     localStorage.setItem('token', token)
