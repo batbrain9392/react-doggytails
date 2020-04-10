@@ -52,8 +52,8 @@ const MyProfile = () => {
     }
   }
 
-  const editDonationHandler = async (petId) => {
-    console.log(petId)
+  const editDonationHandler = async (petId, editedValues) => {
+    console.log(petId, editedValues)
   }
 
   const cancelDonationHandler = async (petId) => {
