@@ -55,9 +55,9 @@ const Appbar = () => {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='ml-auto'>
-            {/* <CustomNavLink to='/' exact>
-         Home
-       </CustomNavLink> */}
+            <CustomNavLink to='/' exact>
+              Home
+            </CustomNavLink>
             <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
             <CustomNavLink to='/donate'>Donate</CustomNavLink>
             {protectedNavLinks}
