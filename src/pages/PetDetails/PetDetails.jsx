@@ -14,7 +14,7 @@ const PetDetails = () => {
   const [pet, setPet] = useState(null)
   const [loadingPet, setLoadingPet] = useState(true)
   const [adopting, setAdopting] = useState(false)
-  const [adopted, setAdopted] = useState(false)
+  const [adopted, setAdopted] = useState(null)
   const [modalShow, setModalShow] = useState(false)
   const { id: petId } = useParams()
   const { isAuthenticated, token, userId, userDetails } = useContext(
@@ -50,7 +50,7 @@ const PetDetails = () => {
         adopterPhone: userDetails.phone,
       }
       await petService.adopt(petId, adopter, token)
-      setAdopted(true)
+      setAdopted(adopter)
       setModalShow(true)
     } catch (error) {
       console.log(error)
@@ -58,10 +58,14 @@ const PetDetails = () => {
     setAdopting(false)
   }
 
+  const successModalCloseHandler = () => {
+    setModalShow(false)
+    setPet({ ...pet, ...adopted })
+  }
   const successModal = (
     <SuccessModal
       show={modalShow}
-      onHide={() => setModalShow(false)}
+      onHide={successModalCloseHandler}
       title='Adopted'>
       <p>Congrats, you're on your way to get a new friend!</p>
       <p>
