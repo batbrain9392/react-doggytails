@@ -4,7 +4,7 @@ import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import AuthContext from './lib/auth-context'
 import auth from './http/auth'
 
-import Layout from './components/UI/Layout/Layout'
+import Layout from './components/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import Adopt from './pages/Adopt/Adopt'
 import PetDetails from './pages/PetDetails/PetDetails'
