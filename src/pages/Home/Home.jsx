@@ -6,14 +6,13 @@ import TopPets from '../../components/TopPets/TopPets'
 import Events from '../../components/UI/Events/Events'
 
 const Home = () => {
-  console.log('Home')
   return (
-    <>
+    <main>
       <Banner />
       <Testimonials />
       <TopPets />
       <Events />
-    </>
+    </main>
   )
 }
 
