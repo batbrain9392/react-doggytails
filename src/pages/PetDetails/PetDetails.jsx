@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useHistory, useLocation, Link } from 'react-router-dom'
+import { useParams, useHistory, useLocation } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -74,17 +74,17 @@ const PetDetails = () => {
     </SuccessModal>
   )
 
-  const action = (pet) =>
-    isAuthenticated ? (
-      pet.adopterUserId ? (
-        <p>This pet has already been adopted.</p>
-      ) : pet.donorUserId === userId ? (
-        <p>You cannot adopt your own donations.</p>
-      ) : adopted ? (
-        <p>
-          Adopted!
-          {successModal}
-        </p>
+  const action = () => {
+    if (!isAuthenticated) {
+      return (
+        <Button variant='secondary' onClick={signinHandler} className='mr-3'>
+          Sign in to adopt
+        </Button>
+      )
+    }
+    if (!pet.adopterUserId && pet.donorUserId !== userId) {
+      return adopted ? (
+        successModal
       ) : (
         <Button
           variant='secondary'
@@ -107,11 +107,12 @@ const PetDetails = () => {
           )}
         </Button>
       )
-    ) : (
-      <Button variant='secondary' onClick={signinHandler} className='mr-3'>
-        Sign in to adopt
-      </Button>
-    )
+    }
+  }
+
+  const onBackHandler = () => {
+    history.goBack()
+  }
 
   return (
     <>
@@ -121,11 +122,13 @@ const PetDetails = () => {
           <p>This ad has been removed.</p>
         ) : (
           <>
-            <PetDetailsView pet={pet} />
-            {action(pet)}
+            <PetDetailsView pet={pet} loggedInUser={userId} />
+            {action()}
           </>
         ))}
-      <Link to='/adopt'>View all pets</Link>
+      <Button variant='link' className='p-0' onClick={onBackHandler}>
+        Go back
+      </Button>
     </>
   )
 }
