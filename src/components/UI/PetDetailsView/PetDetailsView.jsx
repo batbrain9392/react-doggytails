@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
+import Badge from 'react-bootstrap/Badge'
 
 import { toDateLocale } from '../../../lib/util'
 
@@ -9,11 +10,22 @@ import ImgContainer from '../ImgContainer/ImgContainer'
 
 import classes from './PetDetailsView.module.scss'
 
-const PetDetailsView = ({ pet }) => {
+const PetDetailsView = ({ pet, loggedInUser }) => {
   return (
     <Row>
       <Col md={5} className='mb-5'>
         <ImgContainer>
+          {pet.adopterUserId ? (
+            <Badge variant='success' className={classes.badge}>
+              taken
+            </Badge>
+          ) : (
+            pet.donorUserId === loggedInUser && (
+              <Badge variant='warning' className={classes.badge}>
+                mine
+              </Badge>
+            )
+          )}
           {pet.imgUrl && (
             <Image src={pet.imgUrl} alt='Image unavailable' thumbnail />
           )}

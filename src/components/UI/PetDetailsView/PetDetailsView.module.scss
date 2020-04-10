@@ -1,3 +1,11 @@
 .details p {
   margin-bottom: 30px;
 }
+
+.badge {
+  position: absolute;
+  $pos: 15px;
+  top: $pos;
+  right: $pos;
+  font-size: 20px;
+}
