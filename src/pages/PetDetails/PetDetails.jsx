@@ -64,11 +64,13 @@ const PetDetails = () => {
       onHide={() => setModalShow(false)}
       title='Adopted'>
       <p>Congrats, you're on your way to get a new friend!</p>
-      Please call donor{' '}
-      <strong>
-        {pet?.donorName} @ {pet?.donorPhone}
-      </strong>{' '}
-      for further details.
+      <p>
+        Please call donor{' '}
+        <strong>
+          {pet?.donorName} @ {pet?.donorPhone}
+        </strong>{' '}
+        for further details.
+      </p>
     </SuccessModal>
   )
 
