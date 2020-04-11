@@ -13,33 +13,35 @@ import classes from './Banner.module.scss'
 
 const Banner = () => {
   return (
-    <Container className={classes.banner}>
-      <Row>
-        <Col sm className='mb-4 mb-sm-0'>
-          <Image src={mascotSitting} alt='Image unavailable' fluid />
-        </Col>
-        <Col className={`${classes.text} home-font`}>
-          <div>
-            <hr className='mb-3' />
-            <hr className='mb-3' />
-            <h1 className='mb-3'>
-              GIVE UP FOR ADOPTION
-              <br />
-              or
-              <br />
-              ADOPT NOW!
-            </h1>
-            <div className={classes.linkContainer}>
-              <hr />
-              <hr className='mt-3' />
-              <Button variant='secondary' as={Link} to='/adopt'>
-                <FontAwesomeIcon icon='chevron-right' />
-              </Button>
+    <div className={classes.banner}>
+      <Container className={classes.container}>
+        <Row>
+          <Col sm className='mb-4 mb-sm-0'>
+            <Image src={mascotSitting} alt='Image unavailable' fluid />
+          </Col>
+          <Col className={`${classes.text} home-font`}>
+            <div>
+              <hr className='mb-3' />
+              <hr className='mb-3' />
+              <h1 className='mb-3'>
+                GIVE UP FOR ADOPTION
+                <br />
+                or
+                <br />
+                ADOPT NOW!
+              </h1>
+              <div className={classes.linkContainer}>
+                <hr />
+                <hr className='mt-3' />
+                <Button variant='secondary' as={Link} to='/adopt'>
+                  <FontAwesomeIcon icon='chevron-right' />
+                </Button>
+              </div>
             </div>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   )
 }
 

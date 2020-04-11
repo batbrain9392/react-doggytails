@@ -1,11 +1,11 @@
 @import '../../../assets/css/bootstrap-utils';
 
 .banner {
-  $margin: 30px;
-  margin-top: $margin;
-  margin-bottom: $margin;
+  padding: 50px 0;
   text-align: center;
+}
 
+.container {
   @include media-breakpoint-up(lg) {
     max-width: 840px;
   }
