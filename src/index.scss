@@ -7,13 +7,13 @@ div[id='root'] {
 }
 
 hr {
-  border-top: 2px dotted theme-color('secondary');
+  border-top: 2px dotted var(--secondary);
   margin: 0;
 }
 
 .home-font {
   font-family: 'Chelsea Market', fantasy;
-  color: theme-color('secondary');
+  color: var(--secondary);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
