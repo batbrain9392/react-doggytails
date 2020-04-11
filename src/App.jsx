@@ -21,11 +21,13 @@ function App() {
 
   const postSignin = useCallback(
     (authInfo, from) => {
-      setToken(authInfo.token)
-      setUserId(authInfo.userId)
-      setUserDetails(authInfo.userDetails)
-      if (from) {
-        history.replace(from)
+      if (authInfo) {
+        setToken(authInfo.token)
+        setUserId(authInfo.userId)
+        setUserDetails(authInfo.userDetails)
+        if (from) {
+          history.replace(from)
+        }
       }
     },
     [history]
