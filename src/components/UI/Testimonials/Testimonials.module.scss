@@ -1,0 +1,11 @@
+@import '../../../assets/css/bootstrap-utils';
+
+.py {
+  padding: 70px 0;
+}
+
+.border {
+  @include media-breakpoint-up(md) {
+    border-right: 2px dotted var(--secondary);
+  }
+}
