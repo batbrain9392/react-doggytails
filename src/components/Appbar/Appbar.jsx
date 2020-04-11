@@ -42,7 +42,7 @@ const Appbar = () => {
       variant='dark'
       expand='md'
       collapseOnSelect
-      className='py-3 shadow'>
+      className={`${classes.elevate} py-3 shadow`}>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />
