@@ -18,17 +18,17 @@ const Banner = () => {
         <Col sm className='mb-4 mb-sm-0'>
           <Image src={mascotSitting} alt='Image unavailable' fluid />
         </Col>
-        <Col className={`${classes.text} home-font text-secondary`}>
+        <Col className={`${classes.text} home-font`}>
           <div>
             <hr className='mb-3' />
             <hr className='mb-3' />
-            <div className='mb-3'>
+            <h1 className='mb-3'>
               GIVE UP FOR ADOPTION
               <br />
               or
               <br />
               ADOPT NOW!
-            </div>
+            </h1>
             <div className={classes.linkContainer}>
               <hr />
               <hr className='mt-3' />
