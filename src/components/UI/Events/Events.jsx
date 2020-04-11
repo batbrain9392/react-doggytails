@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
+import Container from 'react-bootstrap/Container'
 
 import classes from './Events.module.scss'
-import Container from 'react-bootstrap/Container'
 
 const Events = () => {
   return (
