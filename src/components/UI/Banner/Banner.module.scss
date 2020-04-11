@@ -1,0 +1,39 @@
+@import '../../../assets/css/bootstrap-utils';
+
+.banner {
+  $margin: 30px;
+  margin-top: $margin;
+  margin-bottom: $margin;
+  text-align: center;
+
+  @include media-breakpoint-up(lg) {
+    max-width: 840px;
+  }
+}
+
+.text {
+  font-size: 37px;
+  line-height: 1.2;
+  display: grid;
+  place-content: center;
+}
+
+.linkContainer {
+  position: relative;
+  $size: 100px;
+  height: $size;
+  display: grid;
+  align-content: center;
+
+  a {
+    position: absolute;
+    height: $size;
+    width: $size;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    top: 0;
+    justify-self: center;
+    font-size: 40px;
+  }
+}
