@@ -13,7 +13,7 @@ import classes from './Banner.module.scss'
 
 const Banner = () => {
   return (
-    <div className={classes.banner}>
+    <div className={classes.wrapper}>
       <Container className={classes.container}>
         <Row>
           <Col sm className='mb-4 mb-sm-0'>

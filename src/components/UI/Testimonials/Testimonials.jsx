@@ -8,7 +8,7 @@ import classes from './Testimonials.module.scss'
 
 const Testimonials = () => {
   return (
-    <div className={`bg-info ${classes.py}`}>
+    <div className={classes.wrapper}>
       <Container>
         <Row>
           <Col md className={`${classes.border} pr-sm-4 pr-lg-5`}>
