@@ -1,5 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import '../../assets/css/bootstrap-utils';
 
 .brandText {
   font-family: 'Dancing Script', cursive;
+}
+
+.navGrid {
+  margin: 7px 0px 0 13px;
+
+  @include media-breakpoint-up(md) {
+    margin: 0 0 0 auto;
+    a:not(:last-child) {
+      margin-right: 44px;
+    }
+  }
+}
+
+.elevate {
+  z-index: 1;
 }

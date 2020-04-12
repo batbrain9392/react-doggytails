@@ -1,14 +1,8 @@
-@import '../../../assets/css/bootstrap-utils';
-
 .grid {
   display: grid;
   align-items: center;
   grid-template-columns: max-content max-content auto;
   gap: 20px;
-
-  hr {
-    border-top: 2px dotted theme-color('secondary');
-  }
 
   h1 {
     margin: 0;
@@ -26,5 +20,5 @@
   $size: 20px;
   height: $size;
   width: $size;
-  fill: theme-color('secondary');
+  fill: var(--secondary);
 }

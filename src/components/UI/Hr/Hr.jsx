@@ -8,7 +8,7 @@ import classes from './Hr.module.scss'
 const Hr = ({ children, width, loading }) => {
   return (
     <div className={`${classes.grid} mb-5`}>
-      {children ? children : <hr className='m-0' style={{ width }} />}
+      {children ? children : <hr style={{ width }} />}
       <div className={classes.svgContainer}>
         {loading ? (
           <Spinner animation='grow' variant='secondary' className='m-auto' />
@@ -18,7 +18,7 @@ const Hr = ({ children, width, loading }) => {
           ))
         )}
       </div>
-      <hr className='m-0' />
+      <hr />
     </div>
   )
 }

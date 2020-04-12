@@ -23,16 +23,14 @@ const Appbar = () => {
   }
 
   const protectedNavLinks = isCheckingAuth ? (
-    <Nav.Link className='ml-5' disabled>
+    <Nav.Link disabled>
       <Spinner animation='grow' size='sm' className='mr-1' />
       Authenticating
     </Nav.Link>
   ) : isAuthenticated ? (
     <>
       <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>
-      <Nav.Link className='ml-5' onClick={handleClick}>
-        Logout
-      </Nav.Link>
+      <Nav.Link onClick={handleClick}>Logout</Nav.Link>
     </>
   ) : (
     <CustomNavLink to='/auth'>Sign in / Sign up</CustomNavLink>
@@ -44,7 +42,7 @@ const Appbar = () => {
       variant='dark'
       expand='md'
       collapseOnSelect
-      className='py-3 shadow'>
+      className={`${classes.elevate} py-3 shadow`}>
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />
@@ -54,10 +52,10 @@ const Appbar = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='ml-auto'>
-            {/* <CustomNavLink to='/' exact>
-         Home
-       </CustomNavLink> */}
+          <Nav className={classes.navGrid}>
+            <CustomNavLink to='/' exact>
+              Home
+            </CustomNavLink>
             <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
             <CustomNavLink to='/donate'>Donate</CustomNavLink>
             {protectedNavLinks}

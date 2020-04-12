@@ -5,3 +5,16 @@ div[id='root'] {
   display: grid;
   grid-template-rows: max-content auto max-content;
 }
+
+hr {
+  border-top: 2px dotted var(--secondary);
+  margin: 0;
+}
+
+.home-font {
+  font-family: 'Chelsea Market', fantasy;
+  color: var(--secondary);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap');

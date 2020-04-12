@@ -17,8 +17,11 @@ const addForAdoption = async (pet, token) => {
   return data.name
 }
 
-const fetchAllForAdoption = async () => {
-  const queryParams = addAdopterId(null)
+const fetchAllForAdoption = async (limit) => {
+  let queryParams = addAdopterId(null)
+  if (limit) {
+    queryParams += `&limitToFirst=${limit}`
+  }
   const { data } = await db.get(`/${url}.json?${queryParams}`)
   return toArray(data)
 }

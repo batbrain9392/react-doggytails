@@ -4,13 +4,14 @@ import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import AuthContext from './lib/auth-context'
 import auth from './http/auth'
 
-import Layout from './components/UI/Layout/Layout'
+import Layout from './components/Layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import Adopt from './pages/Adopt/Adopt'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
 import Donate from './pages/Donate/Donate'
 import MyProfile from './pages/MyProfile/MyProfile'
+import Home from './pages/Home/Home'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -85,13 +86,13 @@ function App() {
     <AuthContext.Provider value={authContextValue}>
       <Layout>
         <Switch>
+          <Route path='/' exact component={Home} />
           <Route path='/adopt/:id' component={PetDetails} />
           <Route path='/adopt' component={Adopt} />
           <Route path='/donate' component={Donate} />
           <ProtectedRoute path='/my-profile' component={MyProfile} />
           <ProtectedRoute path='/auth' component={Auth} isAuthPath />
-          {/* <Route path='/' exact component={Home} /> */}
-          <Redirect to='/adopt' />
+          <Redirect to='/' />
         </Switch>
       </Layout>
     </AuthContext.Provider>

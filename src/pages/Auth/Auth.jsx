@@ -22,7 +22,7 @@ const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState(null)
   const location = useLocation()
-  const { from } = location.state || { from: { pathname: '/adopt' } }
+  const { from } = location.state || { from: { pathname: '/' } }
   const initialValues = {
     email: '',
     password: '',
