@@ -3,7 +3,7 @@ import db from './db'
 const url = 'users'
 
 const addUser = async (userId, user) => {
-  const { data } = await db.put(`/${url}/${userId}.json?`, user)
+  const { data } = await db.put(`/${url}/${userId}.json`, user)
   return data
 }
 
