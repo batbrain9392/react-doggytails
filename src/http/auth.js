@@ -3,9 +3,11 @@ import userService from './user'
 
 let timeout = null
 
-const errorHandler = (error) => {
+const errorHandler = (errorObj) => {
   logout()
-  throw error.response.data.error.message
+  let errMsg = errorObj.response.data.error
+  errMsg = errMsg.message || errMsg
+  throw errMsg
 }
 
 const clearAuthTimeout = () => {
