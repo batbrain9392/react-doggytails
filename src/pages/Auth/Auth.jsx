@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Form from 'react-bootstrap/Form'
@@ -18,10 +18,11 @@ import mascotSitting from '../../assets/img/mascot_sitting.webp'
 import classes from './Auth.module.scss'
 
 const Auth = () => {
-  const { authenticate } = useContext(AuthContext)
+  const { authenticate, isAuthenticated, isAdmin } = useContext(AuthContext)
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState(null)
   const location = useLocation()
+  const history = useHistory()
   const { from } = location.state || { from: { pathname: '/' } }
   const initialValues = {
     email: '',
@@ -49,10 +50,11 @@ const Auth = () => {
   const submitHandler = async ({ email, password, ...signupObj }) => {
     try {
       setError(null)
-      const creds = { email, password, from }
-      !isSignUp
+      const creds = { email, password }
+      const isAdmin = !isSignUp
         ? await authenticate(creds)
         : await authenticate({ ...creds, signupObj })
+      history.replace(isAdmin ? '/admin' : from)
     } catch (error) {
       setError(error)
     }
@@ -62,6 +64,12 @@ const Auth = () => {
     setError(null)
     setIsSignUp(!isSignUp)
   }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.replace(isAdmin ? '/admin' : from)
+    }
+  }, [history, isAuthenticated, isAdmin, from])
 
   return (
     <>
