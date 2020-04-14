@@ -44,8 +44,8 @@ const authenticate = async ({ signupObj, ...creds }, postLogout) => {
     setAuthTimeout(expiresIn * 1000, postLogout)
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
     const userDetails = signupObj
-      ? await userService.addUser(userId, signupObj)
-      : await userService.fetchDetails(userId)
+      ? await userService.addUser(userId, signupObj, token)
+      : await userService.fetchDetails(userId, token)
     localStorage.setItem('expirationDate', expirationDate)
     localStorage.setItem('token', token)
     localStorage.setItem('userId', userId)
@@ -69,7 +69,7 @@ const checkAuth = async (postLogout) => {
       return null
     } else {
       try {
-        const userDetails = await userService.fetchDetails(userId)
+        const userDetails = await userService.fetchDetails(userId, token)
         let expiresIn = expirationDate.getTime() - new Date().getTime()
         setAuthTimeout(expiresIn, postLogout)
         return { token, userId, userDetails }
