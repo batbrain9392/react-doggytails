@@ -14,7 +14,9 @@ import logo from '../../assets/img/logo.webp'
 import classes from './Appbar.module.scss'
 
 const Appbar = () => {
-  const { isCheckingAuth, isAuthenticated, logout } = useContext(AuthContext)
+  const { isCheckingAuth, isAuthenticated, logout, isAdmin } = useContext(
+    AuthContext
+  )
   const history = useHistory()
 
   const handleClick = () => {
@@ -29,7 +31,7 @@ const Appbar = () => {
     </Nav.Link>
   ) : isAuthenticated ? (
     <>
-      <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>
+      {!isAdmin && <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>}
       <Nav.Link onClick={handleClick}>Logout</Nav.Link>
     </>
   ) : (
@@ -56,8 +58,12 @@ const Appbar = () => {
             <CustomNavLink to='/' exact>
               Home
             </CustomNavLink>
-            <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
-            <CustomNavLink to='/donate'>Donate</CustomNavLink>
+            {!isAdmin && (
+              <>
+                <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
+                <CustomNavLink to='/donate'>Donate</CustomNavLink>
+              </>
+            )}
             {protectedNavLinks}
           </Nav>
         </Navbar.Collapse>
