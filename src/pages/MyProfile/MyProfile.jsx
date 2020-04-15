@@ -17,13 +17,13 @@ const MyProfile = () => {
 
   const fetchMyAdoptions = useCallback(async () => {
     try {
-      const data = await petService.fetchAllOfAdopter(userId, token)
+      const data = await petService.fetchAllOfAdopter(userId)
       setAdoptions(data)
       setLoadingAdoption(false)
     } catch (error) {
       console.log(error)
     }
-  }, [userId, token])
+  }, [userId])
 
   const fetchMyDonations = useCallback(async () => {
     try {
