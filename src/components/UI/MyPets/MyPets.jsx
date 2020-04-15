@@ -21,7 +21,7 @@ const MyPets = ({ pets, type, onEdit, onDelete }) => {
   return (
     <>
       <h4 className='mb-4'>
-        My {header} <Badge variant='secondary'>{pets.length}</Badge>
+        {header} <Badge variant='secondary'>{pets.length}</Badge>
       </h4>
       {!pets.length ? (
         noPets
