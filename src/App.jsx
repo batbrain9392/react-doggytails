@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 import AuthContext from './lib/auth-context'
@@ -10,9 +10,9 @@ import Adopt from './pages/Adopt/Adopt'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
 import Donate from './pages/Donate/Donate'
-import MyProfile from './pages/MyProfile/MyProfile'
 import Home from './pages/Home/Home'
-import Admin from './pages/Admin/Admin'
+const MyProfile = lazy(() => import('./pages/MyProfile/MyProfile'))
+const Admin = lazy(() => import('./pages/Admin/Admin'))
 
 function App() {
   const [token, setToken] = useState(null)
@@ -98,15 +98,18 @@ function App() {
     </Switch>
   ) : (
     <Switch>
-      <Route path='/' exact component={Admin} />
+      <ProtectedRoute path='/' exact component={Admin} />
       <Route path='/auth' component={Auth} />
       <Redirect to='/' />
     </Switch>
   )
+  const fallback = <p className='text-center'>Loading...</p>
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      <Layout>{routes}</Layout>
+      <Layout>
+        <Suspense fallback={fallback}>{routes}</Suspense>
+      </Layout>
     </AuthContext.Provider>
   )
 }
