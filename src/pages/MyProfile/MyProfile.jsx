@@ -89,7 +89,7 @@ const MyProfile = () => {
         <Col md className='mb-5 mb-md-0'>
           {!loadingAdoption && (
             <MyPets
-              type='adopted'
+              isAdoption
               pets={adoptions}
               onDelete={deleteAdoptionHandler}
             />
@@ -98,7 +98,6 @@ const MyProfile = () => {
         <Col>
           {!loadingDonation && (
             <MyPets
-              type='donated'
               pets={donations}
               onEdit={editDonationHandler}
               onDelete={deleteDonationHandler}

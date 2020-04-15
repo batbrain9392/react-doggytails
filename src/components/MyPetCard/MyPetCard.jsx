@@ -17,7 +17,7 @@ import FormModal from '../UI/FormModal/FormModal'
 
 import classes from './MyPetCard.module.scss'
 
-const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
+const MyPetCard = ({ pet, isAdoption, onEdit, onDelete }) => {
   const imgSize = '60px'
 
   const [formModalShow, setFormModalShow] = useState(false)
@@ -92,7 +92,7 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
         <Card.Text>
           <>
             Available from {toDateLocale(pet.dateAvailable)} at {pet.location}.{' '}
-            {isAdopted
+            {isAdoption
               ? `Call ${pet.donorName} @ ${pet.donorPhone}.`
               : pet.adopterUserId
               ? `Call ${pet.adopterName} @ ${pet.adopterPhone}.`
@@ -110,7 +110,7 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
               <FontAwesomeIcon icon='eye' size='sm' />
             </Button>
           </CustomTooltip>
-          {!isAdopted && (
+          {!isAdoption && (
             <>
               <CustomTooltip text='Edit'>
                 <Button
@@ -134,7 +134,7 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
           </>
         </ButtonGroup>
         <span>
-          {isAdopted ? (
+          {isAdoption ? (
             <MyPetBadge variant='success'>Available</MyPetBadge>
           ) : !pet.adopterUserId ? (
             <MyPetBadge variant='warning'>Awaiting adoption</MyPetBadge>

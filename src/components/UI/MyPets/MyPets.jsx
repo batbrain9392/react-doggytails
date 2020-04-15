@@ -6,14 +6,13 @@ import MyPetCard from '../../MyPetCard/MyPetCard'
 
 import classes from './MyPets.module.scss'
 
-const MyPets = ({ pets, type, onEdit, onDelete }) => {
-  const isAdopted = type === 'adopted'
-  const header = isAdopted ? 'Adoptions' : 'Donations'
+const MyPets = ({ pets, isAdoption, onEdit, onDelete }) => {
+  const header = isAdoption ? 'Adoptions' : 'Donations'
   const noPets = (
     <>
-      <p>You haven't {isAdopted ? 'adopted' : 'donated'} any yet.</p>
-      <Link to={`/${isAdopted ? 'adopt' : 'donate'}`}>
-        {isAdopted ? 'Adopt' : 'Donate'} now
+      <p>You haven't {isAdoption ? 'adopted' : 'donated'} any yet.</p>
+      <Link to={`/${isAdoption ? 'adopt' : 'donate'}`}>
+        {isAdoption ? 'Adopt' : 'Donate'} now
       </Link>
     </>
   )
@@ -31,7 +30,7 @@ const MyPets = ({ pets, type, onEdit, onDelete }) => {
             <MyPetCard
               key={pet.id}
               pet={pet}
-              isAdopted={isAdopted}
+              isAdoption={isAdoption}
               onEdit={onEdit}
               onDelete={onDelete}
             />
