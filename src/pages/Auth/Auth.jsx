@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Form from 'react-bootstrap/Form'
@@ -22,6 +22,7 @@ const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState(null)
   const location = useLocation()
+  const history = useHistory()
   const { from } = location.state || { from: { pathname: '/' } }
   const initialValues = {
     email: '',
@@ -49,10 +50,12 @@ const Auth = () => {
   const submitHandler = async ({ email, password, ...signupObj }) => {
     try {
       setError(null)
-      const creds = { email, password, from }
+      const creds = { email, password }
+      signupObj = { email, ...signupObj }
       !isSignUp
         ? await authenticate(creds)
         : await authenticate({ ...creds, signupObj })
+      history.replace(from)
     } catch (error) {
       setError(error)
     }
