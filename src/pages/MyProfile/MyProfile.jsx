@@ -6,6 +6,8 @@ import AuthContext from '../../lib/auth-context'
 import petService from '../../http/pet'
 
 import Heading from '../../components/UI/Heading/Heading'
+import MyDetails from '../../components/UI/MyDetails/MyDetails'
+import Hr from '../../components/UI/Hr/Hr'
 import MyPets from '../../components/UI/MyPets/MyPets'
 
 const MyProfile = () => {
@@ -13,7 +15,7 @@ const MyProfile = () => {
   const [loadingAdoption, setLoadingAdoption] = useState(true)
   const [donations, setDonations] = useState([])
   const [loadingDonation, setLoadingDonation] = useState(true)
-  const { userId, token } = useContext(AuthContext)
+  const { userId, token, userDetails } = useContext(AuthContext)
 
   const fetchMyAdoptions = useCallback(async () => {
     try {
@@ -80,7 +82,9 @@ const MyProfile = () => {
 
   return (
     <>
-      <Heading loading={loadingAdoption || loadingDonation}>My Profile</Heading>
+      <Heading>My Profile</Heading>
+      <MyDetails userDetails={userDetails} />
+      <Hr width='189px' loading={loadingAdoption || loadingDonation} />
       <Row>
         <Col md className='mb-5 mb-md-0'>
           {!loadingAdoption && (
