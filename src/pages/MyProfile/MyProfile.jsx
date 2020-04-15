@@ -54,20 +54,6 @@ const MyProfile = () => {
     }
   }
 
-  const editDonationHandler = async (petId, editedValues) => {
-    const original = [...donations]
-    const updated = donations.map((pet) =>
-      pet.id === petId ? { ...pet, ...editedValues } : pet
-    )
-    setDonations(updated)
-    try {
-      await petService.updateDonation(petId, editedValues, token)
-    } catch (error) {
-      console.log(error)
-      setDonations(original)
-    }
-  }
-
   const deleteDonationHandler = async (petId) => {
     const original = [...donations]
     const updated = donations.filter((pet) => pet.id !== petId)
@@ -78,6 +64,42 @@ const MyProfile = () => {
       console.log(error)
       setDonations(original)
     }
+  }
+
+  const editAdoptionHandler = async (petId, editedValues) => {
+    const original = [...adoptions]
+    const updated = adoptions.map((pet) =>
+      pet.id === petId ? { ...pet, ...editedValues } : pet
+    )
+    setAdoptions(updated)
+    try {
+      await petService.update(petId, editedValues, token)
+    } catch (error) {
+      console.log(error)
+      setAdoptions(original)
+    }
+  }
+
+  const editDonationHandler = async (petId, editedValues) => {
+    const original = [...donations]
+    const updated = donations.map((pet) =>
+      pet.id === petId ? { ...pet, ...editedValues } : pet
+    )
+    setDonations(updated)
+    try {
+      await petService.update(petId, editedValues, token)
+    } catch (error) {
+      console.log(error)
+      setDonations(original)
+    }
+  }
+
+  const markAdoptedHandler = (petId) => {
+    editAdoptionHandler(petId, { isMarkedAdopted: true })
+  }
+
+  const markDonatedHandler = (petId) => {
+    editDonationHandler(petId, { isMarkedDonated: true })
   }
 
   return (
@@ -92,6 +114,7 @@ const MyProfile = () => {
               isAdoption
               pets={adoptions}
               onDelete={deleteAdoptionHandler}
+              onMarkAdopted={markAdoptedHandler}
             />
           )}
         </Col>
@@ -101,6 +124,7 @@ const MyProfile = () => {
               pets={donations}
               onEdit={editDonationHandler}
               onDelete={deleteDonationHandler}
+              onMarkDonated={markDonatedHandler}
             />
           )}
         </Col>

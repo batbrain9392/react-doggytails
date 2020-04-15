@@ -104,6 +104,21 @@ const MyPetCard = ({
       </Modal.Footer>
     </Modal>
   )
+  const canBeManipulated = isAdoption
+    ? !pet.isMarkedAdopted
+    : !pet.isMarkedDonated
+
+  const badge = pet.isMarkedDonated ? (
+    <MyPetBadge variant='primary'>
+      {isAdoption ? 'Adopted' : 'Donated'}
+    </MyPetBadge>
+  ) : pet.isMarkedAdopted ? (
+    <MyPetBadge variant='warning'>Marked as adopted</MyPetBadge>
+  ) : pet.adopterUserId ? (
+    <MyPetBadge variant='success'>Adoption Requested</MyPetBadge>
+  ) : (
+    <MyPetBadge variant='dark'>Awaiting adoption</MyPetBadge>
+  )
 
   return (
     <Card>
@@ -138,14 +153,6 @@ const MyPetCard = ({
       </Card.Body>
       <Card.Footer className={classes.cardFooter}>
         <ButtonGroup size='sm'>
-          <CustomTooltip text={`Mark as ${isAdoption ? 'adopted' : 'donated'}`}>
-            <Button
-              variant='outline-secondary'
-              onClick={() => setMarkModalShow(true)}>
-              <FontAwesomeIcon icon='check' size='sm' />
-            </Button>
-          </CustomTooltip>
-          {markModal}
           <CustomTooltip text='View'>
             <Button
               variant='outline-secondary'
@@ -154,38 +161,47 @@ const MyPetCard = ({
               <FontAwesomeIcon icon='eye' size='sm' />
             </Button>
           </CustomTooltip>
-          {!isAdoption && (
+          {canBeManipulated && (
             <>
-              <CustomTooltip text='Edit'>
-                <Button
-                  variant='outline-secondary'
-                  onClick={() => setFormModalShow(true)}>
-                  <FontAwesomeIcon icon='edit' size='sm' />
-                </Button>
-              </CustomTooltip>
-              {formModal}
+              {(isAdoption || pet.isMarkedAdopted) && (
+                <>
+                  <CustomTooltip
+                    text={`Mark as ${isAdoption ? 'adopted' : 'donated'}`}>
+                    <Button
+                      variant='outline-secondary'
+                      onClick={() => setMarkModalShow(true)}>
+                      <FontAwesomeIcon icon='check' size='sm' />
+                    </Button>
+                  </CustomTooltip>
+                  {markModal}
+                </>
+              )}
+              {!isAdoption && (
+                <>
+                  <CustomTooltip text='Edit'>
+                    <Button
+                      variant='outline-secondary'
+                      onClick={() => setFormModalShow(true)}>
+                      <FontAwesomeIcon icon='edit' size='sm' />
+                    </Button>
+                  </CustomTooltip>
+                  {formModal}
+                </>
+              )}
+              <>
+                <CustomTooltip text='Delete'>
+                  <Button
+                    variant='outline-secondary'
+                    onClick={() => setDeleteModalShow(true)}>
+                    <FontAwesomeIcon icon='trash' size='sm' />
+                  </Button>
+                </CustomTooltip>
+                {deleteModal}
+              </>
             </>
           )}
-          <>
-            <CustomTooltip text='Delete'>
-              <Button
-                variant='outline-secondary'
-                onClick={() => setDeleteModalShow(true)}>
-                <FontAwesomeIcon icon='trash' size='sm' />
-              </Button>
-            </CustomTooltip>
-            {deleteModal}
-          </>
         </ButtonGroup>
-        <span>
-          {isAdoption ? (
-            <MyPetBadge variant='success'>Available</MyPetBadge>
-          ) : !pet.adopterUserId ? (
-            <MyPetBadge variant='warning'>Awaiting adoption</MyPetBadge>
-          ) : (
-            <MyPetBadge variant='danger'>Adoption Requested</MyPetBadge>
-          )}
-        </span>
+        <span>{badge}</span>
       </Card.Footer>
     </Card>
   )

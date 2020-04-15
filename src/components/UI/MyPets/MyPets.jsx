@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
-import Badge from 'react-bootstrap/Badge'
 
 import MyPetCard from '../../MyPetCard/MyPetCard'
 
@@ -19,9 +18,7 @@ const MyPets = ({ pets, ...props }) => {
 
   return (
     <>
-      <h4 className='mb-4'>
-        {header} <Badge variant='secondary'>{pets.length}</Badge>
-      </h4>
+      <h4 className='mb-4'>{header}</h4>
       {!pets.length ? (
         noPets
       ) : (
