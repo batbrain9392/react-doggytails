@@ -83,21 +83,23 @@ const MyProfile = () => {
       <Heading loading={loadingAdoption || loadingDonation}>My Profile</Heading>
       <Row>
         <Col md className='mb-5 mb-md-0'>
-          <MyPets
-            type='adopted'
-            loading={loadingAdoption}
-            pets={adoptions}
-            onDelete={deleteAdoptionHandler}
-          />
+          {!loadingAdoption && (
+            <MyPets
+              type='adopted'
+              pets={adoptions}
+              onDelete={deleteAdoptionHandler}
+            />
+          )}
         </Col>
         <Col>
-          <MyPets
-            type='donated'
-            loading={loadingDonation}
-            pets={donations}
-            onEdit={editDonationHandler}
-            onDelete={deleteDonationHandler}
-          />
+          {!loadingDonation && (
+            <MyPets
+              type='donated'
+              pets={donations}
+              onEdit={editDonationHandler}
+              onDelete={deleteDonationHandler}
+            />
+          )}
         </Col>
       </Row>
     </>
