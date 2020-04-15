@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 
 import AuthContext from './lib/auth-context'
 import auth from './http/auth'
@@ -20,6 +20,7 @@ function App() {
   const [userDetails, setUserDetails] = useState(null)
   const [isCheckingAuth, setIsCheckingAuth] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const history = useHistory()
 
   const postSignin = useCallback((authInfo) => {
     if (authInfo) {
@@ -46,7 +47,6 @@ function App() {
       const authInfo = await auth.authenticate(creds, postLogout)
       postSignin(authInfo)
       setIsCheckingAuth(false)
-      return authInfo.userDetails.isAdmin
     } catch (error) {
       setIsCheckingAuth(false)
       throw error
@@ -69,35 +69,44 @@ function App() {
     logout,
   }
 
-  const checkAuth = useCallback(async () => {
-    setIsCheckingAuth(true)
-    try {
-      const authInfo = await auth.checkAuth(postLogout)
-      postSignin(authInfo)
-    } catch (error) {
-      console.log(error)
-    }
-    setIsCheckingAuth(false)
-  }, [postSignin])
-
   useEffect(() => {
+    const checkAuth = async () => {
+      setIsCheckingAuth(true)
+      try {
+        const authInfo = await auth.checkAuth(postLogout)
+        postSignin(authInfo)
+        if (authInfo) {
+          history.replace('/')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+      setIsCheckingAuth(false)
+    }
     checkAuth()
-  }, [checkAuth])
+  }, [history, postSignin])
+
+  const routes = !isAdmin ? (
+    <Switch>
+      <Route path='/' exact component={Home} />
+      <Route path='/adopt/:id' component={PetDetails} />
+      <Route path='/adopt' component={Adopt} />
+      <Route path='/donate' component={Donate} />
+      <ProtectedRoute path='/my-profile' component={MyProfile} />
+      <Route path='/auth' component={Auth} />
+      <Redirect to='/' />
+    </Switch>
+  ) : (
+    <Switch>
+      <Route path='/' exact component={Admin} />
+      <Route path='/auth' component={Auth} />
+      <Redirect to='/' />
+    </Switch>
+  )
 
   return (
     <AuthContext.Provider value={authContextValue}>
-      <Layout>
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/adopt/:id' component={PetDetails} />
-          <Route path='/adopt' component={Adopt} />
-          <Route path='/donate' component={Donate} />
-          <ProtectedRoute path='/my-profile' component={MyProfile} />
-          <ProtectedRoute path='/admin' component={Admin} />
-          <Route path='/auth' component={Auth} />
-          <Redirect to='/' />
-        </Switch>
-      </Layout>
+      <Layout>{routes}</Layout>
     </AuthContext.Provider>
   )
 }
