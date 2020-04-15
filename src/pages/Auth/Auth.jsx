@@ -51,6 +51,7 @@ const Auth = () => {
     try {
       setError(null)
       const creds = { email, password }
+      signupObj = { email, ...signupObj }
       !isSignUp
         ? await authenticate(creds)
         : await authenticate({ ...creds, signupObj })
