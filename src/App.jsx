@@ -37,6 +37,7 @@ function App() {
     setToken(null)
     setUserId(null)
     setUserDetails(null)
+    setIsAdmin(false)
   }
 
   const authenticate = async (creds) => {
