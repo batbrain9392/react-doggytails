@@ -1,4 +1,5 @@
 import db from './db'
+import { toArray } from '../lib/util'
 
 const url = 'users'
 const addToken = (token) => `auth=${token}`
@@ -15,7 +16,14 @@ const fetchDetails = async (userId, token) => {
   return data
 }
 
+const fetchAll = async (token) => {
+  const queryParams = addToken(token)
+  const { data } = await db.get(`/${url}.json?${queryParams}`)
+  return toArray(data)
+}
+
 export default {
   addUser,
   fetchDetails,
+  fetchAll,
 }

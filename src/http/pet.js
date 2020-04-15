@@ -39,6 +39,11 @@ const fetchAllOfAdopter = (userId) => {
   return fetchAllOfUser(addAdopterId(userId))
 }
 
+const fetchAll = async () => {
+  const { data } = await db.get(`/${url}.json`)
+  return toArray(data)
+}
+
 const fetchDetails = async (petId) => {
   const { data } = await db.get(`/${url}/${petId}.json`)
   return data
@@ -79,6 +84,7 @@ export default {
   fetchAllForAdoption,
   fetchAllOfDonor,
   fetchAllOfAdopter,
+  fetchAll,
   fetchDetails,
   adopt,
   removeAdoption,
