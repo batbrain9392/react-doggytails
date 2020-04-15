@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
+import Badge from 'react-bootstrap/Badge'
 
 import petService from '../../http/pet'
 
@@ -26,20 +27,25 @@ const AdminDataPets = ({ loading, setLoading }) => {
   ) : !pets.length ? (
     'No ads posted'
   ) : (
-    <Accordion defaultActiveKey={pets[0].id}>
-      {pets.map((pet) => (
-        <Card key={pet.id}>
-          <Accordion.Toggle as={Card.Header} eventKey={pet.id}>
-            {pet.name}
-          </Accordion.Toggle>
-          <Accordion.Collapse eventKey={pet.id}>
-            <Card.Body>
-              <pre>{JSON.stringify(pet, null, 2)}</pre>
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-      ))}
-    </Accordion>
+    <>
+      <h5 className='my-4'>
+        Total ads for pets: <Badge variant='secondary'>{pets.length}</Badge>
+      </h5>
+      <Accordion defaultActiveKey={pets[0].id}>
+        {pets.map((pet) => (
+          <Card key={pet.id}>
+            <Accordion.Toggle as={Card.Header} eventKey={pet.id}>
+              {pet.name}
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey={pet.id}>
+              <Card.Body>
+                <pre>{JSON.stringify(pet, null, 2)}</pre>
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        ))}
+      </Accordion>
+    </>
   )
 }
 
