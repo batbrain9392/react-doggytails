@@ -7,16 +7,12 @@ const MyDetails = ({ userDetails }) => {
       <p>
         <strong>Name : </strong> {userDetails.name}
       </p>
-      {userDetails.email && (
-        <p>
-          <strong>Email : </strong> {userDetails.email}
-        </p>
-      )}
-      {userDetails.phone && (
-        <p>
-          <strong>Phone : </strong> {userDetails.phone}
-        </p>
-      )}
+      <p>
+        <strong>Email : </strong> {userDetails.email}
+      </p>
+      <p>
+        <strong>Phone : </strong> {userDetails.phone}
+      </p>
     </div>
   )
 }
