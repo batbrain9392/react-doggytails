@@ -7,6 +7,8 @@ import petService from '../../http/pet'
 import userService from '../../http/user'
 
 import Heading from '../../components/UI/Heading/Heading'
+import MyDetails from '../../components/UI/MyDetails/MyDetails'
+import Hr from '../../components/UI/Hr/Hr'
 import AdminDataPanel from '../../components/UI/AdminDataPanel/AdminDataPanel'
 
 const Admin = () => {
@@ -14,7 +16,7 @@ const Admin = () => {
   const [loadingPets, setLoadingPets] = useState(true)
   const [users, setUsers] = useState([])
   const [loadingUsers, setLoadingUsers] = useState(true)
-  const { token } = useContext(AuthContext)
+  const { token, userDetails } = useContext(AuthContext)
 
   const fetchAllPets = useCallback(async () => {
     try {
@@ -48,7 +50,10 @@ const Admin = () => {
 
   return (
     <>
-      <Heading loading={loadingPets || loadingUsers}>Admin</Heading>
+      <Heading>Admin</Heading>
+      <MyDetails userDetails={userDetails} />
+      <Hr width='122px' loading={loadingPets || loadingUsers} />
+      <h4 className='mb-4'>Database Snapshot</h4>
       <Tabs defaultActiveKey={type.pets} id='admin-data'>
         <Tab eventKey={type.pets} title={type.pets}>
           {!loadingPets && <AdminDataPanel data={pets} />}

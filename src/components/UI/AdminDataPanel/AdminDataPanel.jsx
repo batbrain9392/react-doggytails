@@ -10,10 +10,10 @@ const AdminDataPanel = ({ data }) => {
         'No data present'
       ) : (
         <>
-          <h5 className='mb-4'>
+          <div className='mb-4'>
             Total items in list:{' '}
             <Badge variant='secondary'>{data.length}</Badge>
-          </h5>
+          </div>
           <Accordion defaultActiveKey={data[0].id}>
             {data.map((item) => (
               <Card key={item.id}>

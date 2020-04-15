@@ -87,7 +87,7 @@ const Donate = () => {
           <Image src={mascotRunning} alt='toon dog' fluid className='mb-5' />
         </Col>
       </Row>
-      <Hr width='9.52vw' />
+      <Hr width='136px' />
       <Row>
         <Col md className='mb-4'>
           <h4 className='mb-4'>Post an Ad today to donate your furry friend</h4>
