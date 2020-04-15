@@ -1,44 +1,32 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react'
+import React, { useState } from 'react'
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 
-import AuthContext from '../../lib/auth-context'
-import petService from '../../http/pet'
-import userService from '../../http/user'
+import Heading from '../../components/UI/Heading/Heading'
+import AdminDataPets from '../../components/AdminDataPets/AdminDataPets'
+import AdminDataUsers from '../../components/AdminDataUsers/AdminDataUsers'
 
 const Admin = () => {
-  const [pets, setPets] = useState([])
   const [loadingPets, setLoadingPets] = useState(true)
-  const [users, setUsers] = useState([])
   const [loadingUsers, setLoadingUsers] = useState(true)
-  const { token } = useContext(AuthContext)
+  const type = {
+    pets: 'Pets',
+    users: 'Users',
+  }
 
-  const fetchAllPets = useCallback(async () => {
-    try {
-      const data = await petService.fetchAll()
-      console.log(data)
-      setPets(data)
-      setLoadingPets(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }, [])
-
-  const fetchAllUsers = useCallback(async () => {
-    try {
-      const data = await userService.fetchAll(token)
-      console.log(data)
-      setUsers(data)
-      setLoadingUsers(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }, [token])
-
-  useEffect(() => {
-    fetchAllPets()
-    fetchAllUsers()
-  }, [fetchAllPets, fetchAllUsers])
-
-  return <div></div>
+  return (
+    <>
+      <Heading loading={loadingPets || loadingUsers}>Admin</Heading>
+      <Tabs defaultActiveKey={type.pets} id='admin-data'>
+        <Tab eventKey={type.pets} title={type.pets}>
+          <AdminDataPets loading={loadingPets} setLoading={setLoadingPets} />
+        </Tab>
+        <Tab eventKey={type.users} title={type.users}>
+          <AdminDataUsers loading={loadingUsers} setLoading={setLoadingUsers} />
+        </Tab>
+      </Tabs>
+    </>
+  )
 }
 
 export default Admin
