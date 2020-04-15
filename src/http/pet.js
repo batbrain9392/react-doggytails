@@ -71,7 +71,7 @@ const removeDonation = (petId, token) => {
   return db.delete(`/${url}/${petId}.json?${queryParams}`)
 }
 
-const updateDonation = async (petId, editedValues, token) => {
+const update = async (petId, editedValues, token) => {
   const queryParams = addToken(token)
   const { data } = await db.patch(`/${url}/${petId}.json?${queryParams}`, {
     ...editedValues,
@@ -89,5 +89,5 @@ export default {
   adopt,
   removeAdoption,
   removeDonation,
-  updateDonation,
+  update,
 }

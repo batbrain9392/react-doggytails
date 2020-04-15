@@ -11,7 +11,7 @@ const AdminDataPanel = ({ data }) => {
       ) : (
         <>
           <div className='mb-4'>
-            Total items in list:{' '}
+            Total items in list :{' '}
             <Badge variant='secondary'>{data.length}</Badge>
           </div>
           <Accordion defaultActiveKey={data[0].id}>
