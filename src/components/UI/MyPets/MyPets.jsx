@@ -6,13 +6,13 @@ import MyPetCard from '../../MyPetCard/MyPetCard'
 
 import classes from './MyPets.module.scss'
 
-const MyPets = ({ pets, isAdoption, onEdit, onDelete }) => {
-  const header = isAdoption ? 'Adoptions' : 'Donations'
+const MyPets = ({ pets, ...props }) => {
+  const header = props.isAdoption ? 'Adoptions' : 'Donations'
   const noPets = (
     <>
-      <p>You haven't {isAdoption ? 'adopted' : 'donated'} any yet.</p>
-      <Link to={`/${isAdoption ? 'adopt' : 'donate'}`}>
-        {isAdoption ? 'Adopt' : 'Donate'} now
+      <p>You haven't {props.isAdoption ? 'adopted' : 'donated'} any yet.</p>
+      <Link to={`/${props.isAdoption ? 'adopt' : 'donate'}`}>
+        {props.isAdoption ? 'Adopt' : 'Donate'} now
       </Link>
     </>
   )
@@ -27,13 +27,7 @@ const MyPets = ({ pets, isAdoption, onEdit, onDelete }) => {
       ) : (
         <div className={classes.cardsGrid}>
           {pets.map((pet) => (
-            <MyPetCard
-              key={pet.id}
-              pet={pet}
-              isAdoption={isAdoption}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
+            <MyPetCard key={pet.id} pet={pet} {...props} />
           ))}
         </div>
       )}

@@ -17,7 +17,14 @@ import FormModal from '../UI/FormModal/FormModal'
 
 import classes from './MyPetCard.module.scss'
 
-const MyPetCard = ({ pet, isAdoption, onEdit, onDelete }) => {
+const MyPetCard = ({
+  pet,
+  isAdoption,
+  onEdit,
+  onDelete,
+  onMarkAdopted,
+  onMarkDonated,
+}) => {
   const imgSize = '60px'
 
   const [formModalShow, setFormModalShow] = useState(false)
@@ -53,17 +60,46 @@ const MyPetCard = ({ pet, isAdoption, onEdit, onDelete }) => {
       </Modal.Header>
       <Modal.Body>Are you sure?</Modal.Body>
       <Modal.Footer className='border-0'>
-        <Button
-          variant='danger'
-          size='sm'
-          onClick={() => deleteModalEventHandler(true)}>
-          Delete
+        <Button variant='danger' onClick={() => deleteModalEventHandler(true)}>
+          Yes
         </Button>
         <Button
           variant='outline-secondary'
-          size='sm'
           onClick={() => deleteModalEventHandler(false)}>
-          Cancel
+          No
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
+
+  const [markModalShow, setMarkModalShow] = useState(false)
+  const markModalEventHandler = (affirmative) => {
+    setMarkModalShow(false)
+    if (affirmative) {
+      isAdoption ? onMarkAdopted(pet.id) : onMarkDonated(pet.id)
+    }
+  }
+  const markModal = (
+    <Modal
+      size='sm'
+      show={markModalShow}
+      onHide={() => setMarkModalShow(false)}
+      aria-labelledby='markModal'
+      centered>
+      <Modal.Header>
+        <Modal.Title id='markModal'>
+          Mark as {isAdoption ? 'adopted' : 'donated'}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Are you sure?</Modal.Body>
+      <Modal.Footer className='border-0'>
+        <Button variant='success' onClick={() => markModalEventHandler(true)}>
+          Yes
+        </Button>
+        <Button
+          variant='outline-secondary'
+          onClick={() => markModalEventHandler(false)}>
+          No
         </Button>
       </Modal.Footer>
     </Modal>
@@ -102,11 +138,19 @@ const MyPetCard = ({ pet, isAdoption, onEdit, onDelete }) => {
       </Card.Body>
       <Card.Footer className={classes.cardFooter}>
         <ButtonGroup size='sm'>
+          <CustomTooltip text={`Mark as ${isAdoption ? 'adopted' : 'donated'}`}>
+            <Button
+              variant='outline-secondary'
+              onClick={() => setMarkModalShow(true)}>
+              <FontAwesomeIcon icon='check' size='sm' />
+            </Button>
+          </CustomTooltip>
+          {markModal}
           <CustomTooltip text='View'>
             <Button
+              variant='outline-secondary'
               as={Link}
-              to={`adopt/${pet.id}`}
-              variant='outline-secondary'>
+              to={`adopt/${pet.id}`}>
               <FontAwesomeIcon icon='eye' size='sm' />
             </Button>
           </CustomTooltip>
