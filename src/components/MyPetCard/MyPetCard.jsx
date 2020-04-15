@@ -19,7 +19,6 @@ import classes from './MyPetCard.module.scss'
 
 const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
   const imgSize = '60px'
-  const [deletePetId, setDeletePetId] = useState(null)
 
   const [formModalShow, setFormModalShow] = useState(false)
   const onSubmitHandler = (editedValues) => {
@@ -36,16 +35,11 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
   )
 
   const [deleteModalShow, setDeleteModalShow] = useState(false)
-  const onDeleteHandler = (petId) => {
-    setDeleteModalShow(true)
-    setDeletePetId(petId)
-  }
   const deleteModalEventHandler = (affirmative) => {
-    if (affirmative) {
-      onDelete(deletePetId)
-    }
-    setDeletePetId(null)
     setDeleteModalShow(false)
+    if (affirmative) {
+      onDelete(pet.id)
+    }
   }
   const deleteModal = (
     <Modal
@@ -132,7 +126,7 @@ const MyPetCard = ({ pet, isAdopted, onEdit, onDelete }) => {
             <CustomTooltip text='Delete'>
               <Button
                 variant='outline-secondary'
-                onClick={() => onDeleteHandler(pet.id)}>
+                onClick={() => setDeleteModalShow(true)}>
                 <FontAwesomeIcon icon='trash' size='sm' />
               </Button>
             </CustomTooltip>
