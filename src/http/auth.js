@@ -2,6 +2,10 @@ import axios from 'axios'
 import userService from './user'
 
 let timeout = null
+const API_KEY = 'AIzaSyDSJIZsMHUxKonvnsXXXY0-SyLiKq6MQY4'
+const createUrl = (method) => {
+  return `https://identitytoolkit.googleapis.com/v1/accounts:${method}?key=${API_KEY}`
+}
 
 const errorHandler = (errorObj) => {
   logout()
@@ -36,9 +40,7 @@ const authenticate = async ({ signupObj, ...creds }, postLogout) => {
     password: creds.password,
     returnSecureToken: true,
   }
-  const API_KEY = 'AIzaSyDSJIZsMHUxKonvnsXXXY0-SyLiKq6MQY4'
-  const method = signupObj ? 'signUp' : 'signInWithPassword'
-  const url = `https://identitytoolkit.googleapis.com/v1/accounts:${method}?key=${API_KEY}`
+  const url = createUrl(signupObj ? 'signUp' : 'signInWithPassword')
   try {
     const {
       data: { idToken: token, localId: userId, expiresIn },
@@ -82,8 +84,18 @@ const checkAuth = async (postLogout) => {
   }
 }
 
+const sendPasswordResetEmail = async (email) => {
+  const url = createUrl('sendOobCode')
+  try {
+    await axios.post(url, { requestType: 'PASSWORD_RESET', email })
+  } catch (error) {
+    errorHandler(error)
+  }
+}
+
 export default {
   authenticate,
   checkAuth,
   logout,
+  sendPasswordResetEmail,
 }
