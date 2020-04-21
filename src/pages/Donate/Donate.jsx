@@ -12,7 +12,7 @@ import Heading from '../../components/UI/Heading/Heading'
 import Hr from '../../components/UI/Hr/Hr'
 import SuccessModal from '../../components/UI/SuccessModal/SuccessModal'
 import PetForm from '../../components/PetForm/PetForm'
-import mascotRunning from '../../assets/img/mascot_running.webp'
+import mascotRunning from '../../assets/img/mascotRunning.jpeg'
 
 const Donate = () => {
   const { isAuthenticated, token, userId, userDetails } = useContext(
