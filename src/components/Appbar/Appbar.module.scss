@@ -18,3 +18,30 @@
 .elevate {
   z-index: 1;
 }
+
+$offset: 5px;
+$count: 40;
+$duration: 1;
+
+@keyframes wave {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY($offset);
+  }
+}
+
+.wavetext span {
+  display: inline-block;
+  animation-duration: #{$duration}s;
+  animation-name: wave;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@for $i from 0 to $count {
+  .wavetext :nth-child(#{$count}n + #{$i}) {
+    animation-delay: -#{($count - $i) * 2 * $duration / $count}s;
+  }
+}
