@@ -4,9 +4,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 
-import jamie from '../../../assets/img/jamie.webp'
-import mary from '../../../assets/img/mary.webp'
-import smith from '../../../assets/img/smith.webp'
+import jamie from '../../../assets/img/jamie.jpg'
+import mary from '../../../assets/img/mary.jpg'
+import smith from '../../../assets/img/smith.jpg'
 
 import classes from './Testimonials.module.scss'
 

@@ -15,7 +15,7 @@ import authService from '../../http/auth'
 import TextInput from '../../components/UI/TextInput/TextInput'
 import Heading from '../../components/UI/Heading/Heading'
 import ForgotPasswordModal from '../../components/UI/ForgotPasswordModal/ForgotPasswordModal'
-import mascotSitting from '../../assets/img/mascot_sitting.webp'
+import mascotSitting from '../../assets/img/mascotSitting.jpeg'
 
 import classes from './Auth.module.scss'
 

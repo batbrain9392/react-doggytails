@@ -9,9 +9,19 @@ import Spinner from 'react-bootstrap/Spinner'
 import AuthContext from '../../lib/auth-context'
 
 import CustomNavLink from '../UI/CustomNavLink/CustomNavLink'
-import logo from '../../assets/img/logo.webp'
+import logo from '../../assets/img/logo.png'
 
 import classes from './Appbar.module.scss'
+
+const getAppName = (appNameText) => {
+  let appName = []
+  let i = 0
+  for (const alphabet of appNameText) {
+    appName.push(<span key={i}>{alphabet}</span>)
+    i++
+  }
+  return appName
+}
 
 const Appbar = () => {
   const { isCheckingAuth, isAuthenticated, logout, isAdmin } = useContext(
@@ -48,8 +58,9 @@ const Appbar = () => {
       <Container>
         <Navbar.Brand as={NavLink} to='/'>
           <Image alt='logo' src={logo} height='50' />
-          <span className={`${classes.brandText} align-bottom`}>
-            DoggyTails
+          <span
+            className={`${classes.brandText} align-bottom ${classes.wavetext}`}>
+            {getAppName('DoggyTails')}
           </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />

@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import mascotSitting from '../../../assets/img/mascot_sitting.webp'
+import mascotHands from '../../../assets/img/mascotHands.jpeg'
 
 import classes from './Banner.module.scss'
 
@@ -17,7 +17,7 @@ const Banner = () => {
       <Container className={classes.container}>
         <Row>
           <Col sm className='mb-4 mb-sm-0'>
-            <Image src={mascotSitting} alt='Image unavailable' fluid />
+            <Image src={mascotHands} alt='Image unavailable' fluid />
           </Col>
           <Col className={`${classes.text} home-font`}>
             <div>
