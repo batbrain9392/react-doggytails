@@ -10,7 +10,7 @@ import Adopt from './pages/Adopt/Adopt'
 import PetDetails from './pages/PetDetails/PetDetails'
 import Auth from './pages/Auth/Auth'
 import Donate from './pages/Donate/Donate'
-import ContactUs from './pages/ContactUs/ContactUs'
+import AboutUs from './pages/AboutUs/AboutUs'
 import Home from './pages/Home/Home'
 const MyProfile = lazy(() => import('./pages/MyProfile/MyProfile'))
 const Admin = lazy(() => import('./pages/Admin/Admin'))
@@ -93,7 +93,7 @@ function App() {
       <Route path='/adopt/:id' component={PetDetails} />
       <Route path='/adopt' component={Adopt} />
       <Route path='/donate' component={Donate} />
-      <Route path='/contact-us' component={ContactUs} />
+      <Route path='/about-us' component={AboutUs} />
       <ProtectedRoute path='/my-profile' component={MyProfile} />
       <Route path='/auth' component={Auth} />
       <Redirect to='/' />

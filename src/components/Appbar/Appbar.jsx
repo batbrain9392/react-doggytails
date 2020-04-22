@@ -73,7 +73,7 @@ const Appbar = () => {
               <>
                 <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
                 <CustomNavLink to='/donate'>Donate</CustomNavLink>
-                <CustomNavLink to='/contact-us'>Contact Us</CustomNavLink>
+                <CustomNavLink to='/about-us'>About Us</CustomNavLink>
               </>
             )}
             {protectedNavLinks}
