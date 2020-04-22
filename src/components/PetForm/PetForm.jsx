@@ -45,6 +45,7 @@ const PetForm = ({ edit, onSubmit }) => {
 
   const submitHandler = (formValues, { setSubmitting }) => {
     formValues.dateAvailable = new Date(formValues.dateAvailable).getTime()
+    formValues = { ...formValues, timestamp: new Date().getTime() }
     onSubmit(formValues, setSubmitting)
   }
 
