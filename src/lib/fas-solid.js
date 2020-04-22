@@ -9,4 +9,7 @@ export {
   faHome,
   faMoneyCheckAlt,
   faBriefcaseMedical,
+  faPhoneSquare,
+  faCalendarAlt,
+  faMapMarkerAlt,
 } from '@fortawesome/free-solid-svg-icons'
