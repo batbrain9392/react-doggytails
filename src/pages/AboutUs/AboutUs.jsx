@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Heading from '../../components/UI/Heading/Heading'
 import TeamMember from '../../components/UI/TeamMember/TeamMember'
 import TeamAchievement from '../../components/UI/TeamAchievement/TeamAchievement'
+import ContactUsForm from '../../components/ContactUsForm/ContactUsForm'
 import zaid from '../../assets/img/zaid.jpg'
-// import aketa from '../../assets/img/aketa.jpg'
+import aketa from '../../assets/img/aketa.jpeg'
 import joel from '../../assets/img/joel.jpg'
 import rajat from '../../assets/img/rajat.jpg'
 
@@ -20,7 +21,7 @@ const AboutUs = () => {
       quote: 'Be stubborn on vision, but flexible on details.',
     },
     {
-      img: zaid,
+      img: aketa,
       name: 'Aketa Rajinder Singh',
       designation: 'Lead Designer',
       quote: 'Design is intelligence made visible.',
@@ -90,12 +91,7 @@ const AboutUs = () => {
         <h4 className='mb-5'>Contact Us</h4>
         <Row>
           <Col sm className='mb-4 mb-sm-0'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor error
-            omnis facere nihil recusandae debitis facilis et laborum
-            reprehenderit, quibusdam explicabo provident illum beatae, odit
-            veniam architecto ratione saepe repellat. Doloribus perferendis
-            eveniet illum voluptates accusantium sunt magni ullam itaque
-            veritatis obcaecati ratione, nostrum ab adipisci, tempore odio.
+            <ContactUsForm />
           </Col>
           <Col>
             <Row noGutters className='mb-2'>

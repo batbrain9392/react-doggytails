@@ -35,17 +35,25 @@ const Appbar = () => {
   }
 
   const protectedNavLinks = isCheckingAuth ? (
-    <Nav.Link disabled>
+    <Nav.Link disabled className={classes.navLink}>
       <Spinner animation='grow' size='sm' className='mr-1' />
       Authenticating
     </Nav.Link>
   ) : isAuthenticated ? (
     <>
-      {!isAdmin && <CustomNavLink to='/my-profile'>My Profile</CustomNavLink>}
-      <Nav.Link onClick={handleClick}>Logout</Nav.Link>
+      {!isAdmin && (
+        <CustomNavLink to='/my-profile' className={classes.navLink}>
+          My Profile
+        </CustomNavLink>
+      )}
+      <Nav.Link onClick={handleClick} className={classes.navLink}>
+        Logout
+      </Nav.Link>
     </>
   ) : (
-    <CustomNavLink to='/auth'>Sign in / Sign up</CustomNavLink>
+    <CustomNavLink to='/auth' className={classes.navLink}>
+      Sign in / Sign up
+    </CustomNavLink>
   )
 
   return (
@@ -66,14 +74,20 @@ const Appbar = () => {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className={classes.navGrid}>
-            <CustomNavLink to='/' exact>
+            <CustomNavLink to='/' exact className={classes.navLink}>
               Home
             </CustomNavLink>
             {!isAdmin && (
               <>
-                <CustomNavLink to='/adopt'>Adopt</CustomNavLink>
-                <CustomNavLink to='/donate'>Donate</CustomNavLink>
-                <CustomNavLink to='/about-us'>About Us</CustomNavLink>
+                <CustomNavLink to='/adopt' className={classes.navLink}>
+                  Adopt
+                </CustomNavLink>
+                <CustomNavLink to='/donate' className={classes.navLink}>
+                  Donate
+                </CustomNavLink>
+                <CustomNavLink to='/about-us' className={classes.navLink}>
+                  About Us
+                </CustomNavLink>
               </>
             )}
             {protectedNavLinks}

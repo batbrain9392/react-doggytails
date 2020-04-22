@@ -39,12 +39,13 @@ const PetForm = ({ edit, onSubmit }) => {
     location: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
     imgUrl: Yup.string().url('Invalid url'),
     description: Yup.string()
-      .min(3, 'Minimum 10 characters')
+      .min(10, 'Minimum 10 characters')
       .required('Required'),
   })
 
   const submitHandler = (formValues, { setSubmitting }) => {
     formValues.dateAvailable = new Date(formValues.dateAvailable).getTime()
+    formValues = { ...formValues, timestamp: new Date().getTime() }
     onSubmit(formValues, setSubmitting)
   }
 
