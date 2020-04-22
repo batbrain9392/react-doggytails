@@ -17,12 +17,18 @@ const Footer = () => {
               </FooterIconLink>
             </Col>
             <Col sm className='mb-3'>
-              <FooterIconLink icon='twitter' type='b'>
-                Follow us on Twitter
+              <FooterIconLink
+                icon='instagram'
+                type='b'
+                href='https://www.instagram.com/doggytails24/'>
+                Follow us on Instagram
               </FooterIconLink>
             </Col>
             <Col sm className='mb-3'>
-              <FooterIconLink icon='facebook-f' type='b'>
+              <FooterIconLink
+                icon='facebook-f'
+                type='b'
+                href='https://www.facebook.com/DoggyTails-107378397619645/'>
                 Follow us on Facebook
               </FooterIconLink>
             </Col>
