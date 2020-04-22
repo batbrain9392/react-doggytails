@@ -8,8 +8,6 @@ import TeamMember from '../../components/UI/TeamMember/TeamMember'
 import TeamAchievement from '../../components/UI/TeamAchievement/TeamAchievement'
 import zaid from '../../assets/img/zaid.jpg'
 
-import classes from './AboutUs.module.scss'
-
 const AboutUs = () => {
   const teamMembers = [
     {
