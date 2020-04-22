@@ -30,7 +30,7 @@ const Admin = () => {
     } finally {
       setloadingMessages(false)
     }
-  }, [])
+  }, [token])
 
   const fetchAllPets = useCallback(async () => {
     try {
