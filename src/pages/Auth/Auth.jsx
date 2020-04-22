@@ -64,7 +64,7 @@ const Auth = () => {
         setModalShow(true)
       } else {
         const creds = { email, password }
-        signupObj = { email, ...signupObj }
+        signupObj = { email, timestamp: new Date().getTime(), ...signupObj }
         !isSignUp
           ? await authenticate(creds)
           : await authenticate({ ...creds, signupObj })

@@ -5,7 +5,6 @@ const url = 'users'
 const addToken = (token) => `auth=${token}`
 
 const addUser = async (userId, user, token) => {
-  user = { ...user, timestamp: new Date().getTime() }
   const queryParams = addToken(token)
   const { data } = await db.put(`/${url}/${userId}.json?${queryParams}`, user)
   return data
