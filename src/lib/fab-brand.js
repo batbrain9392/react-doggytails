@@ -1,5 +1,5 @@
 export {
+  faInstagram,
   faFacebookF,
-  faTwitter,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons'

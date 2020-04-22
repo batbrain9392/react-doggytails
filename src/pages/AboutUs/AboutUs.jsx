@@ -7,36 +7,36 @@ import Heading from '../../components/UI/Heading/Heading'
 import TeamMember from '../../components/UI/TeamMember/TeamMember'
 import TeamAchievement from '../../components/UI/TeamAchievement/TeamAchievement'
 import zaid from '../../assets/img/zaid.jpg'
+// import aketa from '../../assets/img/aketa.jpg'
+import joel from '../../assets/img/joel.jpg'
+import rajat from '../../assets/img/rajat.jpg'
 
 const AboutUs = () => {
   const teamMembers = [
     {
       img: zaid,
-      name: 'Zaid',
-      designation: 'Designation',
-      quote:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id amet sunt deleniti et!',
+      name: 'Mohd Zaid Qureshi',
+      designation: 'Product Owner',
+      quote: 'Be stubborn on vision, but flexible on details.',
     },
     {
       img: zaid,
-      name: 'Aketa',
-      designation: 'Designation',
-      quote:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id amet sunt deleniti et!',
+      name: 'Aketa Rajinder Singh',
+      designation: 'Lead Designer',
+      quote: 'Design is intelligence made visible.',
     },
     {
-      img: zaid,
-      name: 'Joel',
-      designation: 'Designation',
-      quote:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id amet sunt deleniti et!',
+      img: joel,
+      name: 'Joel Dsouza',
+      designation: 'Senior Developer',
+      quote: 'Talk is cheap, show me the code.',
     },
     {
-      img: zaid,
-      name: 'Rajat',
-      designation: 'Designation',
+      img: rajat,
+      name: 'Rajat Sheoran',
+      designation: 'Project Manager',
       quote:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id amet sunt deleniti et!',
+        'Expect the best, plan for the worst, and prepare to be surprised.',
     },
   ]
 
@@ -126,11 +126,7 @@ const AboutUs = () => {
                   className='text-primary'
                 />
               </Col>
-              <Col>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Ducimus aliquam magni soluta aliquid esse delectus accusantium
-                inventore.
-              </Col>
+              <Col>3803 college main, bryan, texas 77801</Col>
             </Row>
           </Col>
         </Row>
