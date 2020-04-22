@@ -7,7 +7,7 @@ const TeamMember = ({ member }) => {
     <div className='text-center'>
       <Image src={member.img} alt='img' roundedCircle />
       <div className='font-weight-bold mt-3'>{member.name}</div>
-      <div className='mb-1'>{member.designation}</div>
+      <div className='mb-2'>{member.designation}</div>
       <div className='font-italic font-weight-lighter'>
         <FontAwesomeIcon
           icon='quote-right'
