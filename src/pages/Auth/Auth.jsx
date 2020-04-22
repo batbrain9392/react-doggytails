@@ -52,8 +52,6 @@ const Auth = () => {
         name: Yup.string().min(3, 'Minimum 3 characters').required('Required'),
         phone: Yup.number()
           .integer('Invalid phone number')
-          .min(1000000000, 'Minimum 10 characters')
-          .max(9999999999, 'Maximum 10 characters')
           .required('Required'),
       }
   const validationSchema = Yup.object(yupObject)
