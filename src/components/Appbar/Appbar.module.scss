@@ -5,13 +5,11 @@
 }
 
 .navGrid {
-  margin: 7px 0px 0 13px;
-
+  @include media-breakpoint-down(sm) {
+    margin: 7px 0px 0 13px;
+  }
   @include media-breakpoint-up(md) {
     margin: 0 0 0 auto;
-    a:not(:last-child) {
-      margin-right: 44px;
-    }
   }
 }
 
