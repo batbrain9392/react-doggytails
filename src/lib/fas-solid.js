@@ -4,6 +4,7 @@ export {
   faTrash,
   faChevronRight,
   faCheck,
+  faQuoteRight,
   faDog,
   faHome,
   faMoneyCheckAlt,
