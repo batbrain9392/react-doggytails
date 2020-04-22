@@ -51,10 +51,10 @@ const Donate = () => {
       show={modalShow}
       onHide={() => setModalShow(false)}
       title='Donated'>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <p>Thanks for donating your pet.</p>
       <p>
-        Quam facilis iste perspiciatis debitis, sunt perferendis aliquam non
-        maiores autem.
+        This ad is already put on the home page. We will make sure that we get
+        an adopter for you.
       </p>
     </SuccessModal>
   )
